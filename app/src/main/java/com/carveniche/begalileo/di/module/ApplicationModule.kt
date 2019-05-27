@@ -1,7 +1,7 @@
 package com.carveniche.begalileo.di.module
 
 import android.app.Application
-import com.carveniche.begalileo.BaseApp
+import com.carveniche.begalileo.util.BaseApp
 import com.carveniche.begalileo.di.scope.PerApplication
 import dagger.Module
 import dagger.Provides

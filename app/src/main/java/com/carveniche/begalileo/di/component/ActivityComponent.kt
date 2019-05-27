@@ -4,15 +4,15 @@ import com.carveniche.begalileo.di.module.ActivityModule
 import com.carveniche.begalileo.di.module.ContextModule
 import com.carveniche.begalileo.di.module.SharedPreferenceModule
 import com.carveniche.begalileo.di.scope.PerApplication
-import com.carveniche.begalileo.ui.SplashActivity
-import com.carveniche.begalileo.ui.login.LoginActivity
-import com.carveniche.begalileo.ui.main.MainActivity
-import com.carveniche.begalileo.ui.addChild.AddChildActivity
-import com.carveniche.begalileo.ui.concepts.ConceptActivity
-import com.carveniche.begalileo.ui.nearbyCenters.NearbyCenterActivity
-import com.carveniche.begalileo.ui.speedMath.SpeedMathActivity
-import com.carveniche.begalileo.ui.speedMath.gameResultActivity.GameResultActivity
-import com.carveniche.begalileo.ui.userLocation.UserLocationActivity
+import com.carveniche.begalileo.ui.activities.SplashActivity
+import com.carveniche.begalileo.ui.activities.LoginActivity
+import com.carveniche.begalileo.ui.activities.MainActivity
+import com.carveniche.begalileo.ui.activities.AddChildActivity
+import com.carveniche.begalileo.ui.activities.ConceptActivity
+import com.carveniche.begalileo.ui.activities.NearbyCenterActivity
+import com.carveniche.begalileo.ui.activities.SpeedMathActivity
+import com.carveniche.begalileo.ui.activities.GameResultActivity
+import com.carveniche.begalileo.ui.activities.UserLocationActivity
 import dagger.Component
 import javax.inject.Singleton
 

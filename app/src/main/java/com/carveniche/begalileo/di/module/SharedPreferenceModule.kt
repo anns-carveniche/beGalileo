@@ -3,8 +3,7 @@ package com.carveniche.begalileo.di.module
 import android.content.Context
 
 import android.content.SharedPreferences
-import com.carveniche.begalileo.Constants
-import com.carveniche.begalileo.di.scope.PerApplication
+import com.carveniche.begalileo.util.Constants
 import dagger.Module
 import dagger.Provides
 import javax.inject.Inject

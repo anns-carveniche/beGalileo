@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.carveniche.begalileo.Constants
+import com.carveniche.begalileo.util.Constants
 
 
 import com.carveniche.begalileo.R
-import com.carveniche.begalileo.ui.home.HomeContract
+import com.carveniche.begalileo.contract.HomeContract
 import kotlinx.android.synthetic.main.home_list_item.view.*
 
 

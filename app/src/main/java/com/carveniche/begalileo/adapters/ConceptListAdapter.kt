@@ -4,20 +4,13 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 
 import com.carveniche.begalileo.R
-import com.carveniche.begalileo.iInterfaces.IGradeBoardListener
-import com.carveniche.begalileo.models.GradeBoard
-import com.carveniche.begalileo.models.GradeDetail
 import com.carveniche.begalileo.models.SubConcept
-import com.carveniche.begalileo.ui.concepts.fragments.ConceptHomeContract
-import com.carveniche.begalileo.ui.concepts.fragments.ConceptListContract
+import com.carveniche.begalileo.ui.fragments.ConceptListContract
 import kotlinx.android.synthetic.main.concept_horizontal_list_item.view.*
-import kotlinx.android.synthetic.main.concept_list_item.view.*
-
 
 
 class ConceptListAdapter(private val context:Context, private val conceptList : List<SubConcept>,  private val conceptView: ConceptListContract.View) : RecyclerView.Adapter<ConceptListAdapter.ViewHolder>()

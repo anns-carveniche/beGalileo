@@ -1,6 +1,6 @@
 package com.carveniche.begalileo.api
 
-import com.carveniche.begalileo.Constants
+import com.carveniche.begalileo.util.Constants
 import com.carveniche.begalileo.models.*
 import io.reactivex.Observable
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory

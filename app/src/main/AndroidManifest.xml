@@ -12,7 +12,7 @@
     <dist:module dist:instant="true" />
 
     <application
-        android:name=".BaseApp"
+        android:name=".util.BaseApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -21,19 +21,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:targetApi="n">
-        <activity android:name=".ui.practiceMath.PracticeMathActivity"></activity>
+        <activity android:name=".ui.activities.PracticeMathActivity"></activity>
         <activity
-            android:name=".ui.speedMath.gameResultActivity.GameResultActivity"
+            android:name=".ui.activities.GameResultActivity"
             android:screenOrientation="landscape"></activity>
         <activity
-            android:name=".ui.speedMath.SpeedMathActivity"
+            android:name=".ui.activities.SpeedMathActivity"
             android:screenOrientation="landscape"></activity>
         <activity
-            android:name=".ui.nearbyCenters.NearbyCenterActivity"
+            android:name=".ui.activities.NearbyCenterActivity"
             android:exported="true"
             android:screenOrientation="landscape"></activity>
         <activity
-            android:name=".ui.concepts.ConceptActivity"
+            android:name=".ui.activities.ConceptActivity"
             android:screenOrientation="landscape"></activity>
 
         <meta-data
@@ -41,13 +41,13 @@
             android:value="AIzaSyCBNt2lyec1xpxDExHSX2EAHKj56b17PV8" />
 
         <activity
-            android:name=".ui.userLocation.UserLocationActivity"
+            android:name=".ui.activities.UserLocationActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".ui.addChild.AddChildActivity"
+            android:name=".ui.activities.AddChildActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".ui.SplashActivity"
+            android:name=".ui.activities.SplashActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -57,12 +57,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.login.LoginActivity"
+            android:name=".ui.activities.LoginActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".activities.questions.MathboardActivity" />
         <activity android:name=".activities.payment.PaymentActivity" />
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:screenOrientation="landscape" />
 
         <meta-data

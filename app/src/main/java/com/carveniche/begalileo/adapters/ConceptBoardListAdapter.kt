@@ -4,15 +4,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 
 import com.carveniche.begalileo.R
-import com.carveniche.begalileo.iInterfaces.IGradeBoardListener
 import com.carveniche.begalileo.models.GradeBoard
-import com.carveniche.begalileo.models.GradeDetail
-import com.carveniche.begalileo.ui.concepts.fragments.ConceptHomeContract
+import com.carveniche.begalileo.ui.fragments.ConceptHomeContract
 import kotlinx.android.synthetic.main.concept_list_item.view.*
 
 

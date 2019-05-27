@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primaryDarkColor"
-    tools:context=".ui.speedMath.SpeedMathActivity">
+    tools:context=".ui.activities.SpeedMathActivity">
 
 
     <include layout="@layout/layout_progressbar" />
