@@ -1,62 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primaryColor">#00838f</color>
-    <color name="primaryLightColor">#4fb3bf</color>
-    <color name="primaryDarkColor">#005662</color>
-    <color name="secondaryColor">#455a64</color>
-    <color name="secondaryLightColor">#718792</color>
-    <color name="secondaryDarkColor">#1c313a</color>
-    <color name="primaryTextColor">#ffffff</color>
-    <color name="secondaryTextColor">#ffffff</color>
-    <color name="textview_disabled">#9e9e9e</color>
-    <color name="colorPrimary">#880e4f</color>
-    <color name="colorPrimaryDark">#bc477b</color>
+    <color name="primaryColor">#b71c1c</color>
+    <color name="primaryLightColor">#f05545</color>
+    <color name="primaryDarkColor">#7f0000</color>
+    <color name="secondaryColor">#eeeeee</color>
+    <color name="secondaryLightColor">#ffffff</color>
+    <color name="secondaryDarkColor">#bcbcbc</color>
+    <color name="primaryTextColor">#fafafa</color>
+    <color name="secondaryTextColor">#212121</color>
+    <color name="colorPrimary">#b71c1c</color>
+    <color name="colorPrimaryDark">#7f0000</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="white">#FFFFFF</color>
+    <color name="white">#F3F3F3</color>
     <color name="text_black">#4E4E4E</color>
-    <color name="red">#A91111</color>
-    <color name="green">#09BD06</color>
-    <color name="correct_green">#00BD09</color>
-    <color name="incorrect_red">#B7381C</color>
-
-    <!-- Screens background color-->
-    <color name="bg_screen1">#f64c73</color>
-    <color name="bg_screen2">#20d2bb</color>
-    <color name="bg_screen3">#3395ff</color>
-    <color name="bg_screen4">#c873f4</color>
-
-    <!-- dots inactive colors -->
-    <color name="dot_dark_screen1">#d1395c</color>
-    <color name="dot_dark_screen2">#14a895</color>
-    <color name="dot_dark_screen3">#2278d4</color>
-    <color name="dot_dark_screen4">#a854d4</color>
-
-    <!-- dots active colors -->
-    <color name="dot_light_screen1">#f98da5</color>
-    <color name="dot_light_screen2">#8cf9eb</color>
-    <color name="dot_light_screen3">#93c6fd</color>
-    <color name="dot_light_screen4">#e4b5fc</color>
-
-    <array name="array_dot_active">
-        <item>@color/dot_light_screen1</item>
-        <item>@color/dot_light_screen2</item>
-        <item>@color/dot_light_screen3</item>
-        <item>@color/dot_light_screen4</item>
-    </array>
-
-    <array name="array_dot_inactive">
-        <item>@color/dot_dark_screen1</item>
-        <item>@color/dot_dark_screen2</item>
-        <item>@color/dot_dark_screen3</item>
-        <item>@color/dot_dark_screen4</item>
-    </array>
-
-
-    //Wireframe Colors
-    <color name="wf_color_primary">#F5F5F5</color>
-    <color name="wf_text_color">#3B3837</color>
-    <color name="wf_color_secondary">#EEEEEE</color>
-
-
+    <color name="textview_disabled">#9e9e9e</color>
 
 </resources>

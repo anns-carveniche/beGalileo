@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+    android:background="@drawable/bubble_in"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/tvMarkerText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="Tutor Name"
+        android:padding="5dp"
+        android:textColor="@color/secondaryLightColor"
+        android:textSize="@dimen/font_size_medium"/>
+
+    <Button
+        android:id="@+id/btnBookTrial"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="Book Trial" />
+
+    <ImageButton
+        android:id="@+id/ibCall"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        app:srcCompat="@android:drawable/sym_action_call" />
+
+</LinearLayout>

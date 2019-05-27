@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
-    package="com.carveniche.wisdomleap">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.carveniche.begalileo">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <dist:module dist:instant="true" />
 
@@ -13,32 +19,36 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".view.activity.RoughActivity">
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        tools:targetApi="n">
+        <activity android:name=".ui.practiceMath.PracticeMathActivity"></activity>
+        <activity
+            android:name=".ui.speedMath.gameResultActivity.GameResultActivity"
+            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".ui.speedMath.SpeedMathActivity"
+            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".ui.nearbyCenters.NearbyCenterActivity"
+            android:exported="true"
+            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".ui.concepts.ConceptActivity"
+            android:screenOrientation="landscape"></activity>
 
-        </activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCBNt2lyec1xpxDExHSX2EAHKj56b17PV8" />
+
         <activity
-            android:name=".view.activity.ReferralActivity"
-            android:screenOrientation="portrait"></activity>
+            android:name=".ui.userLocation.UserLocationActivity"
+            android:screenOrientation="landscape" />
         <activity
-            android:name=".view.activity.MultiPlayerQuizActivity"
-            android:screenOrientation="portrait" />
+            android:name=".ui.addChild.AddChildActivity"
+            android:screenOrientation="landscape" />
         <activity
-            android:name=".view.activity.ChatSupportActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".view.activity.RecentlyViewedActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".view.activity.WelcomeActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity
-            android:name=".view.activity.ConceptQuizActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".view.activity.SplashActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/SplashScreenTheme">
+            android:name=".ui.SplashActivity"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -46,26 +56,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.VideoPlayActivity"></activity>
         <activity
-            android:name=".view.activity.QuizActivity"
+            android:name=".ui.login.LoginActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".activities.questions.MathboardActivity" />
+        <activity android:name=".activities.payment.PaymentActivity" />
         <activity
-            android:name=".view.activity.SubjectActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".view.activity.RegisterActivity"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            android:screenOrientation="portrait" >
+            android:name=".ui.main.MainActivity"
+            android:screenOrientation="landscape" />
 
-        </activity>
-        <activity
-            android:name=".view.activity.LoginActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustResize" />
-        <activity
-            android:name=".view.activity.MainActivity"
-            android:screenOrientation="portrait" />
+        <meta-data
+            android:name="com.razorpay.ApiKey"
+            android:value="rzp_test_CFYpymECku6QK2" />
     </application>
 
 </manifest>
