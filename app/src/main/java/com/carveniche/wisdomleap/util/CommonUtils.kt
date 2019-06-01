@@ -2,11 +2,14 @@ package com.carveniche.wisdomleap.util
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.Typeface
 import android.util.DisplayMetrics
 import android.util.Patterns
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
+import com.carveniche.wisdomleap.model.MySharedPreferences
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
 
@@ -59,3 +62,25 @@ import java.util.*
         else
             progressBar.visibility = View.GONE
     }
+    fun TextView.setCustomFontType(context: Context,fontPath : String)
+    {
+        var customFont  = Typeface.createFromAsset(context.assets,fontPath)
+        typeface = customFont
+    }
+
+     fun isFirstLaunchToday(mySharedPreferences: MySharedPreferences) : Boolean
+    {
+        val calendar = Calendar.getInstance()
+        val currentDay  = calendar.get(Calendar.DAY_OF_MONTH)
+        val lastDay = mySharedPreferences.getIntData(Constants.LAST_DAY)
+        return if(lastDay!=currentDay) {
+            mySharedPreferences.putIntData(Constants.LAST_DAY,currentDay)
+            true
+        } else {
+            false
+        }
+    }
+
+
+
+

@@ -1,5 +1,6 @@
 package com.carveniche.wisdomleap.view.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -33,6 +34,20 @@ class SubjectActivity : AppCompatActivity() {
             .addToBackStack(ListChaptersFragment.TAG)
             .replace(R.id.frame,ldf,ListChaptersFragment.TAG)
             .commit()
+    }
+
+    override fun onBackPressed() {
+        var count = supportFragmentManager.backStackEntryCount
+        when(count)
+        {
+            1->{
+                var intent = Intent(this,MainActivity::class.java)
+                startActivity(intent)
+            }
+            2->{
+               super.onBackPressed()
+            }
+        }
     }
 
 }

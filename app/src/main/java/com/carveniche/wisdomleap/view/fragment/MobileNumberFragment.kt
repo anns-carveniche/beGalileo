@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import com.carveniche.wisdomleap.R
 import com.carveniche.wisdomleap.contract.MobileNumberContract
@@ -14,8 +15,11 @@ import com.carveniche.wisdomleap.di.module.FragmentModule
 import com.carveniche.wisdomleap.di.module.SharedPreferenceModule
 import com.carveniche.wisdomleap.model.RegisterModel
 import com.carveniche.wisdomleap.util.Constants
+import com.carveniche.wisdomleap.util.showLoadingProgress
 import com.carveniche.wisdomleap.util.showLongToast
 import com.carveniche.wisdomleap.view.activity.LoginActivity
+import com.hbb20.CountryCodePicker
+import com.jakewharton.rxbinding2.widget.RxProgressBar
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.fragment_mobile_number.*
@@ -30,6 +34,9 @@ class MobileNumberFragment : Fragment(),MobileNumberContract.View,View.OnClickLi
     lateinit var rootView : View
     @Inject lateinit var presenter : MobileNumberContract.Presenter
     lateinit var loginActivity: LoginActivity
+    private lateinit var countryCodeSelector : CountryCodePicker
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,16 +64,12 @@ class MobileNumberFragment : Fragment(),MobileNumberContract.View,View.OnClickLi
         Log.d(Constants.LOG_TAG,error)
     }
 
-    override fun mobileNumber(): Observable<CharSequence> {
+   /* override fun mobileNumber(): Observable<CharSequence> {
         return RxTextView.textChanges(edMobileNumber).skipInitialValue()
-    }
+    }*/
 
     override fun showProgress(show: Boolean) {
-        progressBar.bringToFront()
-        if(show)
-            progressBar.visibility = View.VISIBLE
-        else
-            progressBar.visibility = View.GONE
+        showLoadingProgress(progressBar,show)
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_mobile_number,container,false)
@@ -81,7 +84,7 @@ class MobileNumberFragment : Fragment(),MobileNumberContract.View,View.OnClickLi
     }
 
     private fun initUI() {
-        rootView.tvNumOne.setOnClickListener(this)
+        /*rootView.tvNumOne.setOnClickListener(this)
         rootView.tvNumTwo.setOnClickListener(this)
         rootView.tvNumThree.setOnClickListener(this)
         rootView.tvNumFour.setOnClickListener(this)
@@ -91,9 +94,17 @@ class MobileNumberFragment : Fragment(),MobileNumberContract.View,View.OnClickLi
         rootView.tvNumEight.setOnClickListener(this)
         rootView.tvNumNine.setOnClickListener(this)
         rootView.tvNumZero.setOnClickListener(this)
-        rootView.ivClear.setOnClickListener(this)
+        rootView.ivClear.setOnClickListener(this)*/
         rootView.tvVerifyMe.setOnClickListener(this)
-        rootView.tvVerifyMe.isEnabled = false
+
+
+
+        countryCodeSelector = ccp
+        countryCodeSelector.registerCarrierNumberEditText(edMobileNumber)
+        countryCodeSelector.setPhoneNumberValidityChangeListener {
+           tvVerifyMe.isEnabled = it
+        }
+        countryCodeSelector.setNumberAutoFormattingEnabled(true)
     }
     private fun displayMobileNumber(value: String?)
     {
@@ -107,10 +118,17 @@ class MobileNumberFragment : Fragment(),MobileNumberContract.View,View.OnClickLi
             rootView.edMobileNumber.text.delete(length-1,length)
         }
     }
+    private fun submitMobileNumber()
+    {
+        if(ccp.isValidFullNumber)
+            presenter.verifyNumberClick(countryCodeSelector.selectedCountryCode,edMobileNumber.text.toString())
+        else
+            showLongToast("Please enter a valid number",context!!)
+    }
     override fun onClick(v: View?) {
         when(v!!.id)
         {
-            rootView.tvNumOne.id -> displayMobileNumber(getString(R.string.num1))
+            /*rootView.tvNumOne.id -> displayMobileNumber(getString(R.string.num1))
             rootView.tvNumTwo.id -> displayMobileNumber(getString(R.string.num2))
             rootView.tvNumThree.id -> displayMobileNumber(getString(R.string.num3))
             rootView.tvNumFour.id -> displayMobileNumber(getString(R.string.num4))
@@ -120,8 +138,8 @@ class MobileNumberFragment : Fragment(),MobileNumberContract.View,View.OnClickLi
             rootView.tvNumEight.id -> displayMobileNumber(getString(R.string.num8))
             rootView.tvNumNine.id -> displayMobileNumber(getString(R.string.num9))
             rootView.tvNumZero.id -> displayMobileNumber(getString(R.string.num0))
-            rootView.ivClear.id ->  deleteLastNumber()
-            rootView.tvVerifyMe.id -> presenter.verifyNumberClick(edMobileNumber.text.toString())
+            rootView.ivClear.id ->  deleteLastNumber()*/
+            rootView.tvVerifyMe.id ->submitMobileNumber()
         }
     }
 

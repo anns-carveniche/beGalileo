@@ -9,6 +9,6 @@ class VideoPlayContract {
     }
     interface Presenter : BaseContract.Presenter<VideoPlayContract.View>
     {
-
+        fun updateVideoStatus(studentId : Int,courseId : Int,conceptId : Int,subConceptId : Int,isCompleted : Boolean,duration : Long)
     }
 }

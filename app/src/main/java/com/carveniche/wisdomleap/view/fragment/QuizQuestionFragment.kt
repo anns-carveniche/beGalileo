@@ -1,19 +1,18 @@
 package com.carveniche.wisdomleap.view.fragment
 
 
-import android.graphics.Color
 import android.os.Bundle
+import android.os.SystemClock
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Chronometer
 import android.widget.RadioButton
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 
 import com.carveniche.wisdomleap.R
-import com.carveniche.wisdomleap.api.ApiInterface
 import com.carveniche.wisdomleap.contract.QuizQuestionContract
 import com.carveniche.wisdomleap.di.component.DaggerFragmentComponent
 import com.carveniche.wisdomleap.di.module.ContextModule
@@ -23,10 +22,11 @@ import com.carveniche.wisdomleap.model.QuizQuestionModel
 import com.carveniche.wisdomleap.util.Constants
 import com.carveniche.wisdomleap.util.showLoadingProgress
 import com.carveniche.wisdomleap.util.showLongToast
+import com.carveniche.wisdomleap.view.activity.QuizActivity
 import kotlinx.android.synthetic.main.fragment_quiz_question.*
 import kotlinx.android.synthetic.main.layout_progressbar.*
 import org.jsoup.Jsoup
-import java.lang.invoke.ConstantCallSite
+import java.util.concurrent.TimeUnit
 
 import javax.inject.Inject
 
@@ -40,6 +40,14 @@ class QuizQuestionFragment : Fragment(),QuizQuestionContract.View {
     var mCurrentOptions = mutableListOf<String>()
     var currentQuestionNumber = 0
     var mCorrectAnswer = ""
+    private var categoryId = 0
+    private var mLevel = ""
+    private var playerScore = 0
+    private lateinit var quizActivity : QuizActivity
+    var timeWhenStopped: Long = 0
+    private var timeTaken : Long = 0
+    private lateinit var mChronometer: Chronometer
+    private var isResume = false
 
 
     override fun onCreateView(
@@ -54,6 +62,9 @@ class QuizQuestionFragment : Fragment(),QuizQuestionContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         injectDependency()
+        categoryId = arguments!!.getInt(Constants.QUIZ_CATEGORY)
+        mLevel = arguments!!.getString(Constants.QUIZ_LEVEL)
+        quizActivity = activity as QuizActivity
 
     }
     private fun injectDependency() {
@@ -67,6 +78,7 @@ class QuizQuestionFragment : Fragment(),QuizQuestionContract.View {
     }
     override fun loadQuestionSucess(quizQuestionModel: QuizQuestionModel) {
         this.quizQuestionModel = quizQuestionModel
+        startTimer()
         updateQuestion()
     }
 
@@ -75,28 +87,56 @@ class QuizQuestionFragment : Fragment(),QuizQuestionContract.View {
     }
 
 
+    fun startTimer()
+    {
+        mChronometer.base = SystemClock.elapsedRealtime() - timeWhenStopped
+        mChronometer.start()
+    }
+
+    fun stopTimer()
+    {
+        timeWhenStopped =  mChronometer.base - SystemClock.elapsedRealtime()
+        mChronometer.stop()
+    }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.attach(this)
         presenter.subscribe()
-        presenter.loadQuizQuestions(15,17,Constants.EASY,Constants.QUIZ_TYPE)
-        chronometerTimer.start()
-        btnNext.setOnClickListener {
+        presenter.loadQuizQuestions(15,categoryId,mLevel,Constants.QUIZ_TYPE)
+        mChronometer = chronometerTimer
+        btnCheckAnswer.setOnClickListener {
             if(rgOptions.checkedRadioButtonId==-1)
                 showLongToast("Please choose an option",context!!)
             else{
                 showAnswerStatus(isValidAnswer())
+                if(isValidAnswer())
+                    playerScore++
                 if(currentQuestionNumber<=14)
                 {
                     updateQuestion()
                 }
-
-
+                else
+                {
+                    endQuiz()
+                }
             }
 
         }
+        btnQuit.setOnClickListener {
+           endQuiz()
+        }
 
     }
+
+    private fun endQuiz()
+    {
+        timeTaken = SystemClock.elapsedRealtime() - mChronometer.base
+        Log.d(Constants.LOG_TAG,TimeUnit.MILLISECONDS.toSeconds(timeTaken).toString())
+        quizActivity.showQuizResultFragment(playerScore,timeTaken.toInt())
+    }
+
 
     private fun isValidAnswer(): Boolean {
         var selectedId = rgOptions.checkedRadioButtonId
@@ -109,10 +149,7 @@ class QuizQuestionFragment : Fragment(),QuizQuestionContract.View {
     }
 
     override fun showAnswerStatus(isCorrect: Boolean) {
-        var colorState = if(isCorrect)
-            Color.GREEN
-        else
-            Color.RED
+
         when(currentQuestionNumber)
         {
             1->changeQuestionNumberStatus(tvNum1,isCorrect)
@@ -134,7 +171,7 @@ class QuizQuestionFragment : Fragment(),QuizQuestionContract.View {
         }
     }
 
-    fun changeQuestionNumberStatus(textView : TextView,isCorrect: Boolean)
+    private fun changeQuestionNumberStatus(textView : TextView, isCorrect: Boolean)
     {
         textView.isSelected = isCorrect
         textView.isEnabled = isCorrect
@@ -168,6 +205,25 @@ class QuizQuestionFragment : Fragment(),QuizQuestionContract.View {
     companion object {
         const val TAG = "QuizQuestionFragment"
     }
+
+    override fun onPause() {
+        Log.d(Constants.LOG_TAG,"ON PAUSE")
+        super.onPause()
+        stopTimer()
+        isResume = true
+        presenter.unSubscribe()
+    }
+
+    override fun onResume() {
+        super.onResume()
+       if(isResume)
+       {
+           Log.d(Constants.LOG_TAG,"Start Timer Resume")
+           startTimer()
+           isResume = false
+       }
+    }
+
 
 
 }

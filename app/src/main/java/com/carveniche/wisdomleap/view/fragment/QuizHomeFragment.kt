@@ -70,11 +70,11 @@ class QuizHomeFragment : Fragment(),QuizHomeContract.View {
         quizCategory.add(QuizCategoryModel(9,"General Knowledge",R.drawable.ic_quiz_gk))
         quizCategory.add(QuizCategoryModel(17,"Nature",R.drawable.ic_quiz_nature))
         quizCategory.add(QuizCategoryModel(18,"Computer",R.drawable.ic_quiz_computer))
-        quizCategory.add(QuizCategoryModel(19,"Mathematics",R.drawable.ic_quiz_maths))
+      //  quizCategory.add(QuizCategoryModel(19,"Mathematics",R.drawable.ic_quiz_maths))
         quizCategory.add(QuizCategoryModel(22,"Geography",R.drawable.ic_quiz_geography))
         quizCategory.add(QuizCategoryModel(23,"History",R.drawable.ic_quiz_history))
         quizCategory.add(QuizCategoryModel(27,"Animals",R.drawable.ic_quiz_animals))
-        quizCategory.add(QuizCategoryModel(30,"Science",R.drawable.ic_quiz_science))
+      //  quizCategory.add(QuizCategoryModel(30,"Science",R.drawable.ic_quiz_science))
     }
 
     override fun showProgress(show: Boolean) {
@@ -108,8 +108,14 @@ class QuizHomeFragment : Fragment(),QuizHomeContract.View {
     override fun openQuizQuestionActivity(level: String) {
         Log.d(Constants.LOG_TAG,"$categoryId -- $level")
         var intent = Intent(context!!,QuizActivity::class.java)
-        
+        intent.putExtra(Constants.QUIZ_LEVEL,level)
+        intent.putExtra(Constants.QUIZ_CATEGORY,categoryId)
         startActivity(intent)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        presenter.unSubscribe()
     }
 
 
@@ -126,6 +132,12 @@ class QuizDifficultyDialog(private var quizHomeView : QuizHomeContract.View) : D
 
         view.btnEasy.setOnClickListener {
             quizHomeView.openQuizQuestionActivity(Constants.EASY)
+        }
+        view.btnMedium.setOnClickListener {
+            quizHomeView.openQuizQuestionActivity(Constants.MEDIUM)
+        }
+        view.btnHard.setOnClickListener {
+            quizHomeView.openQuizQuestionActivity(Constants.HARD)
         }
 
         return view

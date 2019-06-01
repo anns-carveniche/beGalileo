@@ -7,7 +7,6 @@ import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.core.app.ActivityCompat
 import com.carveniche.wisdomleap.R
 import com.carveniche.wisdomleap.adapter.GradeListAdapter
@@ -53,6 +52,8 @@ class RegisterActivity : AppCompatActivity(),RegisterContract.View,IGradeClickLi
     private var mSelectedCity = ""
     private var mMobileNumber = ""
     private var mEmail = ""
+    private var mFirstName = ""
+    private var mLastName = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,18 +68,21 @@ class RegisterActivity : AppCompatActivity(),RegisterContract.View,IGradeClickLi
         mMobileNumber = mySharedPreferences.getString(Constants.MOBILE_NUMBER)
         presenter.attach(this)
         presenter.subscribe()
-
-
         presenter.getGradeList()
 
     }
+
+    override fun lastName(): Observable<CharSequence> {
+        return RxTextView.textChanges(edLastName).skipInitialValue()
+    }
+
 
     private fun initUI() {
 
         tvCity.setOnClickListener {
             openAutoCompletePlaceActivity()
         }
-        btnNext.setOnClickListener {
+        btnCheckAnswer.setOnClickListener {
            if(tvCity.text.isNotEmpty())
                 viewflipper.showNext()
             else
@@ -86,13 +90,25 @@ class RegisterActivity : AppCompatActivity(),RegisterContract.View,IGradeClickLi
                showLongToast("Please select your city",this)
            }
         }
-        btnSubmit.setOnClickListener {
+        btnSubmitDetails.setOnClickListener {
             mEmail = edEmail.text.toString()
-            presenter.submitRegisterDetails(mMobileNumber,mEmail,mSelectedGradeId,mSelectedCity)
+            presenter.submitRegisterDetails(mMobileNumber,mEmail,mFirstName,mLastName,mSelectedGradeId,mSelectedCity)
         }
+        btnNameSubmit.setOnClickListener {
+            mFirstName = edFirstName.text.toString()
+            mLastName = edLastName.text.toString()
+            viewflipper.showNext()
+        }
+
+    }
+    override fun updateSchoolSubmitButtonState(state: Boolean) {
+        btnNameSubmit.isEnabled = state
     }
 
 
+    override fun name(): Observable<CharSequence> {
+        return RxTextView.textChanges(edFirstName).skipInitialValue()
+    }
     override fun onGradeClick(id: Int) {
         mSelectedGradeId  = gradeList[id].id
         Log.d(Constants.LOG_TAG,id.toString())
@@ -118,10 +134,12 @@ class RegisterActivity : AppCompatActivity(),RegisterContract.View,IGradeClickLi
     }
 
     override fun updateSubmitButton(state: Boolean) {
-        btnSubmit.isEnabled = state
+        btnSubmitDetails.isEnabled = state
     }
 
-
+    override fun updateNameSubmitButton(state: Boolean) {
+        btnNameSubmit.isEnabled = state
+    }
 
 
     private fun openAutoCompletePlaceActivity() {
@@ -165,6 +183,8 @@ class RegisterActivity : AppCompatActivity(),RegisterContract.View,IGradeClickLi
     }
     override fun onSubmitDetailsSucess() {
         mySharedPreferences.putString(Constants.EMAIL,mEmail)
+        mySharedPreferences.putString(Constants.FIRST_NAME,mFirstName)
+        mySharedPreferences.putString(Constants.LAST_NAME,mLastName)
         var intent = Intent(this,MainActivity::class.java)
         startActivity(intent)
     }

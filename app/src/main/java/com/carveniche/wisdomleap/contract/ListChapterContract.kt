@@ -8,6 +8,7 @@ class ListChapterContract {
     {
         fun onLoadDataSucess(chapterList : ChapterListModel)
         fun onLoadDataError(msg : String)
+        fun onChapterClick(conceptId : Int,subconceptId : Int,videoUrl : String)
     }
     interface Presenter : BaseContract.Presenter<ListChapterContract.View>
     {

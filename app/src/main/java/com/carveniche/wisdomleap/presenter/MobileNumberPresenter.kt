@@ -15,11 +15,11 @@ class MobileNumberPresenter : MobileNumberContract.Presenter {
     private val api = ApiInterface.create()
 
     override fun subscribe() {
-        val mobileNumberObservable = view.mobileNumber().map(isMobileNumberValid())
+      /*  val mobileNumberObservable = view.mobileNumber().map(isMobileNumberValid())
         val mobileNumberSubscribe = mobileNumberObservable.subscribe {
             view.updateVerifyMeViewState(it)
         }
-        disposable.add(mobileNumberSubscribe)
+        disposable.add(mobileNumberSubscribe)*/
     }
 
     override fun unSubscribe() {
@@ -28,9 +28,9 @@ class MobileNumberPresenter : MobileNumberContract.Presenter {
     override fun attach(view: MobileNumberContract.View) {
        this.view = view
     }
-    override fun verifyNumberClick(mobileNumber: String) {
+    override fun verifyNumberClick(countryCode : String,mobileNumber: String) {
         view.showProgress(true)
-        val subscribe = api.registerMobileNumber(mobileNumber).subscribeOn(Schedulers.io())
+        val subscribe = api.registerMobileNumber(countryCode,mobileNumber).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 view.showProgress(false)
@@ -45,9 +45,9 @@ class MobileNumberPresenter : MobileNumberContract.Presenter {
         disposable.add(subscribe)
     }
 
-    override fun isMobileNumberValid(): Function<CharSequence, Boolean> {
+    /*override fun isMobileNumberValid(): Function<CharSequence, Boolean> {
         return Function { t -> checkNumber(t) }
-    }
+    }*/
     private fun checkNumber(t: CharSequence): Boolean
     {
         return t.length==10

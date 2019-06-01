@@ -70,4 +70,16 @@ class FragmentModule {
         return ProfileHomePresenter()
     }
 
+    @Provides
+    fun provideChapterQuizFragment() : ChapterQuizContract.Presenter
+    {
+        return ChapterQuizPresenter()
+    }
+
+    @Provides
+    fun provideChapterQuizResultFragment() : ChapterQuizResultContract.Presenter
+    {
+        return ChapterQuizResultPresenter()
+    }
+
 }

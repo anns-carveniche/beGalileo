@@ -8,13 +8,13 @@ import io.reactivex.functions.Function
 class MobileNumberContract {
     interface View : BaseContract.View {
         fun showErrorMessages(error: String)
-        fun mobileNumber(): Observable<CharSequence>
+       // fun mobileNumber(): Observable<CharSequence>
         fun updateVerifyMeViewState(state: Boolean)
         fun showEnterOtpFragment(registerModel: RegisterModel)
     }
     interface Presenter : BaseContract.Presenter<MobileNumberContract.View>
     {
-        fun verifyNumberClick(mobileNumber: String)
-        fun isMobileNumberValid(): Function<CharSequence, Boolean>
+        fun verifyNumberClick(countryCode:String,mobileNumber: String)
+       // fun isMobileNumberValid(): Function<CharSequence, Boolean>
     }
 }

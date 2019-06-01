@@ -105,4 +105,13 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer-core:2.8.3'
     implementation 'com.google.android.exoplayer:exoplayer-hls:2.8.3'
     implementation 'com.google.android.exoplayer:exoplayer-ui:2.8.3'
+
+    //MPAndroidChart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+
+    //Country Code
+    implementation 'com.hbb20:ccp:2.2.9'
+
+    //Circular Image View
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
 }

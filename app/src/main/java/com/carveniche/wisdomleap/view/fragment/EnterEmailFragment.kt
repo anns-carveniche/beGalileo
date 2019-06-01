@@ -18,7 +18,6 @@ import com.carveniche.wisdomleap.di.module.SharedPreferenceModule
 import com.carveniche.wisdomleap.model.MySharedPreferences
 import com.carveniche.wisdomleap.util.Constants
 import com.carveniche.wisdomleap.util.snackBar
-import com.carveniche.wisdomleap.view.activity.MainActivity
 import com.carveniche.wisdomleap.view.activity.RegisterActivity
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.Observable
@@ -62,7 +61,7 @@ class EnterEmailFragment : Fragment(),EnterEmailContract.View {
         startActivity(intent)
     }
     private fun initUI() {
-        btnSubmit.setOnClickListener {
+        btnEditProfile.setOnClickListener {
             try {
                 presenter.updateEmail(sharedPreferences.getString(Constants.MOBILE_NUMBER), edEmail.text.toString())
             }
@@ -82,7 +81,7 @@ class EnterEmailFragment : Fragment(),EnterEmailContract.View {
     }
 
     override fun updateSubmitButton(state: Boolean) {
-        btnSubmit.isEnabled = state
+        btnEditProfile.isEnabled = state
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

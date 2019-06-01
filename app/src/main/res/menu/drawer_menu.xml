@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/nav_home"
+        android:enabled="true"
+        android:title="Home"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/nav_support"
+        android:enabled="true"
+        android:title="Support"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/nav_chat"
+        android:enabled="true"
+        android:title="Chat"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/nav_privacy_policy"
+        android:enabled="true"
+        android:title="Privacy Policy"
+        app:showAsAction="always"/>
+</menu>

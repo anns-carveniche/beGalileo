@@ -40,6 +40,7 @@
     <string name="level_string_num1">Level 1</string>
     <string name="ComputerScore">Computer : %1$d</string>
     <string name="YourScore">You : %1$d</string>
+    <string name="YOUR_SCORE">Your Score</string>
 
     <string name="unable_to_fetch_data">Unable to fetch data please try again</string>
     <string name="sample_question">Which of the following planets does not have a natural satellite?</string>
@@ -55,4 +56,26 @@
     <string name="easy">Easy</string>
     <string name="medium">Medium</string>
     <string name="hard">Hard</string>
+    <string name="quiz_point_percentage">%1$d of %2$d points,(%3$d%)</string>
+    <string name="average">Average</string>
+    <string name="quit">Quit</string>
+
+    //Intro Sliders
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Quality Videos</string>
+    <string name="slide_1_desc">“The best quality learning videos covering the complete curriculum.”</string>
+
+    <string name="slide_2_title">Learn</string>
+    <string name="slide_2_desc">“Learn concepts visually. Anytime, anywhere”</string>
+
+    <string name="slide_3_title">What do you want?</string>
+    <string name="slide_3_desc">“Science, Math, History, Geography, Economics or Political Science – we have it all here”</string>
+
+    <string name="quote_of_the_day">Quote of the day</string>
+    <string name="sample_quote">As America celebrates Memorial Day, we pay tribute to those who have given their lives in our nation\'s wars.</string>
+    <string name="nav_drawer_open">Open</string>
+    <string name="nav_drawer_close">Close</string>
+
 </resources>

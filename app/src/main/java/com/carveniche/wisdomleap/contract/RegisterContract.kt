@@ -9,14 +9,18 @@ class RegisterContract {
     {
         fun emailObservable() : Observable<CharSequence>
         fun updateSubmitButton(state : Boolean)
+        fun updateNameSubmitButton(state: Boolean)
         fun gradeListLoadSucess(gradeListModel: GradeListModel)
         fun gradeListLoadFailed(msg : String)
         fun onSubmitDetailsSucess()
         fun onSubmitDetailFailed(msg : String)
+        fun name(): Observable<CharSequence>
+        fun lastName() : Observable<CharSequence>
+        fun updateSchoolSubmitButtonState(state: Boolean)
     }
     interface Presenter : BaseContract.Presenter<RegisterContract.View>
     {
         fun getGradeList()
-        fun submitRegisterDetails(mobileNumber : String,email: String,gradeId : Int,city : String)
+        fun submitRegisterDetails(mobileNumber : String,email: String,firstName : String,lastName : String,gradeId : Int,city : String)
     }
 }

@@ -18,5 +18,6 @@ data class SubConceptDetail(
     val sub_concept_id: Int,
     val sub_concept_name: String,
     val video: Boolean,
+    val video_url : String,
     val image: String
 )

@@ -3,13 +3,17 @@ package com.carveniche.wisdomleap.view.fragment
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -30,9 +34,12 @@ import com.carveniche.wisdomleap.util.Constants
 import com.carveniche.wisdomleap.util.showLoadingProgress
 import com.carveniche.wisdomleap.util.showLongToast
 import com.carveniche.wisdomleap.view.activity.SubjectActivity
+import com.carveniche.wisdomleap.view.activity.VideoPlayActivity
 import kotlinx.android.synthetic.main.fragment_list_chapters.*
 import kotlinx.android.synthetic.main.layout_progressbar.*
 import javax.inject.Inject
+import androidx.core.content.ContextCompat.getSystemService
+import com.carveniche.wisdomleap.view.activity.ConceptQuizActivity
 
 
 class ListChaptersFragment : Fragment(),ListChapterContract.View {
@@ -72,7 +79,6 @@ class ListChaptersFragment : Fragment(),ListChapterContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUI()
-
     }
 
     private fun initUI() {
@@ -97,25 +103,55 @@ class ListChaptersFragment : Fragment(),ListChapterContract.View {
     }
 
     private fun displayData(chapterConcept : ChapterConcept) {
-        var layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT,1f)
-        var tvTextView  = TextView(context!!)
-        tvTextView.layoutParams = layoutParams
-        tvTextView.gravity = Gravity.CENTER
-        tvTextView.text = chapterConcept.chapter_name
-        tvTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP,20f)
-        tvTextView.setPadding(20,10,20,10)
-        lvContainer.addView(tvTextView)
-        var rvChapter = RecyclerView(context!!)
+        val inflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        var customView = inflater.inflate(R.layout.list_item_chapter_video,null)
+
+        var rvChapter = customView.findViewById<RecyclerView>(R.id.recyclerView)
+        var tvHeader = customView.findViewById<TextView>(R.id.tvHeader)
+        var btnTakeTest = customView.findViewById<Button>(R.id.btnTakeTest)
+
+        tvHeader.text = chapterConcept.chapter_name
+
         val firstManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         rvChapter.layoutManager = firstManager
-        rvChapter.adapter = ChapterListAdapter(context!!,chapterConcept.sub_concept_details)
-        rvChapter.layoutParams = ViewGroup.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT,RecyclerView.LayoutParams.WRAP_CONTENT)
-        lvContainer.addView(rvChapter)
+        rvChapter.adapter = ChapterListAdapter(context!!,chapterConcept.chapter_id,chapterConcept.sub_concept_details,this)
+
+
+        if(chapterConcept.questions)
+            btnTakeTest.visibility = View.VISIBLE
+        else
+            btnTakeTest.visibility = View.GONE
+
+
+        btnTakeTest.setOnClickListener {
+            startQuizActivity(chapterConcept.chapter_id)
+        }
+
+        lvContainer.addView(customView)
+        Log.d(Constants.LOG_TAG,"$courseId - $studentId - ${chapterConcept.chapter_id}")
+
+    }
+
+
+    private fun startQuizActivity(conceptId : Int)
+    {
+        var intent  =  Intent(context,ConceptQuizActivity::class.java)
+        intent.putExtra(Constants.STUDENT_ID,studentId)
+        intent.putExtra(Constants.COURSE_ID,courseId)
+        intent.putExtra(Constants.CONCEPT_ID,conceptId)
+        startActivity(intent)
     }
 
     override fun onLoadDataError(msg: String) {
         showLongToast(msg,context!!)
     }
 
-
+    override fun onChapterClick(conceptId: Int, subconceptId: Int, videoUrl: String) {
+        var intent = Intent(context,VideoPlayActivity::class.java)
+        intent.putExtra(Constants.VIDEO_URL,videoUrl)
+        intent.putExtra(Constants.COURSE_ID,courseId)
+        intent.putExtra(Constants.CONCEPT_ID,conceptId)
+        intent.putExtra(Constants.SUB_CONCEPT_ID,subconceptId)
+        startActivity(intent)
+    }
 }

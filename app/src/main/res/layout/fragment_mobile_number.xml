@@ -6,32 +6,34 @@
     android:layout_height="match_parent"
     android:background="@color/primaryColor">
 
-    <include layout="@layout/layout_progressbar"/>
+    <include
+
+        layout="@layout/layout_progressbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="0dp"
+        android:layout_width="411dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="32dp"
         android:gravity="center"
         android:text="Enter Mobile Number to receive OTP"
         android:textColor="@color/white"
         android:textSize="@dimen/font_size_medium"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/tvVerifyMe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/button_corner_shape"
         android:gravity="center"
         android:paddingStart="50dp"
@@ -39,7 +41,6 @@
         android:text="@string/verify_me"
         android:textColor="@color/white"
         android:textSize="@dimen/font_size_medium"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
@@ -48,27 +49,23 @@
         android:id="@+id/linearLayout2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="32dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/tvVerifyMe"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toTopOf="parent">
 
 
-        <TextView
-            android:id="@+id/tvCountryCode"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:background="@color/primaryDarkColor"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="+91"
-            android:textColor="@color/white"
-            android:textSize="@dimen/font_size_medium"
-
-            />
+        <com.hbb20.CountryCodePicker
+            android:id="@+id/ccp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:paddingStart="10dp"
+            app:ccpDialog_backgroundColor="@color/white" />
 
         <EditText
             android:id="@+id/edMobileNumber"
@@ -81,14 +78,14 @@
             android:focusableInTouchMode="true"
             android:gravity="center"
             android:inputType="number"
-            android:padding="5dp"
+            android:padding="2dp"
             android:text=""
             android:textColor="@color/primaryDarkColor"
             android:textSize="@dimen/font_size_medium" />
 
     </LinearLayout>
 
-    <LinearLayout
+    <!--<LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -103,8 +100,9 @@
 
         <include
             layout="@layout/number_layout"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-    </LinearLayout>
+    </LinearLayout>-->
 </androidx.constraintlayout.widget.ConstraintLayout>

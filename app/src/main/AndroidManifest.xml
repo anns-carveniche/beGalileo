@@ -14,7 +14,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".view.activity.SplashActivity">
+        <activity android:name=".view.activity.WelcomeActivity">
+
+        </activity>
+        <activity android:name=".view.activity.ConceptQuizActivity"></activity>
+        <activity
+            android:name=".view.activity.SplashActivity"
+            android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -22,26 +28,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.VideoPlayActivity"
-            android:screenOrientation="landscape">
-
-        </activity>
-        <activity android:name=".view.activity.QuizActivity">
-
-        </activity>
-        <activity android:name=".view.activity.SubjectActivity">
-
-        </activity>
         <activity
-            android:name=".view.activity.RegisterActivity">
+            android:name=".view.activity.VideoPlayActivity"
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".view.activity.QuizActivity"></activity>
+        <activity android:name=".view.activity.SubjectActivity"></activity>
+        <activity android:name=".view.activity.RegisterActivity"></activity>
+        <activity android:name=".view.activity.LoginActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize"
+            >
 
         </activity>
-        <activity android:name=".view.activity.LoginActivity">
-
-        </activity>
-        <activity android:name=".view.activity.MainActivity">
-
-        </activity>
+        <activity android:name=".view.activity.MainActivity"></activity>
     </application>
 
 </manifest>

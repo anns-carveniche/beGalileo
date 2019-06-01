@@ -51,5 +51,18 @@ class LoginActivity : AppCompatActivity() {
             .commit()
     }
 
+    override fun onBackPressed() {
+        var count = supportFragmentManager.backStackEntryCount
+        when(count)
+        {
+            1->exitApplication()
+            2->super.onBackPressed()
+        }
+    }
+
+    private fun exitApplication() {
+
+    }
+
 
 }

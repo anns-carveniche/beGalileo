@@ -32,6 +32,8 @@ class EnterOtpFragment : Fragment(),EnterOtpContract.View,View.OnClickListener {
     private  var mMobileNumber : String = ""
     private  var mStudentId = 0
     private  var mEmail : String = ""
+    private var mFirstName = ""
+    private var mLastName = ""
     lateinit var rootView: View
     @Inject lateinit var presenter : EnterOtpContract.Presenter
     @Inject lateinit var sharedPreferences: MySharedPreferences
@@ -67,6 +69,10 @@ class EnterOtpFragment : Fragment(),EnterOtpContract.View,View.OnClickListener {
         mStudentId = arguments!!.getInt(Constants.STUDENT_ID)
         if(arguments!!.getString(Constants.EMAIL)!=null)
             mEmail = arguments!!.getString(Constants.EMAIL)
+        if(arguments!!.getString(Constants.FIRST_NAME)!=null)
+            mFirstName = arguments!!.getString(Constants.FIRST_NAME)
+        if(arguments!!.getString(Constants.LAST_NAME)!=null)
+            mLastName = arguments!!.getString(Constants.LAST_NAME)
         return rootView
     }
 
@@ -90,8 +96,9 @@ class EnterOtpFragment : Fragment(),EnterOtpContract.View,View.OnClickListener {
             tvNumNine.id->displayOtpNumber(getString(R.string.num9))
             tvNumZero.id->displayOtpNumber(getString(R.string.num0))
             ivClear.id->deleteOtpNumber()
-            btnSubmit.id->presenter.verifyOtp(getUserOtp(),mGeneratedOtp)
+            btnEditProfile.id->presenter.verifyOtp(getUserOtp(),mGeneratedOtp)
             tvResendOTP.id->presenter.resendOtp(mMobileNumber)
+            tvEditMobileNumber.id->loginActivity.onBackPressed()
         }
     }
 
@@ -101,7 +108,7 @@ class EnterOtpFragment : Fragment(),EnterOtpContract.View,View.OnClickListener {
     }
 
     override fun updateSubmitButtonState(state: Boolean) {
-        btnSubmit.isEnabled = state
+        btnEditProfile.isEnabled = state
     }
 
     override fun showOtpError() {
@@ -122,6 +129,8 @@ class EnterOtpFragment : Fragment(),EnterOtpContract.View,View.OnClickListener {
         }
         else
         {
+            sharedPreferences.putString(Constants.FIRST_NAME,mFirstName)
+            sharedPreferences.putString(Constants.LAST_NAME,mLastName)
             sharedPreferences.putString(Constants.EMAIL,mEmail)
             sharedPreferences.putBoolean(Constants.LOGGED_IN,true)
             val intent = Intent(context, MainActivity::class.java)
@@ -175,8 +184,10 @@ class EnterOtpFragment : Fragment(),EnterOtpContract.View,View.OnClickListener {
         tvNumNine.setOnClickListener(this)
         tvNumZero.setOnClickListener(this)
         ivClear.setOnClickListener(this)
-        btnSubmit.setOnClickListener(this)
+        btnEditProfile.setOnClickListener(this)
         tvResendOTP.setOnClickListener(this)
+        tvEditMobileNumber.setOnClickListener(this)
+        tvMobileNumber.text = mMobileNumber
     }
     companion object {
         const val TAG = "EnterOtpFragment"
