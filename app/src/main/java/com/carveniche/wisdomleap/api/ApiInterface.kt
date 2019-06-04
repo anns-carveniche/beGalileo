@@ -1,13 +1,12 @@
 package com.carveniche.wisdomleap.api
 
+import com.carveniche.wisdomleap.di.module.ActivityLogModel
 import com.carveniche.wisdomleap.model.*
-import com.carveniche.wisdomleap.util.Constants
 import com.carveniche.wisdomleap.util.URL
 import com.google.gson.JsonElement
 import io.reactivex.Observable
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
@@ -55,6 +54,10 @@ interface ApiInterface {
     fun getChapterList(@Query("student_id") studentId : Int,
                        @Query("course_id") courseId : Int
                        ) : Observable<ChapterListModel>
+    @GET("app_students/activities")
+    fun getActivityLog(@Query("student_id") studentId : Int,
+                       @Query("search") search : String
+    ) : Observable<ActivityLogModel>
 
     @POST("app_students/start_quiz")
     fun getChapterQuizQuestions(@Query("student_id") studentId : Int,

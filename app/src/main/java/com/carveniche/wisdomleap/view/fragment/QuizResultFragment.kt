@@ -52,6 +52,7 @@ class QuizResultFragment : Fragment(),QuizResultContract.View {
     private lateinit var level  : String
     private var userPercent = 0
     private lateinit var scoreChart : BarChart
+    private lateinit var accuracyChart : BarChart
     @Inject lateinit var mySharedPreferences: MySharedPreferences
     private var studentId = 0
     private var timeTaken = 0
@@ -112,6 +113,51 @@ class QuizResultFragment : Fragment(),QuizResultContract.View {
         presenter.submitQuizResult(studentId,categoryId,level,totalQuestions,score,timeTaken)
         initUI()
         setScoreChart()
+        setPieChart()
+    }
+
+    private fun setPieChart() {
+        accuracyChart  = bc_pie_chart
+        accuracyChart.setDrawBarShadow(false)
+        val description =  Description()
+        description.text = ""
+        accuracyChart.description = description
+        accuracyChart.legend.isEnabled = false
+        accuracyChart.setPinchZoom(false)
+        accuracyChart.isDoubleTapToZoomEnabled = false
+        accuracyChart.setDrawValueAboveBar(false)
+
+        val xAxis = accuracyChart.xAxis
+        xAxis.setDrawGridLines(false)
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+
+        xAxis.isEnabled  = true
+        xAxis.setDrawAxisLine(false)
+
+        val yLeft = accuracyChart.axisLeft
+
+        yLeft.axisMaximum  = 100f
+        yLeft.axisMinimum = 0f
+        yLeft.isEnabled = false
+
+
+        xAxis.labelCount = 2
+        xAxis.textSize = 10f
+        xAxis.textColor = Color.WHITE
+
+
+        val values = arrayOf("Your Score","Average Score")
+        xAxis.valueFormatter = XAxisValueFormatter(values)
+
+        val yRight = accuracyChart.axisRight
+        yRight.setDrawAxisLine(true)
+        yRight.setDrawGridLines(false)
+        yRight.isEnabled  = false
+
+        setGraphData()
+
+        accuracyChart.animateY(2000)
+
     }
 
     private fun setScoreChart() {

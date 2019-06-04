@@ -14,7 +14,10 @@ class SubjectActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_subject)
-        showListSubjectFragment()
+        var courseId = intent.getIntExtra(Constants.COURSE_ID,0)
+        //showListSubjectFragment()
+        showListChapterFragment(courseId)
+
     }
 
      fun showListSubjectFragment() {

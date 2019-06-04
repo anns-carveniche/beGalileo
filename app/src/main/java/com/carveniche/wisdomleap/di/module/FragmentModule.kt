@@ -82,4 +82,15 @@ class FragmentModule {
         return ChapterQuizResultPresenter()
     }
 
+    @Provides
+    fun provideRecentVideoPresenter() : RecentViewedVideosContract.Presenter
+    {
+        return RecentViewedVideosPresenter()
+    }
+
+    @Provides
+    fun provideRecentQuizPresenter() : RecentViewedQuizContract.Presenter{
+        return RecentViewedQuizPresenter()
+    }
+
 }

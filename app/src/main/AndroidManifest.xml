@@ -14,9 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".view.activity.WelcomeActivity">
+        <activity android:name=".view.activity.RecentlyViewedActivity">
 
         </activity>
+        <activity android:name=".view.activity.WelcomeActivity"></activity>
         <activity android:name=".view.activity.ConceptQuizActivity"></activity>
         <activity
             android:name=".view.activity.SplashActivity"
@@ -30,16 +31,14 @@
         </activity>
         <activity
             android:name=".view.activity.VideoPlayActivity"
-            android:screenOrientation="landscape"></activity>
-        <activity android:name=".view.activity.QuizActivity"></activity>
-        <activity android:name=".view.activity.SubjectActivity"></activity>
-        <activity android:name=".view.activity.RegisterActivity"></activity>
-        <activity android:name=".view.activity.LoginActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize"
-            >
-
-        </activity>
-        <activity android:name=".view.activity.MainActivity"></activity>
+            android:screenOrientation="landscape" />
+        <activity android:name=".view.activity.QuizActivity" />
+        <activity android:name=".view.activity.SubjectActivity" />
+        <activity android:name=".view.activity.RegisterActivity" />
+        <activity
+            android:name=".view.activity.LoginActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize"></activity>
+        <activity android:name=".view.activity.MainActivity" />
     </application>
 
 </manifest>

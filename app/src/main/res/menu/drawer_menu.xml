@@ -7,6 +7,11 @@
         android:title="Home"
         app:showAsAction="always"/>
     <item
+        android:id="@+id/nav_recently_viewed"
+        android:enabled="true"
+        android:title="Recently Viewed"
+        app:showAsAction="always"/>
+    <item
         android:id="@+id/nav_support"
         android:enabled="true"
         android:title="Support"

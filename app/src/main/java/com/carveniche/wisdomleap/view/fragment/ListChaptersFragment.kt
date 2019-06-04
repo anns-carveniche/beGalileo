@@ -39,10 +39,11 @@ import kotlinx.android.synthetic.main.fragment_list_chapters.*
 import kotlinx.android.synthetic.main.layout_progressbar.*
 import javax.inject.Inject
 import androidx.core.content.ContextCompat.getSystemService
+import com.carveniche.wisdomleap.interfaces.IChapterClickListener
 import com.carveniche.wisdomleap.view.activity.ConceptQuizActivity
 
 
-class ListChaptersFragment : Fragment(),ListChapterContract.View {
+class ListChaptersFragment : Fragment(),ListChapterContract.View,IChapterClickListener {
 
     lateinit var rootView: View
     @Inject lateinit var presenter : ListChapterContract.Presenter

@@ -2,12 +2,14 @@ package com.carveniche.wisdomleap.contract
 
 import com.carveniche.wisdomleap.base.BaseContract
 import com.carveniche.wisdomleap.model.ChapterQuizModel
+import com.carveniche.wisdomleap.model.QuizData
+
 
 class ChapterQuizContract {
     interface View : BaseContract.View{
         fun onQuestionLoadSucess(chapterQuizModel: ChapterQuizModel)
         fun onQuestionLoadFailed(msg : String)
-        fun updateQuestion(qNumber : Int)
+        fun updateQuestion(quizData: QuizData)
         fun submitAnswer()
     }
     interface Presenter : BaseContract.Presenter<ChapterQuizContract.View>{

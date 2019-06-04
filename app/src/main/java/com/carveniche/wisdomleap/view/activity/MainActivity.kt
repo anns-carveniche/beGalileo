@@ -1,8 +1,11 @@
 package com.carveniche.wisdomleap.view.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -27,7 +30,7 @@ import kotlinx.android.synthetic.main.layout_progressbar.*
 import kotlinx.android.synthetic.main.nav_header.*
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(),MainContract.View{
+class MainActivity : AppCompatActivity(),MainContract.View,NavigationView.OnNavigationItemSelectedListener{
 
     @Inject lateinit var presenter : MainContract.Presenter
     @Inject lateinit var mySharedPreferences: MySharedPreferences
@@ -57,6 +60,8 @@ class MainActivity : AppCompatActivity(),MainContract.View{
         toggle.isDrawerIndicatorEnabled = true
 
         mNavigationView = navigationView
+        mNavigationView.setNavigationItemSelectedListener(this)
+
         headerView = navigationView.getHeaderView(0)
 
 
@@ -82,6 +87,7 @@ class MainActivity : AppCompatActivity(),MainContract.View{
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {
         when(it.itemId)
         {
+
             R.id.main_nav_home->{
                 showDashboardFragment()
                 return@OnNavigationItemSelectedListener true
@@ -142,6 +148,22 @@ class MainActivity : AppCompatActivity(),MainContract.View{
 
     override fun onBackPressed() {
 
+    }
+
+    override fun onNavigationItemSelected(p0: MenuItem): Boolean {
+        when(p0.itemId)
+        {
+            R.id.nav_home -> showDashboardFragment()
+            R.id.nav_recently_viewed -> showRecentlyViewed()
+        }
+        return true
+    }
+
+    private fun showRecentlyViewed() {
+        drawer_layout.closeDrawers()
+        var intent = Intent(this,RecentlyViewedActivity::class.java)
+        intent.putExtra(Constants.STUDENT_ID,mySharedPreferences.getIntData(Constants.STUDENT_ID))
+        startActivity(intent)
     }
 
 

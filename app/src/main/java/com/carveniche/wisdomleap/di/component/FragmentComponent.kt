@@ -23,4 +23,6 @@ interface FragmentComponent {
     fun inject(profileHomeFragment: ProfileHomeFragment)
     fun inject(chapterQuizFragment: ChapterQuizFragment)
     fun inject(chapterQuizResultFragment: ChapterQuizResultFragment)
+    fun inject(recentViewedVideosFragment: RecentViewedVideosFragment)
+    fun inject(recentViewedQuizFragment: RecentViewedQuizFragment)
 }

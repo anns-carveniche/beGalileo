@@ -20,6 +20,7 @@ import com.carveniche.wisdomleap.di.module.FragmentModule
 import com.carveniche.wisdomleap.di.module.SharedPreferenceModule
 import com.carveniche.wisdomleap.model.ChapterQuizModel
 import com.carveniche.wisdomleap.model.QuizData
+
 import com.carveniche.wisdomleap.model.ResultData
 import com.carveniche.wisdomleap.util.Constants
 import com.carveniche.wisdomleap.util.showLoadingProgress
@@ -56,7 +57,7 @@ class ChapterQuizFragment : Fragment(),ChapterQuizContract.View {
     private lateinit var mChronometer : Chronometer
     private var questionStartTime : Long = 0
     private var timeTaken : Long = 0
-
+    private var currentQuestion = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -80,7 +81,6 @@ class ChapterQuizFragment : Fragment(),ChapterQuizContract.View {
         initUI()
         presenter.attach(this)
         presenter.subscribe()
-
         presenter.loadQuestionDatas(studentId,courseId,chapterId)
     }
 
@@ -145,13 +145,14 @@ class ChapterQuizFragment : Fragment(),ChapterQuizContract.View {
         resetUI()
         isOptionCorrect()
         questionCount++
+        currentQuestion++
         if(!isCompleted)
-            updateQuestion(questionCount)
+            updateQuestion(quizDataList[questionCount])
         else
         {
             conceptQuizActivity.showChapterQuizResultFragment(userCorrectAnswer,totalQuestion)
         }
-        if(questionCount == quizDataList.size-1)
+        if(currentQuestion == totalQuestion)
             isCompleted = true
     }
 
@@ -189,7 +190,7 @@ class ChapterQuizFragment : Fragment(),ChapterQuizContract.View {
             userCorrectAnswer++
         var currentQuizData = quizDataList[questionCount]
         var currentChoiceData = currentQuizData.choices_data[mSelectedOptionIndex]
-        presenter.saveQuiz(studentId,quizId,currentQuizData.question_id,questionCount+1,currentChoiceData.choice_id,timeTaken.toInt(),isAnswerCorrect,isCompleted)
+        presenter.saveQuiz(studentId,quizId,currentQuizData.question_id,currentQuestion,currentChoiceData.choice_id,timeTaken.toInt(),isAnswerCorrect,isCompleted)
         showAnswerStatus(isAnswerCorrect)
     }
 
@@ -236,17 +237,20 @@ class ChapterQuizFragment : Fragment(),ChapterQuizContract.View {
         this.quizId = chapterQuizModel.quiz_id
         this.quizDataList = chapterQuizModel.quiz_data
         this.resultData = chapterQuizModel.result_data
-
+        this.currentQuestion = chapterQuizModel.current
         if(!resultData.isEmpty())
         {
-            questionCount += resultData.size
+           // questionCount += chapterQuizModel.current
             resultData.forEach {
                 if(it.correct)
                     userCorrectAnswer++
             }
         }
+        this.quizDataList.forEach {
+            updateQuestion(it)
+        }
 
-        updateQuestion(questionCount)
+      //  updateQuestion(questionCount)
     }
 
     private fun startTimer()
@@ -292,9 +296,31 @@ class ChapterQuizFragment : Fragment(),ChapterQuizContract.View {
     override fun onQuestionLoadFailed(msg: String) {
         Log.d(Constants.LOG_TAG,msg)
     }
-    override fun updateQuestion(qNumber: Int) {
 
-       // Log.d(Constants.LOG_TAG,resultData.last().question_no.toString())
+    override fun updateQuestion(quizData: QuizData)
+    {
+        startTimer()
+        questionStartTime = SystemClock.elapsedRealtime() - mChronometer.base
+        tvQuestionNumber.text = context!!.getString(R.string.QuestionNumber,currentQuestion,totalQuestion)
+        tvQuestion.text = Jsoup.parse(quizData.question_text).text()
+        if(!quizData.question_image.isEmpty())
+        {
+            ivQuestionImage.visibility = View.VISIBLE
+        }
+        quizData.choices_data.forEachIndexed { index, choicesData ->
+            rbList[index].visibility = View.VISIBLE
+            rbList[index].text = Jsoup.parse(choicesData.options).text()
+            if(!choicesData.image.isEmpty())
+            {
+                imageOptionList[index].visibility = View.VISIBLE
+            }
+        }
+
+    }
+
+   /* override fun updateQuestion(qNumber: Int) {
+
+        Log.d(Constants.LOG_TAG,quizDataList.toString())
         startTimer()
         questionStartTime = SystemClock.elapsedRealtime() - mChronometer.base
         Log.d(Constants.LOG_TAG,questionStartTime.toString())
@@ -315,7 +341,7 @@ class ChapterQuizFragment : Fragment(),ChapterQuizContract.View {
                 imageOptionList[index].visibility = View.VISIBLE
             }
         }
-    }
+    }*/
 
 }
 class QuizOptionResultDialogFragment(var chapterQuizView : ChapterQuizContract.View,var correctAnswer : String,var isCorrect : Boolean,var image_url : String) : DialogFragment(){
@@ -354,7 +380,6 @@ class QuizOptionResultDialogFragment(var chapterQuizView : ChapterQuizContract.V
     override fun onPause() {
         super.onPause()
         Log.d(Constants.LOG_TAG,"Paused")
-
         chapterQuizView.submitAnswer()
     }
 

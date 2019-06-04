@@ -13,7 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.carveniche.wisdomleap.R
 import com.carveniche.wisdomleap.contract.ListChapterContract
 import com.carveniche.wisdomleap.interfaces.IChapterClickListener
+import com.carveniche.wisdomleap.interfaces.IQuizClickListener
 import com.carveniche.wisdomleap.model.ChapterListModel
+import com.carveniche.wisdomleap.model.RecentPractice
+import com.carveniche.wisdomleap.model.RecentVideo
 import com.carveniche.wisdomleap.model.SubConceptDetail
 import com.carveniche.wisdomleap.util.Constants
 import com.carveniche.wisdomleap.util.URL
@@ -21,7 +24,7 @@ import com.carveniche.wisdomleap.util.screenWidth
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
-class ChapterListAdapter(public var context : Context,var conceptId: Int,private var subConceptList : List<SubConceptDetail>,private var viewListener : IChapterClickListener) : RecyclerView.Adapter<ChapterListAdapter.ViewHolder>() {
+class DashboardRecentQuizListAdapter(public var context : Context,  private var recentPractice: List<RecentPractice>, private var viewListener : IQuizClickListener) : RecyclerView.Adapter<DashboardRecentQuizListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_chapter,parent,false)
@@ -29,18 +32,18 @@ class ChapterListAdapter(public var context : Context,var conceptId: Int,private
     }
 
     override fun getItemCount(): Int {
-        return subConceptList.size
+        return recentPractice.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.bindItems(conceptId,subConceptList[position])
+        holder.bindItems(recentPractice[position])
 
     }
 
-    class ViewHolder(itemView : View,private val listener : IChapterClickListener,private var mContext: Context) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView : View,private val listener : IQuizClickListener,private var mContext: Context) : RecyclerView.ViewHolder(itemView) {
 
-        fun bindItems(conceptId: Int,subConceptDetail :  SubConceptDetail)
+        fun bindItems(recentPractice: RecentPractice )
         {
             val tvDescription  = itemView.findViewById<TextView>(R.id.tvDescription)
             val ivImageItem = itemView.findViewById<ImageView>(R.id.ivImageItem)
@@ -49,24 +52,15 @@ class ChapterListAdapter(public var context : Context,var conceptId: Int,private
            /* ivImageItem.layoutParams.height = (screenWidth/2)
             ivImageItem.layoutParams.width = (screenWidth/2)-30*/
 
-            Picasso.with(mContext).load(subConceptDetail.image)
+            Picasso.with(mContext).load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT39r3PtQTWg2d-JhFeGWQgrjlx0etaq3ffc1vfCNy_z1FqSbAwJA")
                 .fit()
-                .into(ivImageItem,object : Callback{
-                    override fun onSuccess() {
-                        Log.d(Constants.LOG_TAG,"Image Load Suc")
-                    }
-
-                    override fun onError() {
-                        Log.d(Constants.LOG_TAG,"Image Load Failed")
-                    }
-
-                })
+                .into(ivImageItem)
 
 
             ivImageItem.setOnClickListener {
-                listener.onChapterClick(conceptId,subConceptDetail.sub_concept_id,subConceptDetail.video_url)
+               listener.onQuizItemClick(recentPractice)
             }
-            tvDescription.text = subConceptDetail.sub_concept_name
+            tvDescription.text = recentPractice.chapter_name
         }
     }
 }

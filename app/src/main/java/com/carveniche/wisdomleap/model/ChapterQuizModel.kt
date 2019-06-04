@@ -1,5 +1,6 @@
 package com.carveniche.wisdomleap.model
 
+
 data class ChapterQuizModel(
     val current: Int,
     val quiz_data: List<QuizData>,
