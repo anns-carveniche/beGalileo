@@ -21,6 +21,7 @@ import com.carveniche.wisdomleap.di.module.FragmentModule
 import com.carveniche.wisdomleap.di.module.SharedPreferenceModule
 import com.carveniche.wisdomleap.model.QuizCategoryModel
 import com.carveniche.wisdomleap.util.Constants
+import com.carveniche.wisdomleap.view.activity.MultiPlayerQuizActivity
 import com.carveniche.wisdomleap.view.activity.QuizActivity
 import kotlinx.android.synthetic.main.dialog_quiz_levels.*
 import kotlinx.android.synthetic.main.dialog_quiz_levels.view.*
@@ -61,7 +62,10 @@ class QuizHomeFragment : Fragment(),QuizHomeContract.View {
         initLoadDatas()
 
     }
-
+    override fun openMultiPlayerQuiz() {
+        var intent = Intent(context,MultiPlayerQuizActivity::class.java)
+        startActivity(intent)
+    }
     private fun displayData() {
         gvQuizCateg.adapter = QuizCategroyAdapter(context!!,quizCategory,this)
     }
@@ -134,11 +138,13 @@ class QuizDifficultyDialog(private var quizHomeView : QuizHomeContract.View) : D
             quizHomeView.openQuizQuestionActivity(Constants.EASY)
         }
         view.btnMedium.setOnClickListener {
-            quizHomeView.openQuizQuestionActivity(Constants.MEDIUM)
+            quizHomeView.openMultiPlayerQuiz()
+           // quizHomeView.openQuizQuestionActivity(Constants.MEDIUM)
         }
         view.btnHard.setOnClickListener {
-            quizHomeView.openQuizQuestionActivity(Constants.HARD)
+           // quizHomeView.openQuizQuestionActivity(Constants.HARD)
         }
+        view.btnHard.visibility = View.GONE
 
         return view
     }

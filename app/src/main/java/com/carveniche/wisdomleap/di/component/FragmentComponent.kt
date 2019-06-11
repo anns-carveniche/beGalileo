@@ -25,4 +25,7 @@ interface FragmentComponent {
     fun inject(chapterQuizResultFragment: ChapterQuizResultFragment)
     fun inject(recentViewedVideosFragment: RecentViewedVideosFragment)
     fun inject(recentViewedQuizFragment: RecentViewedQuizFragment)
+    fun inject(multiplayerSearchFragment: MultiplayerSearchFragment)
+    fun inject(multiplayerquizplayfragment: MultiplayerQuizPlayFragment)
+    fun inject(multiplayerResultFragment: MultiplayerResultFragment)
 }

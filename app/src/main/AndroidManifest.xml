@@ -14,11 +14,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".view.activity.RecentlyViewedActivity">
+        <activity android:name=".view.activity.MultiPlayerQuizActivity">
 
         </activity>
-        <activity android:name=".view.activity.WelcomeActivity"></activity>
-        <activity android:name=".view.activity.ConceptQuizActivity"></activity>
+        <activity android:name=".view.activity.ChatSupportActivity" />
+        <activity android:name=".view.activity.RecentlyViewedActivity" />
+        <activity android:name=".view.activity.WelcomeActivity" />
+        <activity android:name=".view.activity.ConceptQuizActivity" />
         <activity
             android:name=".view.activity.SplashActivity"
             android:theme="@style/SplashScreenTheme">
@@ -37,7 +39,7 @@
         <activity android:name=".view.activity.RegisterActivity" />
         <activity
             android:name=".view.activity.LoginActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize"></activity>
+            android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity android:name=".view.activity.MainActivity" />
     </application>
 

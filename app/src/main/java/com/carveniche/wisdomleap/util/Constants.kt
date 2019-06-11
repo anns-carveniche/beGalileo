@@ -1,5 +1,9 @@
 package com.carveniche.wisdomleap.util
 
+import android.R.drawable
+import com.carveniche.wisdomleap.R
+
+
 class Constants {
     companion object {
         const val LOG_TAG = "WisdomLeap"
@@ -28,11 +32,25 @@ class Constants {
         const val IS_FIRST_TIME_LAUNCH = "IS_FIRST_TIME_LAUNCH"
         const val LAST_DAY = "LAST_DAY"
         const val AVATAR_IMAGE_ID = "AVATAR_IMAGE_ID"
+        const val OPPONENT_NAME = "OPPONENT_NAME"
+        const val OPPONENT_COINS = "OPPONENT_COINS"
+        const val OPPONENT_AVATAR = "OPPONENT_AVATAR"
+        const val IS_PLAYER_WIN = "IS_PLAYER_WIN"
 
         //Custom Font Path
         const val FONT_NICONNE = "fonts/Niconne-Regular.ttf"
         const val FONT_ROBOTO_LIGHT = "fonts/Roboto/Roboto-Light.ttf"
 
+        //Avatar Array
+         val myAvatarList = intArrayOf(R.drawable.avatar_1,
+                                                R.drawable.avatar_2,
+                                                R.drawable.avatar_3,R.drawable.avatar_4,R.drawable.avatar_5,
+                                                R.drawable.avatar_6,R.drawable.avatar_7,R.drawable.avatar_8,
+                                                R.drawable.avatar_9,R.drawable.avatar_10,R.drawable.avatar_11,R.drawable.avatar_12)
 
+        fun getAvatarList() : IntArray
+        {
+            return myAvatarList
+        }
     }
 }

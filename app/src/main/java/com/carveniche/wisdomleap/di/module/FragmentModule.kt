@@ -93,4 +93,22 @@ class FragmentModule {
         return RecentViewedQuizPresenter()
     }
 
+    @Provides
+    fun provideMultiplayerSearch() : MultiplayerSearchContract.Presenter
+    {
+        return MultiplayerSearchPresenter()
+    }
+
+    @Provides
+    fun provideMultiplayerquizplay() : MultiplayerPlayQuizContract.Presenter
+    {
+        return MultiplayerQuizPlayPresenter()
+    }
+
+    @Provides
+    fun provideMultiplayerResult() : MultiplayerResultContract.Presenter
+    {
+        return MultiplayerResultPresenter()
+    }
+
 }
