@@ -121,7 +121,7 @@ class DashboardFragment : Fragment(),DashboardContract.View,IChapterClickListene
     override fun onLoadDataSucess(subjectListModel: SubjectListModel) {
         this.subjectListData = subjectListModel
         assignSubjectDatas()
-        if(!subjectListModel.recent_video.isEmpty())
+        if(!subjectListModel.recent_video.isNullOrEmpty())
         {
             displayRecentVideos(subjectListModel.recent_video)
             ll_recently_videos_container.visibility = View.VISIBLE
@@ -161,8 +161,8 @@ class DashboardFragment : Fragment(),DashboardContract.View,IChapterClickListene
     private fun displayInprogressQuiz(inprogress_practice: List<InprogressPractice>) {
         this.inprogress_practice = inprogress_practice[0]
         ll_in_progress_quiz_container.visibility = View.VISIBLE
-       iv_quiz_inprogress.setImageDrawable(ContextCompat.getDrawable(context!!,R.drawable.quiz_in_progress))
-        tv_quiz_inprogress.text = inprogress_practice[0].chapter_name.replace("_"," ")
+         iv_quiz_inprogress.setImageDrawable(ContextCompat.getDrawable(context!!,R.drawable.quiz_in_progress))
+         tv_quiz_inprogress.text = inprogress_practice[0].chapter_name.replace("_"," ")
     }
 
     override fun onQuizItemClick(recentQuiz: RecentPractice) {

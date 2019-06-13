@@ -17,6 +17,7 @@ import com.carveniche.wisdomleap.di.module.ActivityModule
 import com.carveniche.wisdomleap.di.module.ContextModule
 import com.carveniche.wisdomleap.di.module.SharedPreferenceModule
 import com.carveniche.wisdomleap.model.MySharedPreferences
+import com.carveniche.wisdomleap.util.Config
 import com.carveniche.wisdomleap.util.Constants
 import com.carveniche.wisdomleap.util.DailyQuotes
 import com.carveniche.wisdomleap.util.showLoadingProgress
@@ -25,6 +26,9 @@ import com.carveniche.wisdomleap.view.fragment.ProfileHomeFragment
 import com.carveniche.wisdomleap.view.fragment.QuizHomeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import com.zopim.android.sdk.api.ZopimChat
+import com.zopim.android.sdk.model.VisitorInfo
+import com.zopim.android.sdk.prechat.ZopimChatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_progressbar.*
 import kotlinx.android.synthetic.main.nav_header.*
@@ -37,6 +41,9 @@ class MainActivity : AppCompatActivity(),MainContract.View,NavigationView.OnNavi
     private lateinit var toggle: ActionBarDrawerToggle
     private lateinit var mNavigationView : NavigationView
     private lateinit var headerView : View
+    var userName = ""
+    var userEmail = ""
+    var userContactNumber = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +53,7 @@ class MainActivity : AppCompatActivity(),MainContract.View,NavigationView.OnNavi
         injectDependency()
         initUI()
         setDrawerHeaderDetails()
+        ZopimChat.init(Config.ZOPIUM_ACCOUNT_KEY)
     }
 
     private fun initUI() {
@@ -131,8 +139,9 @@ class MainActivity : AppCompatActivity(),MainContract.View,NavigationView.OnNavi
         var tvUserName = headerView.findViewById<TextView>(R.id.tv_header_user_name)
         var tvUserEmail = headerView.findViewById<TextView>(R.id.tv_header_user_email)
         var imageId = mySharedPreferences.getIntData(Constants.AVATAR_IMAGE_ID)
-        var userName = mySharedPreferences.getString(Constants.FIRST_NAME)+" "+mySharedPreferences.getString(Constants.LAST_NAME)
-        var userEmail = mySharedPreferences.getString(Constants.EMAIL)
+         userName = mySharedPreferences.getString(Constants.FIRST_NAME)+" "+mySharedPreferences.getString(Constants.LAST_NAME)
+         userEmail = mySharedPreferences.getString(Constants.EMAIL)
+        userContactNumber = mySharedPreferences.getString(Constants.MOBILE_NUMBER)
         tvUserName.text = userName
         tvUserEmail.text = userEmail
         if(imageId==0)
@@ -162,8 +171,17 @@ class MainActivity : AppCompatActivity(),MainContract.View,NavigationView.OnNavi
 
     private fun showChatSupportActivity() {
         drawer_layout.closeDrawers()
-        var intent = Intent(this,ChatSupportActivity::class.java)
+       /* var intent = Intent(this,ChatSupportActivity::class.java)
         intent.putExtra(Constants.STUDENT_ID,mySharedPreferences.getIntData(Constants.STUDENT_ID))
+        startActivity(intent)*/
+
+        var visitrInfo = VisitorInfo.Builder()
+            .name(userName)
+            .email(userEmail)
+            .phoneNumber(userContactNumber)
+            .build()
+        ZopimChat.setVisitorInfo(visitrInfo)
+        var intent = Intent(this,ZopimChatActivity::class.java)
         startActivity(intent)
     }
 

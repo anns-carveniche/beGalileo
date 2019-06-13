@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.RadioButton
 import androidx.fragment.app.DialogFragment
 
 import com.carveniche.wisdomleap.R
@@ -21,6 +22,7 @@ import com.carveniche.wisdomleap.di.module.FragmentModule
 import com.carveniche.wisdomleap.di.module.SharedPreferenceModule
 import com.carveniche.wisdomleap.model.QuizCategoryModel
 import com.carveniche.wisdomleap.util.Constants
+import com.carveniche.wisdomleap.util.showLongToast
 import com.carveniche.wisdomleap.view.activity.MultiPlayerQuizActivity
 import com.carveniche.wisdomleap.view.activity.QuizActivity
 import kotlinx.android.synthetic.main.dialog_quiz_levels.*
@@ -31,7 +33,6 @@ import javax.inject.Inject
 
 
 class QuizHomeFragment : Fragment(),QuizHomeContract.View {
-
 
 
     private lateinit var rootView: View
@@ -62,10 +63,7 @@ class QuizHomeFragment : Fragment(),QuizHomeContract.View {
         initLoadDatas()
 
     }
-    override fun openMultiPlayerQuiz() {
-        var intent = Intent(context,MultiPlayerQuizActivity::class.java)
-        startActivity(intent)
-    }
+
     private fun displayData() {
         gvQuizCateg.adapter = QuizCategroyAdapter(context!!,quizCategory,this)
     }
@@ -121,7 +119,13 @@ class QuizHomeFragment : Fragment(),QuizHomeContract.View {
         super.onPause()
         presenter.unSubscribe()
     }
-
+    override fun openMultiPlayerQuiz(level: String) {
+        Log.d(Constants.LOG_TAG,"$categoryId -- $level")
+        var intent = Intent(context!!,MultiPlayerQuizActivity::class.java)
+        intent.putExtra(Constants.QUIZ_LEVEL,level)
+        intent.putExtra(Constants.QUIZ_CATEGORY,categoryId)
+        startActivity(intent)
+    }
 
 }
 
@@ -129,23 +133,38 @@ class QuizDifficultyDialog(private var quizHomeView : QuizHomeContract.View) : D
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme);
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
        var view = inflater.inflate(R.layout.dialog_quiz_levels,container,false)
 
-        view.btnEasy.setOnClickListener {
-            quizHomeView.openQuizQuestionActivity(Constants.EASY)
+        view.btn_single_player.setOnClickListener {
+            var selectedId = view.rg_quiz_level.checkedRadioButtonId
+            quizLevelSelected(selectedId,true)
         }
-        view.btnMedium.setOnClickListener {
-            quizHomeView.openMultiPlayerQuiz()
-           // quizHomeView.openQuizQuestionActivity(Constants.MEDIUM)
+        view.btn_multi_player.setOnClickListener {
+            var selectedId = view.rg_quiz_level.checkedRadioButtonId
+            quizLevelSelected(selectedId,false)
         }
-        view.btnHard.setOnClickListener {
-           // quizHomeView.openQuizQuestionActivity(Constants.HARD)
-        }
-        view.btnHard.visibility = View.GONE
 
         return view
     }
+
+    fun quizLevelSelected(selected : Int,isSingle : Boolean)
+    {
+        if(selected==-1)
+        {
+            showLongToast("Please select the difficulty level",context!!)
+        }
+        else
+        {
+            var radioButton = view!!.findViewById<RadioButton>(selected)
+            if(isSingle)
+                 quizHomeView.openQuizQuestionActivity(radioButton.text.toString().toLowerCase())
+            else
+                quizHomeView.openMultiPlayerQuiz(radioButton.text.toString().toLowerCase())
+        }
+    }
+
 }

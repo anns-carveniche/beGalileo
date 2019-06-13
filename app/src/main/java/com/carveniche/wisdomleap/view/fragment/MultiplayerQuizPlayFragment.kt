@@ -70,6 +70,9 @@ class MultiplayerQuizPlayFragment : Fragment(),MultiplayerPlayQuizContract.View,
     private var opponentAvatar = 0
     private var avatarList = Constants.getAvatarList()
     private var questionDuration : Long = 12000
+    private var quizCategory = 0
+    private var quizLevel = Constants.EASY
+    private lateinit var opponentAnswerAnimator : ObjectAnimator
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,6 +82,8 @@ class MultiplayerQuizPlayFragment : Fragment(),MultiplayerPlayQuizContract.View,
         mOpponentName = arguments!!.getString(Constants.OPPONENT_NAME)
         mPlayerName = mySharedPreferences.getString(Constants.FIRST_NAME)+" "+mySharedPreferences.getString(Constants.LAST_NAME)
         opponentAvatar = arguments!!.getInt(Constants.OPPONENT_AVATAR)
+        quizCategory = arguments!!.getInt(Constants.QUIZ_CATEGORY)
+        quizLevel = arguments!!.getString(Constants.QUIZ_LEVEL)
     }
 
     override fun onCreateView(
@@ -134,7 +139,7 @@ class MultiplayerQuizPlayFragment : Fragment(),MultiplayerPlayQuizContract.View,
 
         presenter.attach(this)
         presenter.subscribe()
-        presenter.loadQuizQuestions(15,9,"easy","multiple")
+        presenter.loadQuizQuestions(15,quizCategory,quizLevel,"multiple")
 
 
         tv_option_1.setOnClickListener {
@@ -207,13 +212,28 @@ class MultiplayerQuizPlayFragment : Fragment(),MultiplayerPlayQuizContract.View,
 
     private fun highLightRightAnswer(textView: TextView)
     {
-         rightAnswerAnimator = ObjectAnimator.ofInt(textView,"backgroundColor",Color.GREEN,R.color.primaryDarkColor,Color.GREEN)
+         rightAnswerAnimator = ObjectAnimator.ofInt(textView,"backgroundColor",Color.GREEN,android.R.color.transparent,Color.GREEN)
         rightAnswerAnimator.duration = 1000
         rightAnswerAnimator.setEvaluator(ArgbEvaluator())
         rightAnswerAnimator.repeatMode = ValueAnimator.REVERSE
         rightAnswerAnimator.repeatCount = Animation.INFINITE
         rightAnswerAnimator.start()
     }
+    private fun highLightOpponentAnswer(isCorrect : Boolean)
+    {
+        var highColor = if(isCorrect)
+            Color.GREEN
+        else
+            Color.RED
+       opponentAnswerAnimator = ObjectAnimator.ofInt(tv_opponent_score,"backgroundColor",highColor,android.R.color.transparent,highColor)
+        opponentAnswerAnimator.duration = 1000
+        opponentAnswerAnimator.setEvaluator(ArgbEvaluator())
+        opponentAnswerAnimator.repeatMode = ValueAnimator.REVERSE
+        opponentAnswerAnimator.repeatCount = 2
+
+        opponentAnswerAnimator.start()
+    }
+
 
     private fun updateUserScore() {
         tv_user_score.text = "Score $userScore"
@@ -264,6 +284,10 @@ class MultiplayerQuizPlayFragment : Fragment(),MultiplayerPlayQuizContract.View,
         tv_option_2.setBackgroundColor(ContextCompat.getColor(context!!,R.color.primaryDarkColor))
         tv_option_3.setBackgroundColor(ContextCompat.getColor(context!!,R.color.primaryDarkColor))
         tv_option_4.setBackgroundColor(ContextCompat.getColor(context!!,R.color.primaryDarkColor))
+        if(::opponentAnswerAnimator.isInitialized)
+            opponentAnswerAnimator.cancel()
+        tv_opponent_score.setBackgroundColor(resources.getColor(R.color.primaryLightColor))
+
     }
 
     private fun stopQuizPlay() {
@@ -280,7 +304,7 @@ class MultiplayerQuizPlayFragment : Fragment(),MultiplayerPlayQuizContract.View,
     }
 
     private fun machinePlay() {
-        val answerDelay = kotlin.random.Random.nextLong(4000,12000)
+        val answerDelay = kotlin.random.Random.nextLong(4000,8000)
 
        var sub =  Observable.timer(answerDelay, TimeUnit.MILLISECONDS)
             .map<Boolean> {
@@ -295,6 +319,7 @@ class MultiplayerQuizPlayFragment : Fragment(),MultiplayerPlayQuizContract.View,
                     opponentScore++
                     tv_opponent_score.text = "Score $opponentScore"
                 }
+                highLightOpponentAnswer(it)
             }
         disposable.add(sub)
 

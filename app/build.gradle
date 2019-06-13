@@ -22,6 +22,7 @@ android {
     }
 }
 repositories {
+    maven { url 'https://zendesk.jfrog.io/zendesk/repo' }
     flatDir {
         dirs 'libs'
     }
@@ -114,4 +115,7 @@ dependencies {
 
     //Circular Image View
     implementation 'de.hdodenhof:circleimageview:3.0.0'
+
+    //Zopium Zendesk
+    implementation group: 'com.zopim.android', name: 'sdk', version: '1.4.4'
 }

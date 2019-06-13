@@ -17,7 +17,10 @@
         <activity android:name=".view.activity.MultiPlayerQuizActivity">
 
         </activity>
-        <activity android:name=".view.activity.ChatSupportActivity" />
+        <activity android:name=".view.activity.ChatSupportActivity" >
+
+
+        </activity>
         <activity android:name=".view.activity.RecentlyViewedActivity" />
         <activity android:name=".view.activity.WelcomeActivity" />
         <activity android:name=".view.activity.ConceptQuizActivity" />

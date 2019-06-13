@@ -6,7 +6,7 @@ class QuizHomeContract {
     interface View : BaseContract.View{
         fun onCategorySelected(categoryId : Int)
         fun openQuizQuestionActivity(level : String)
-        fun openMultiPlayerQuiz()
+        fun openMultiPlayerQuiz(level : String)
     }
     interface Presenter : BaseContract.Presenter<QuizHomeContract.View>
     {
