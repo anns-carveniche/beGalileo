@@ -118,4 +118,7 @@ dependencies {
 
     //Zopium Zendesk
     implementation group: 'com.zopim.android', name: 'sdk', version: '1.4.4'
+
+    //Lottie Animation tool
+    implementation 'com.airbnb.android:lottie:3.0.6'
 }

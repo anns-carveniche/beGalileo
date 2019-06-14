@@ -7,7 +7,10 @@ import com.github.mikephil.charting.components.Legend
 
 class ConfigChart {
 
+        private lateinit var chart: PieChart
+
         fun setPieChart(chart: PieChart) {
+            this.chart = chart
             chart.setUsePercentValues(true)
             chart.setUsePercentValues(true);
             chart.getDescription().setEnabled(false);
@@ -56,6 +59,11 @@ class ConfigChart {
             chart.setEntryLabelColor(Color.WHITE)
          //   chart.setEntryLabelTypeface(tfRegular)
             chart.setEntryLabelTextSize(12f)
+        }
+
+        fun setHoleColor(color : Int)
+        {
+            chart.setHoleColor(color);
         }
 
 

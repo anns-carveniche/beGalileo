@@ -23,6 +23,8 @@ class QuizActivity : AppCompatActivity() {
 
         categoryId = intent.getIntExtra(Constants.QUIZ_CATEGORY,0)
         level = intent.getStringExtra(Constants.QUIZ_LEVEL)
+
+
         showQuizQuestionFragment()
 
     }

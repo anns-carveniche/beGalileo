@@ -21,9 +21,6 @@ import com.carveniche.wisdomleap.di.module.SharedPreferenceModule
 import com.carveniche.wisdomleap.model.QuizResultModel
 import com.carveniche.wisdomleap.util.Constants
 import com.github.mikephil.charting.charts.HorizontalBarChart
-import com.github.mikephil.charting.data.BarData
-import com.github.mikephil.charting.data.BarDataSet
-import com.github.mikephil.charting.data.BarEntry
 import kotlinx.android.synthetic.main.fragment_quiz_result.*
 import javax.inject.Inject
 import com.github.mikephil.charting.utils.ColorTemplate
@@ -32,11 +29,15 @@ import android.content.Intent
 import android.graphics.Color
 import android.util.Log
 import com.carveniche.wisdomleap.model.MySharedPreferences
+import com.carveniche.wisdomleap.util.ConfigChart
 import com.carveniche.wisdomleap.util.XAxisValueFormatter
 import com.carveniche.wisdomleap.view.activity.MainActivity
 import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.formatter.PercentFormatter
 
 
 class QuizResultFragment : Fragment(),QuizResultContract.View {
@@ -51,8 +52,8 @@ class QuizResultFragment : Fragment(),QuizResultContract.View {
     private var categoryId = 0
     private lateinit var level  : String
     private var userPercent = 0
-    private lateinit var scoreChart : BarChart
-    private lateinit var accuracyChart : BarChart
+    var configChart = ConfigChart()
+    private lateinit var accuracyChart : PieChart
     @Inject lateinit var mySharedPreferences: MySharedPreferences
     private var studentId = 0
     private var timeTaken = 0
@@ -95,6 +96,8 @@ class QuizResultFragment : Fragment(),QuizResultContract.View {
             var intent = Intent(context,MainActivity::class.java)
             startActivity(intent)
         }
+
+        ll_players_container.visibility = View.GONE
     }
 
     private fun injectDependency() {
@@ -112,123 +115,38 @@ class QuizResultFragment : Fragment(),QuizResultContract.View {
         presenter.subscribe()
         presenter.submitQuizResult(studentId,categoryId,level,totalQuestions,score,timeTaken)
         initUI()
-        setScoreChart()
         setPieChart()
     }
 
     private fun setPieChart() {
-        accuracyChart  = bc_pie_chart
-        accuracyChart.setDrawBarShadow(false)
-        val description =  Description()
-        description.text = ""
-        accuracyChart.description = description
-        accuracyChart.legend.isEnabled = false
-        accuracyChart.setPinchZoom(false)
-        accuracyChart.isDoubleTapToZoomEnabled = false
-        accuracyChart.setDrawValueAboveBar(false)
-
-        val xAxis = accuracyChart.xAxis
-        xAxis.setDrawGridLines(false)
-        xAxis.position = XAxis.XAxisPosition.BOTTOM
-
-        xAxis.isEnabled  = true
-        xAxis.setDrawAxisLine(false)
-
-        val yLeft = accuracyChart.axisLeft
-
-        yLeft.axisMaximum  = 100f
-        yLeft.axisMinimum = 0f
-        yLeft.isEnabled = false
-
-
-        xAxis.labelCount = 2
-        xAxis.textSize = 10f
-        xAxis.textColor = Color.WHITE
-
-
-        val values = arrayOf("Your Score","Average Score")
-        xAxis.valueFormatter = XAxisValueFormatter(values)
-
-        val yRight = accuracyChart.axisRight
-        yRight.setDrawAxisLine(true)
-        yRight.setDrawGridLines(false)
-        yRight.isEnabled  = false
-
-        setGraphData()
-
-        accuracyChart.animateY(2000)
-
+        accuracyChart  = accuracy_chart
+        configChart.setPieChart(accuracyChart)
+        accuracyChart.setHoleColor(resources.getColor(R.color.primaryDarkColor))
+        setAccuracyData()
     }
 
-    private fun setScoreChart() {
-        scoreChart  = bcAvarageChart
-        scoreChart.setDrawBarShadow(false)
-        val description =  Description()
-        description.text = ""
-        scoreChart.description = description
-        scoreChart.legend.isEnabled = false
-        scoreChart.setPinchZoom(false)
-        scoreChart.isDoubleTapToZoomEnabled = false
-        scoreChart.setDrawValueAboveBar(false)
+    private fun setAccuracyData()
+    {
+        var entries  = ArrayList<PieEntry>()
+        entries.add(PieEntry(userPercent.toFloat(), "Accuracy"))
+        entries.add(PieEntry((100-userPercent).toFloat(), ""))
 
-        val xAxis = scoreChart.xAxis
-        xAxis.setDrawGridLines(false)
-        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        var dataSet  = PieDataSet(entries,"Quiz Result")
+        dataSet.setDrawIcons(false)
+        dataSet.sliceSpace = 3f
+        dataSet.selectionShift = 5f
+        var colors = mutableListOf<Int>()
+        colors.add(Color.GREEN)
+        colors.add(Color.RED)
+        dataSet.colors = colors
 
-        xAxis.isEnabled  = true
-        xAxis.setDrawAxisLine(false)
-
-        val yLeft = scoreChart.axisLeft
-
-        yLeft.axisMaximum  = 100f
-        yLeft.axisMinimum = 0f
-        yLeft.isEnabled = false
-
-
-        xAxis.labelCount = 2
-        xAxis.textSize = 10f
-        xAxis.textColor = Color.WHITE
-
-
-        val values = arrayOf("Your Score","Average Score")
-        xAxis.valueFormatter = XAxisValueFormatter(values)
-
-        val yRight = scoreChart.axisRight
-        yRight.setDrawAxisLine(true)
-        yRight.setDrawGridLines(false)
-        yRight.isEnabled  = false
-
-        setGraphData()
-
-        scoreChart.animateY(2000)
-
-    }
-
-    private fun setGraphData() {
-     var entries = ArrayList<BarEntry>()
-        Log.d(Constants.LOG_TAG,"User Perncet $userPercent")
-        entries.add(BarEntry(0f,userPercent.toFloat()))
-        entries.add(BarEntry(1f,81f))
-
-        scoreChart.setDrawBarShadow(true)
-        val barDataSet = BarDataSet(entries, "Bar Data Set")
-
-        barDataSet.setColors(
-            Color.CYAN,
-            Color.GREEN
-        )
-        barDataSet.valueTextColor = Color.BLACK
-        barDataSet.valueTextSize = 15f
-
-        barDataSet.barShadowColor = ContextCompat.getColor(context!!,R.color.primaryDarkColor)
-
-        val data = BarData(barDataSet)
-
-        data.barWidth = 0.5f
-
-        scoreChart.data = data
-        scoreChart.invalidate()
-
+        var data = PieData(dataSet)
+        data.setValueFormatter(PercentFormatter())
+        data.setValueTextSize(11f)
+        data.setValueTextColor(Color.WHITE)
+        accuracyChart.data = data
+        accuracyChart.highlightValues(null)
+        accuracyChart.invalidate()
     }
 
     override fun showProgress(show: Boolean) {

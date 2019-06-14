@@ -23,42 +23,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="@+id/rvQuizResult"
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/accuracy_chart"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/rvQuizResult"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPoints">
-
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/bcAvarageChart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:layout_weight="1"
-            android:visibility="gone"
-            android:background="@color/colorPrimary">
-
-        </com.github.mikephil.charting.charts.BarChart>
-
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/bc_pie_chart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:layout_weight="1"
-            android:visibility="gone"
-            >
-
-        </com.github.mikephil.charting.charts.BarChart>
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/tvPoints" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -68,7 +41,7 @@
         app:layout_constraintGuide_percent="0.6" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/linearLayout11"
+        android:id="@+id/ll_players_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -151,7 +124,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btnHome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout11" />
+        app:layout_constraintTop_toBottomOf="@+id/ll_players_container" />
 
     <Button
         android:id="@+id/btnHome"

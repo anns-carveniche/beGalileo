@@ -20,10 +20,15 @@ class MultiPlayerQuizActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_multi_player_quiz)
-        quizLevel = intent.getStringExtra(Constants.QUIZ_LEVEL)
-        quizCategory = intent.getIntExtra(Constants.QUIZ_CATEGORY,0)
+       /* quizLevel = intent.getStringExtra(Constants.QUIZ_LEVEL)
+        quizCategory = intent.getIntExtra(Constants.QUIZ_CATEGORY,0)*/
+
         Log.d(Constants.LOG_TAG,quizLevel+" -- "+quizCategory)
-        showMultiplayerSearch()
+     //   showMultiplayerSearch()
+
+        quizLevel = Constants.EASY
+        quizCategory = 18
+        showMultiplayerQuizPlay("Test User",2)
     }
 
     private fun showMultiplayerSearch() {

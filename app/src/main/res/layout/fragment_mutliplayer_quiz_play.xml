@@ -8,6 +8,19 @@
     android:background="@color/primaryLightColor"
     tools:context=".view.fragment.MultiplayerQuizPlayFragment">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/quantum_orange"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_fileName="StickAndBall.json"
+        android:visibility="gone"
+         />
+
     <include
 
         layout="@layout/layout_progressbar"

@@ -35,8 +35,8 @@ class MultiplayerQuizPlayPresenter : MultiplayerPlayQuizContract.Presenter {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                view.showProgress(false)
                 view.questionLoadSuccess(it)
+
             },{
                 view.showProgress(false)
                 view.questionLoadFailed(it.localizedMessage)
