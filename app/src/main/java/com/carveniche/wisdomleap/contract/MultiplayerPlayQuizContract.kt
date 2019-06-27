@@ -17,6 +17,13 @@ class MultiplayerPlayQuizContract {
     {
         fun loadQuizQuestions(amount : Int,category : Int,difficulty : String,type : String)
         fun verifyAnswer(tvOption : android.view.View,userAnswer : String,correctAnswer : String)
+        fun saveMultiPlayerQuiz(studentId : Int,
+                                category: Int,
+                                level : String,
+                                total : Int,
+                                correct : Int,
+                                playedWith : String,
+                                winningStatus : String)
 
     }
 }

@@ -15,26 +15,26 @@ class MultiPlayerQuizActivity : AppCompatActivity() {
 
     var quizLevel  = Constants.EASY
     var quizCategory = 0
-
+    var userCoins = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_multi_player_quiz)
-       /* quizLevel = intent.getStringExtra(Constants.QUIZ_LEVEL)
-        quizCategory = intent.getIntExtra(Constants.QUIZ_CATEGORY,0)*/
-
+        quizLevel = intent.getStringExtra(Constants.QUIZ_LEVEL)
+        quizCategory = intent.getIntExtra(Constants.QUIZ_CATEGORY,0)
+        userCoins = intent.getIntExtra(Constants.USER_COINS,0)
         Log.d(Constants.LOG_TAG,quizLevel+" -- "+quizCategory)
-     //   showMultiplayerSearch()
-
-        quizLevel = Constants.EASY
-        quizCategory = 18
-        showMultiplayerQuizPlay("Test User",2)
+        showMultiplayerSearch()
     }
 
     private fun showMultiplayerSearch() {
+        var ldf = MultiplayerSearchFragment()
+        var args = Bundle()
+        args.putInt(Constants.USER_COINS,userCoins)
+        ldf.arguments = args
         supportFragmentManager.beginTransaction()
             .addToBackStack(null)
-            .replace(R.id.container,MultiplayerSearchFragment(),MultiplayerSearchFragment.TAG)
+            .replace(R.id.container,ldf,MultiplayerSearchFragment.TAG)
             .commit()
     }
      fun showMultiplayerQuizPlay(opponentName : String,opponentAvatar : Int) {
@@ -44,6 +44,7 @@ class MultiPlayerQuizActivity : AppCompatActivity() {
          args.putInt(Constants.OPPONENT_AVATAR,opponentAvatar)
          args.putInt(Constants.QUIZ_CATEGORY,quizCategory)
          args.putString(Constants.QUIZ_LEVEL,quizLevel)
+
          ldf.arguments = args
         supportFragmentManager.beginTransaction()
             .addToBackStack(null)

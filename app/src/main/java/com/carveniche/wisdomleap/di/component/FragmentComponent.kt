@@ -28,4 +28,5 @@ interface FragmentComponent {
     fun inject(multiplayerSearchFragment: MultiplayerSearchFragment)
     fun inject(multiplayerquizplayfragment: MultiplayerQuizPlayFragment)
     fun inject(multiplayerResultFragment: MultiplayerResultFragment)
+
 }

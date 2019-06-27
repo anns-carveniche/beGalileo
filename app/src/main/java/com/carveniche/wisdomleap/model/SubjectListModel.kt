@@ -9,6 +9,10 @@ data class SubjectListModel(
     val recent_video: List<RecentVideo>,
     val status: Boolean
 )
+{
+    constructor() : this(emptyList(), emptyList(), emptyList(),"", emptyList(), emptyList(),false)
+}
+
 
 data class RecentPractice(
     val chapter_id: Int,

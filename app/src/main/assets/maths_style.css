@@ -1,0 +1,100 @@
+/* Individual styles */
+/*for maths styles starts--*/
+body {
+    color : #ffffff;
+    font-size: 20px;
+}
+.fraction {
+    display: inline-block;
+    vertical-align: middle; 
+    margin: 0 0.2em 0.4ex;
+    text-align: center;
+    font-size: 20px;
+}
+.fraction > span {display: block;padding-top: 0.12em;}
+.fraction span.fdn {border-top: thin solid black;}
+.fraction span.bar {display: none;}
+.n-root { position: absolute; top: 7px; left: 7px; font-size: 33%; } 
+.radicand { padding: 10px 2px 2px 0px; border-top: thin black solid; } 
+.radical {position: relative; font-size: 37px; vertical-align: middle;}
+.fraction-root {display: inline-block; vertical-align: middle; margin: 0 0.2em 0.4ex; text-align: center; } 
+.fraction-root > span { display: block;  font-size: 14px; }
+.fraction-root span.fdn {border-top: thin solid black;}   
+.fraction-root span.bar {display: none;} 
+#quiz-time-field{
+    font-size: 31px;
+    color: black;
+    font-weight: 900;
+    width: 64%;
+    padding: 10px;
+    text-align: center;
+    border: 5px solid black;border-radius:none;
+} 
+
+/*for maths styles--ends*/
+
+.top-underlined {
+    border-top: thin solid black;
+}
+.font-bracket15 {
+    font-size: 34px;
+    font-family: MathJax_Size3;
+}
+.top {
+    position: relative;
+    top: -20px;
+    font-size: 10px;
+}
+.nested-fraction{margin-top:-23px !important;}
+
+.cross-stike1-main-rel1{width: 160px;height: 50px;color:#01579b;}
+.cross-stike1-main-rel1,.cross-stike1-main-rel1 .cross-stike1-rel1{position:relative;}
+.cross-stike1-main-rel1 .cross-stike1-abs1,.cross-stike1-main-rel1 .cross-stike1-abs2,.cross-stike1-main-rel1 .cross-stike1-abs3,.cross-stike1-main-rel1 .cross-stike1-abs4,.cross-stike1-main-rel1 .cross-stike1-abs5{position:absolute;}
+.cross-stike1-main-rel1 .cross-stike1-rel1{float:left;}
+.cross-stike1-main-rel1 .cross-stike1-x{padding: 7px 5px;float: left;display: block;}
+.cross-stike1-main-rel1 .cross-stike1-abs2{top:-17px;}
+.cross-stike1-main-rel1 .cross-stike1-abs3{top: -8px;-webkit-transform: rotate(43deg);font-size: 30px;left: 5px;}
+.cross-stike1-main-rel1{margin-top:25px;}
+.cross-stike1-main-rel1 .cross-stike1-bar1{position: absolute;border-bottom: 2px solid;width: 20px;height: 2px;top:25px;}
+.cross-stike1-main-rel1 .cross-stike1-abs4{top:22px;}
+.cross-stike1-main-rel1 .cross-stike1-abs5{-webkit-transform: rotate(48deg);-moz-transform: rotate(48deg);transform: rotate(48deg);font-size: 24px;top: 17px;left: 2px;}
+.cross-stike1-main-rel1 .cross-stike1-blue{color:blue;}
+.cross-stike1-main-rel1 .cross-stike1-red{color:red;}
+
+.clear{clear:both;}
+.right-spac{float:right;}
+.std-size{letter-spacing: 20px;padding-right: 20px;margin-left: 25px;position: relative;}
+.right-spac .num1{display: inline-block;float: left;padding:4px;position: relative;letter-spacing: 20px;}
+.num1 .carry{position: absolute;top: -5px;font-size: 11px;left:8px;}
+.right-spac:nth-of-type(1) .num1{padding-top: 15px;}
+.math-func{position: absolute;left: -23px;bottom: -3px;font-weight: bold;font-size: 25px;}
+.left{left:-37px}
+.bottom-underlined {
+    border-bottom: thin solid black;
+}
+.top-underlined {
+    border-top: thin solid black;
+}
+
+.ext-bottom-underlined{border-bottom: thin solid black;padding-left:28px;}
+.two-digit-carry{letter-spacing:0px}
+.diff-carry{left:-20px !important;}
+
+.double-left{left:-73px;}
+
+.triple-left {left: -110px;}
+.forth-left {left: -145px;}
+.two-digit-carry{letter-spacing:0px;}
+.num1 .two-digit-carry{left:5px;}
+
+/*inner-root style*/
+.top-underlined-root {display:inline-block;border-top: 1px solid #4d4d4d;}
+.inner-root1{margin-top:3px;}
+.inner-root2{margin-top:3px;}
+.root-border{font-size:40px;}
+.root-border1{font-size:34px;}
+.root-border2{font-size:21px;}
+
+
+.fraction-align-rel{position: relative;float: left;width: 51px;height: 50px;}
+.fraction-align-abs{position: absolute;top: 64px;}

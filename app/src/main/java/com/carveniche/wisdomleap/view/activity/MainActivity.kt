@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity(),MainContract.View,NavigationView.OnNavi
         initUI()
         setDrawerHeaderDetails()
         ZopimChat.init(Config.ZOPIUM_ACCOUNT_KEY)
+        Constants.updateDeviceInfo(mySharedPreferences.getIntData(Constants.STUDENT_ID))
     }
 
     private fun initUI() {

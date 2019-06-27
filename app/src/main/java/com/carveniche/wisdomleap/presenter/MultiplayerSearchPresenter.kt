@@ -5,6 +5,7 @@ import android.view.View
 import com.carveniche.wisdomleap.api.ApiInterface
 import com.carveniche.wisdomleap.api.RandomNameApiInterface
 import com.carveniche.wisdomleap.contract.MultiplayerSearchContract
+import com.carveniche.wisdomleap.util.Config
 import com.carveniche.wisdomleap.util.Constants
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -48,12 +49,12 @@ class MultiplayerSearchPresenter : MultiplayerSearchContract.Presenter {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 view.randomPlayerAnimation(false)
-                view.showRandomPlayer(it.name+" "+it.surname,50)
+                view.showRandomPlayer(it.name+" "+it.surname,Config.MULTIPLAYER_BET_VALUE)
             },{
                 Log.d(Constants.LOG_TAG,it.localizedMessage)
                 view.randomPlayerAnimation(false)
                 var user = Random.nextInt(100,999)
-                view.showRandomPlayer("user$user",50)
+                view.showRandomPlayer("user$user", Config.MULTIPLAYER_BET_VALUE)
             })
         disposable.add(randomName)
     }

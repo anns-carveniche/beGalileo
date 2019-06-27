@@ -20,6 +20,7 @@ import com.carveniche.wisdomleap.di.component.DaggerFragmentComponent
 import com.carveniche.wisdomleap.di.module.ContextModule
 import com.carveniche.wisdomleap.di.module.FragmentModule
 import com.carveniche.wisdomleap.di.module.SharedPreferenceModule
+import com.carveniche.wisdomleap.model.MySharedPreferences
 import com.carveniche.wisdomleap.model.QuizCategoryModel
 import com.carveniche.wisdomleap.util.Constants
 import com.carveniche.wisdomleap.util.showLongToast
@@ -34,12 +35,14 @@ import javax.inject.Inject
 
 class QuizHomeFragment : Fragment(),QuizHomeContract.View {
 
-
     private lateinit var rootView: View
     @Inject lateinit var presenter : QuizHomeContract.Presenter
     private var categoryId = 0
     private var mquizLevel = Constants.EASY
+    private var studentId = 0
+    private var userCoins = 0
     private var quizCategory  = mutableListOf<QuizCategoryModel>()
+    @Inject lateinit var mySharedPreferences: MySharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,15 +57,23 @@ class QuizHomeFragment : Fragment(),QuizHomeContract.View {
         super.onViewCreated(view, savedInstanceState)
         presenter.attach(this)
         presenter.subscribe()
+        presenter.loadUserCoins(studentId)
         displayData()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         injectDependency()
+        studentId= mySharedPreferences.getIntData(Constants.STUDENT_ID)
         initLoadDatas()
 
     }
+    override fun onCoinsLoad(coins: Int) {
+        userCoins = coins
+        Log.d(Constants.LOG_TAG,"Coins $userCoins")
+    }
+
 
     private fun displayData() {
         gvQuizCateg.adapter = QuizCategroyAdapter(context!!,quizCategory,this)
@@ -94,6 +105,11 @@ class QuizHomeFragment : Fragment(),QuizHomeContract.View {
         fragmentComponent.inject(this)
     }
     override fun onCategorySelected(categoryId: Int) {
+        if(userCoins==0)
+        {
+            showLongToast("You do not have enough coins",context!!)
+            return
+        }
         this.categoryId = categoryId
         var ft = childFragmentManager.beginTransaction()
         var prev = childFragmentManager.findFragmentByTag("dialog")
@@ -124,6 +140,7 @@ class QuizHomeFragment : Fragment(),QuizHomeContract.View {
         var intent = Intent(context!!,MultiPlayerQuizActivity::class.java)
         intent.putExtra(Constants.QUIZ_LEVEL,level)
         intent.putExtra(Constants.QUIZ_CATEGORY,categoryId)
+        intent.putExtra(Constants.USER_COINS,userCoins)
         startActivity(intent)
     }
 

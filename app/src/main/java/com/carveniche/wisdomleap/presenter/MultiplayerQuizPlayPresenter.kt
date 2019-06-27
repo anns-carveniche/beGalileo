@@ -1,10 +1,12 @@
 package com.carveniche.wisdomleap.presenter
 
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import com.carveniche.wisdomleap.api.ApiInterface
 import com.carveniche.wisdomleap.api.QuizApiInterface
 import com.carveniche.wisdomleap.contract.MultiplayerPlayQuizContract
+import com.carveniche.wisdomleap.util.Constants
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -15,8 +17,10 @@ import java.util.concurrent.TimeUnit
 class MultiplayerQuizPlayPresenter : MultiplayerPlayQuizContract.Presenter {
 
 
+
     private lateinit var view : MultiplayerPlayQuizContract.View
-    private var api = QuizApiInterface.create()
+    private var quizApi = QuizApiInterface.create()
+    private var api = ApiInterface.create()
     private var disposable = CompositeDisposable()
 
     override fun subscribe() {
@@ -31,7 +35,7 @@ class MultiplayerQuizPlayPresenter : MultiplayerPlayQuizContract.Presenter {
     }
     override fun loadQuizQuestions(amount: Int, category: Int, difficulty: String, type: String) {
         view.showProgress(true)
-        var loadQuesObservable = api.getQuizQuestions(amount,category,difficulty,type)
+        var loadQuesObservable = quizApi.getQuizQuestions(amount,category,difficulty,type)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -45,6 +49,23 @@ class MultiplayerQuizPlayPresenter : MultiplayerPlayQuizContract.Presenter {
     }
     override fun verifyAnswer(tvOption: View, userAnswer: String, correctAnswer: String) {
             view.showAnswerStatus(tvOption,userAnswer==correctAnswer)
+    }
+    override fun saveMultiPlayerQuiz(
+        studentId: Int,
+        category: Int,
+        level: String,
+        total: Int,
+        correct: Int,
+        playedWith: String,
+        winningStatus: String
+    ) {
+        var submitObs =  api.saveMultiPlayerQuiz(studentId,category,level,total,correct,playedWith,winningStatus)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe {
+                Log.d(Constants.LOG_TAG,"Result Updated $it")
+            }
+        disposable.add(submitObs)
     }
 
 

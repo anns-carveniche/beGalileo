@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
 import android.widget.*
 import androidx.fragment.app.DialogFragment
 
@@ -25,10 +26,36 @@ import com.carveniche.wisdomleap.model.ResultData
 import com.carveniche.wisdomleap.util.Constants
 import com.carveniche.wisdomleap.util.showLoadingProgress
 import com.carveniche.wisdomleap.util.showLongToast
+import com.carveniche.wisdomleap.util.showtMathView
 import com.carveniche.wisdomleap.view.activity.ConceptQuizActivity
 import kotlinx.android.synthetic.main.dialog_concept_quiz_option_result.view.*
 import kotlinx.android.synthetic.main.fragment_chapter_quiz.*
+import kotlinx.android.synthetic.main.fragment_chapter_quiz.btnCheckAnswer
+import kotlinx.android.synthetic.main.fragment_chapter_quiz.chronometerTimer
+import kotlinx.android.synthetic.main.fragment_chapter_quiz.tvNum1
+import kotlinx.android.synthetic.main.fragment_chapter_quiz.tvNum10
+import kotlinx.android.synthetic.main.fragment_chapter_quiz.tvNum11
+import kotlinx.android.synthetic.main.fragment_chapter_quiz.tvNum12
+import kotlinx.android.synthetic.main.fragment_chapter_quiz.tvNum13
+import kotlinx.android.synthetic.main.fragment_chapter_quiz.tvNum14
+import kotlinx.android.synthetic.main.fragment_chapter_quiz.tvNum15
+import kotlinx.android.synthetic.main.fragment_chapter_quiz.tvNum2
+import kotlinx.android.synthetic.main.fragment_chapter_quiz.tvNum3
+import kotlinx.android.synthetic.main.fragment_chapter_quiz.tvNum4
+import kotlinx.android.synthetic.main.fragment_chapter_quiz.tvNum5
+import kotlinx.android.synthetic.main.fragment_chapter_quiz.tvNum6
+import kotlinx.android.synthetic.main.fragment_chapter_quiz.tvNum7
+import kotlinx.android.synthetic.main.fragment_chapter_quiz.tvNum8
+import kotlinx.android.synthetic.main.fragment_chapter_quiz.tvNum9
+import kotlinx.android.synthetic.main.fragment_chapter_quiz.tvQuestion
+import kotlinx.android.synthetic.main.fragment_chapter_quiz.tvQuestionNumber
+import kotlinx.android.synthetic.main.fragment_quiz_question.*
+import kotlinx.android.synthetic.main.fragment_quiz_question.radioButton1
+import kotlinx.android.synthetic.main.fragment_quiz_question.radioButton2
+import kotlinx.android.synthetic.main.fragment_quiz_question.radioButton3
+import kotlinx.android.synthetic.main.fragment_quiz_question.radioButton4
 import kotlinx.android.synthetic.main.layout_progressbar.*
+import kotlinx.android.synthetic.main.layout_quiz_options.*
 import org.jsoup.Jsoup
 
 import javax.inject.Inject
@@ -51,6 +78,7 @@ class ChapterQuizFragment : Fragment(),ChapterQuizContract.View {
     private lateinit var resultData: List<ResultData>
     private  var quizId = 0
     private var rbList = mutableListOf<RadioButton>()
+    private var wbOptionsList = mutableListOf<WebView>()
     private var imageOptionList = mutableListOf<ImageView>()
     private lateinit var conceptQuizActivity: ConceptQuizActivity
     var timeWhenStopped: Long = 0
@@ -92,6 +120,13 @@ class ChapterQuizFragment : Fragment(),ChapterQuizContract.View {
         rbList.add(radioButton2)
         rbList.add(radioButton3)
         rbList.add(radioButton4)
+
+        wbOptionsList.add(wv_opt_1)
+        wbOptionsList.add(wv_opt_2)
+        wbOptionsList.add(wv_opt_3)
+        wbOptionsList.add(wv_opt_4)
+
+
         rlHeaderContainer.bringToFront()
 
         imageOptionList.add(rdImage1)
@@ -302,14 +337,16 @@ class ChapterQuizFragment : Fragment(),ChapterQuizContract.View {
         startTimer()
         questionStartTime = SystemClock.elapsedRealtime() - mChronometer.base
         tvQuestionNumber.text = context!!.getString(R.string.QuestionNumber,currentQuestion,totalQuestion)
-        tvQuestion.text = Jsoup.parse(quizData.question_text).text()
+        showtMathView(tvQuestion,quizData.question_text)
+       // tvQuestion.text = Jsoup.parse(quizData.question_text).text()
         if(!quizData.question_image.isEmpty())
         {
             ivQuestionImage.visibility = View.VISIBLE
         }
         quizData.choices_data.forEachIndexed { index, choicesData ->
             rbList[index].visibility = View.VISIBLE
-            rbList[index].text = Jsoup.parse(choicesData.options).text()
+          //  rbList[index].text = Jsoup.parse(choicesData.options).text()
+            showtMathView(wbOptionsList[index],choicesData.options)
             if(!choicesData.image.isEmpty())
             {
                 imageOptionList[index].visibility = View.VISIBLE

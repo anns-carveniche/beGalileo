@@ -23,8 +23,8 @@ class ConceptQuizActivity : AppCompatActivity() {
         studentId = intent.getIntExtra(Constants.STUDENT_ID,0)
         courseId = intent.getIntExtra(Constants.COURSE_ID,0)
         chapterId = intent.getIntExtra(Constants.CONCEPT_ID,0)
-       // showChapterQuizFragment()
-        showChapterQuizResultFragment(9,15)
+        showChapterQuizFragment()
+
     }
 
      private fun showChapterQuizFragment()

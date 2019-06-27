@@ -20,6 +20,7 @@ import com.carveniche.wisdomleap.di.module.ContextModule
 import com.carveniche.wisdomleap.di.module.FragmentModule
 import com.carveniche.wisdomleap.di.module.SharedPreferenceModule
 import com.carveniche.wisdomleap.model.MySharedPreferences
+import com.carveniche.wisdomleap.util.Config
 import com.carveniche.wisdomleap.util.Constants
 import com.carveniche.wisdomleap.util.showLoadingProgress
 import com.carveniche.wisdomleap.view.activity.MultiPlayerQuizActivity
@@ -37,9 +38,9 @@ class MultiplayerSearchFragment : Fragment(),MultiplayerSearchContract.View {
     @Inject lateinit var mySharedPreferences: MySharedPreferences
     private lateinit var randomPlayerFrameAnimation : AnimationDrawable
     private var coinAnimationSpeed : Long = 4000
-    private var opponentCoins = 0
-    private var userCoins = 50
-    private var betValue = 50
+    private var opponentCoins = 100
+    private var userCoins = 0
+    private var betValue = Config.MULTIPLAYER_BET_VALUE
     private var mUserName = ""
     private var mOpponentName = ""
     private var mOpponentAvatar = 0
@@ -52,6 +53,7 @@ class MultiplayerSearchFragment : Fragment(),MultiplayerSearchContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         injectDependency()
+        userCoins = arguments!!.getInt(Constants.USER_COINS)
         multiPlayerQuizActivity = activity as MultiPlayerQuizActivity
         mUserName = mySharedPreferences.getString(Constants.FIRST_NAME)+" "+mySharedPreferences.getString(Constants.LAST_NAME)
         if(mUserName.isBlank())
@@ -69,7 +71,7 @@ class MultiplayerSearchFragment : Fragment(),MultiplayerSearchContract.View {
         btn_play.isEnabled = false
         iv_random_Player.setBackgroundResource(R.drawable.player_avatar_list)
         randomPlayerFrameAnimation = iv_random_Player.background as AnimationDrawable
-
+        tv_player_coins.text = "$userCoins Coins"
         presenter.searchRandomPlayer()
         btn_play.setOnClickListener {
             multiPlayerQuizActivity.showMultiplayerQuizPlay(mOpponentName,randomAvatarIndex)

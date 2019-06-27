@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -37,6 +38,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0-beta01'
     implementation 'com.android.support:appcompat-v7:28.1.0'
     implementation 'com.android.support:support-v4:28.1.0'
+    implementation 'com.google.firebase:firebase-messaging:17.3.4'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
@@ -102,7 +104,7 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.10.1'
 
 
-    //ExoPlayer
+    //Player
     implementation 'com.google.android.exoplayer:exoplayer-core:2.8.3'
     implementation 'com.google.android.exoplayer:exoplayer-hls:2.8.3'
     implementation 'com.google.android.exoplayer:exoplayer-ui:2.8.3'
@@ -121,4 +123,7 @@ dependencies {
 
     //Lottie Animation tool
     implementation 'com.airbnb.android:lottie:3.0.6'
+
+    //Reactive Network
+    implementation 'com.github.pwittchen:reactivenetwork-rx2:3.0.3'
 }

@@ -64,7 +64,7 @@ class ChapterListAdapter(public var context : Context,var conceptId: Int,private
 
 
             ivImageItem.setOnClickListener {
-                listener.onChapterClick(conceptId,subConceptDetail.sub_concept_id,subConceptDetail.video_url)
+                listener.onChapterClick(conceptId,subConceptDetail.sub_concept_id,subConceptDetail.video_url,subConceptDetail.sub_concept_name)
             }
             tvDescription.text = subConceptDetail.sub_concept_name
         }

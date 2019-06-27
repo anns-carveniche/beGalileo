@@ -7,4 +7,7 @@ class MultiplayerResultContract {
 
     }
     interface Presenter : BaseContract.Presenter<MultiplayerResultContract.View>
+    {
+
+    }
 }

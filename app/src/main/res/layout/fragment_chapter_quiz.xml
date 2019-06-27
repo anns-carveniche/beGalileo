@@ -49,7 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -327,20 +327,18 @@
                 <LinearLayout
                     android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="8dp"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <TextView
+                    <WebView
                         android:id="@+id/tvQuestion"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-
-                        android:text="@string/sample_question"
                         android:textColor="@color/white"
                         android:textSize="@dimen/font_size_medium"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -353,10 +351,12 @@
                         android:layout_gravity="center"
                         android:src="@drawable/ic_quiz_computer"
                         android:visibility="gone" />
+
+                    <include layout="@layout/layout_quiz_options" />
                 </LinearLayout>
 
 
-                <RadioGroup
+                <!--  <RadioGroup
                     android:id="@+id/rgOptions"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -372,15 +372,35 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <RadioButton
-                            android:id="@+id/radioButton1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:text="Saturn"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/font_size_medium"
-                            android:visibility="gone" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/radioButton1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="10dp"
+                                android:text=""
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/font_size_medium"
+                                android:visibility="gone" />
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <WebView
+                                    android:id="@+id/wv_opt_1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                    
 
                         <ImageView
                             android:id="@+id/rdImage1"
@@ -395,16 +415,33 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
 
-                        <RadioButton
-                            android:id="@+id/radioButton2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:text="Saturn"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/font_size_medium"
-                            android:visibility="gone" />
+                            <RadioButton
+                                android:id="@+id/radioButton2"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="10dp"
+                                android:text=""
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/font_size_medium"
+                                android:visibility="gone" />
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <WebView
+                                    android:id="@+id/wv_opt_2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </LinearLayout>
+
 
                         <ImageView
                             android:id="@+id/rdImage2"
@@ -420,15 +457,33 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <RadioButton
-                            android:id="@+id/radioButton3"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:text="Saturn"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/font_size_medium"
-                            android:visibility="gone" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/radioButton3"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="10dp"
+                                android:text=""
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/font_size_medium"
+                                android:visibility="gone" />
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <WebView
+                                    android:id="@+id/wv_opt_3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </LinearLayout>
+
 
                         <ImageView
                             android:id="@+id/rdImage3"
@@ -444,15 +499,33 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <RadioButton
-                            android:id="@+id/radioButton4"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:text="Saturn"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/font_size_medium"
-                            android:visibility="gone" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/radioButton4"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="10dp"
+                                android:text=""
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/font_size_medium"
+                                android:visibility="gone" />
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <WebView
+                                    android:id="@+id/wv_opt_4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </LinearLayout>
+
 
                         <ImageView
                             android:id="@+id/rdImage4"
@@ -464,7 +537,7 @@
                     </LinearLayout>
 
 
-                </RadioGroup>
+                </RadioGroup>-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

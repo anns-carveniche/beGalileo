@@ -147,12 +147,13 @@ class ListChaptersFragment : Fragment(),ListChapterContract.View,IChapterClickLi
         showLongToast(msg,context!!)
     }
 
-    override fun onChapterClick(conceptId: Int, subconceptId: Int, videoUrl: String) {
+    override fun onChapterClick(conceptId: Int, subconceptId: Int, videoUrl: String,videoTitle: String) {
         var intent = Intent(context,VideoPlayActivity::class.java)
         intent.putExtra(Constants.VIDEO_URL,videoUrl)
         intent.putExtra(Constants.COURSE_ID,courseId)
         intent.putExtra(Constants.CONCEPT_ID,conceptId)
         intent.putExtra(Constants.SUB_CONCEPT_ID,subconceptId)
+        intent.putExtra(Constants.VIDEO_TITLE,videoTitle)
         startActivity(intent)
     }
 }

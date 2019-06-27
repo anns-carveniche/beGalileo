@@ -6,6 +6,7 @@ import io.reactivex.disposables.CompositeDisposable
 
 class MultiplayerResultPresenter : MultiplayerResultContract.Presenter {
 
+
     private lateinit var view : MultiplayerResultContract.View
     private var api = ApiInterface.create()
     private var disposable = CompositeDisposable()

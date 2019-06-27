@@ -14,7 +14,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".view.activity.MultiPlayerQuizActivity">
+        <activity android:name=".view.activity.ReferralActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+        <activity android:name=".view.activity.MultiPlayerQuizActivity"
+            android:screenOrientation="portrait"
+            ></activity>
+        <activity android:name=".view.activity.ChatSupportActivity"
+            android:screenOrientation="portrait"
+            ></activity>
+        <activity android:name=".view.activity.RecentlyViewedActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".view.activity.WelcomeActivity"
+            android:screenOrientation="portrait"
+            >
+
+
+        </activity>
+        <activity android:name=".view.activity.ConceptQuizActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".view.activity.SplashActivity"
+            android:theme="@style/SplashScreenTheme"
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -22,30 +49,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.ChatSupportActivity" >
-
-
-        </activity>
-        <activity android:name=".view.activity.RecentlyViewedActivity" />
-        <activity android:name=".view.activity.WelcomeActivity" />
-        <activity android:name=".view.activity.ConceptQuizActivity" />
-        <activity
-            android:name=".view.activity.SplashActivity"
-            android:theme="@style/SplashScreenTheme">
-
-        </activity>
         <activity
             android:name=".view.activity.VideoPlayActivity"
-            android:screenOrientation="landscape" />
-        <activity android:name=".view.activity.QuizActivity" >
+             >
 
         </activity>
-        <activity android:name=".view.activity.SubjectActivity" />
-        <activity android:name=".view.activity.RegisterActivity" />
+        <activity android:name=".view.activity.QuizActivity"
+            android:screenOrientation="portrait"
+            ></activity>
+        <activity android:name=".view.activity.SubjectActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".view.activity.RegisterActivity"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".view.activity.LoginActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize" />
-        <activity android:name=".view.activity.MainActivity" />
+            android:windowSoftInputMode="stateVisible|adjustResize"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".view.activity.MainActivity"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>

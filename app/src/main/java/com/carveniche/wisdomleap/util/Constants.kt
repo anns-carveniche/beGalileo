@@ -1,7 +1,17 @@
 package com.carveniche.wisdomleap.util
 
 import android.R.drawable
+import android.util.Log
 import com.carveniche.wisdomleap.R
+import com.carveniche.wisdomleap.api.ApiInterface
+
+import io.reactivex.schedulers.Schedulers
+import java.util.*
+
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.iid.FirebaseInstanceId
+
+
 
 
 class Constants {
@@ -26,6 +36,7 @@ class Constants {
         const val CONCEPT_ID = "CONCEPT_ID"
         const val SUB_CONCEPT_ID = "SUB_CONCEPT_ID"
         const val VIDEO_URL = "VIDEO_URL"
+        const val VIDEO_TITLE = "VIDEO_TITLE"
         const val QUIZ_SCORE = "QUIZ_SCORE"
         const val TIME_TAKEN = "TIME_TAKEN"
         const val TOTAL_QUIZ_QUESTION = "TOTAL_QUIZ_QUESTION"
@@ -36,6 +47,10 @@ class Constants {
         const val OPPONENT_COINS = "OPPONENT_COINS"
         const val OPPONENT_AVATAR = "OPPONENT_AVATAR"
         const val IS_PLAYER_WIN = "IS_PLAYER_WIN"
+        const val WINNER = "winner"
+        const val LOOSER = "loser"
+        const val DRAW = "draw"
+        const val USER_COINS = "USER_COINS"
 
         //Custom Font Path
         const val FONT_NICONNE = "fonts/Niconne-Regular.ttf"
@@ -51,6 +66,35 @@ class Constants {
         fun getAvatarList() : IntArray
         {
             return myAvatarList
+        }
+
+        fun updateDeviceInfo(studentId : Int)
+        {
+
+
+            FirebaseInstanceId.getInstance().instanceId
+                .addOnCompleteListener(OnCompleteListener { task ->
+                    if (!task.isSuccessful) {
+                        Log.w(Constants.LOG_TAG, "getInstanceId failed", task.exception)
+
+                        return@OnCompleteListener
+                    }
+
+                    // Get new Instance ID token
+                    val token = task.result!!.token
+
+                    var year = Calendar.getInstance().get(Calendar.YEAR)
+                    var month = Calendar.getInstance().get(Calendar.MONTH)
+                    var day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+                    var lastActiveDate = "$year-$month-$day"
+                    ApiInterface.create().updateDeviceInfo(studentId,token,lastActiveDate)
+                        .subscribeOn(Schedulers.io())
+                        .subscribe {
+                            Log.d(Constants.LOG_TAG,"Device Updated : $token - $it")
+                        }
+
+                })
+
         }
     }
 }

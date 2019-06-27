@@ -18,6 +18,7 @@ import com.carveniche.wisdomleap.di.module.ContextModule
 import com.carveniche.wisdomleap.di.module.FragmentModule
 import com.carveniche.wisdomleap.di.module.SharedPreferenceModule
 import com.carveniche.wisdomleap.model.MySharedPreferences
+import com.carveniche.wisdomleap.util.Config
 import com.carveniche.wisdomleap.util.Constants
 import com.carveniche.wisdomleap.view.activity.MainActivity
 import io.reactivex.Observable
@@ -35,7 +36,8 @@ class MultiplayerResultFragment : Fragment(),MultiplayerResultContract.View {
     private var playerScore= 0
     private var opponentScore = 0
     private var opponentAvatarId = 0
-    private var totalCoins = 100
+    private var betValue = Config.MULTIPLAYER_BET_VALUE
+    private var totalCoins = betValue + betValue
     private var playerName = ""
     private var opponentName = ""
     private var isPlayerWin = false

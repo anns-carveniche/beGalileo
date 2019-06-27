@@ -29,10 +29,7 @@ import com.carveniche.wisdomleap.di.module.SharedPreferenceModule
 import com.carveniche.wisdomleap.interfaces.IChapterClickListener
 import com.carveniche.wisdomleap.interfaces.IQuizClickListener
 import com.carveniche.wisdomleap.model.*
-import com.carveniche.wisdomleap.util.Constants
-import com.carveniche.wisdomleap.util.URL
-import com.carveniche.wisdomleap.util.isFirstLaunchToday
-import com.carveniche.wisdomleap.util.showLoadingProgress
+import com.carveniche.wisdomleap.util.*
 import com.carveniche.wisdomleap.view.activity.ConceptQuizActivity
 import com.carveniche.wisdomleap.view.activity.SubjectActivity
 import com.carveniche.wisdomleap.view.activity.VideoPlayActivity
@@ -41,6 +38,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import kotlinx.android.synthetic.main.layout_progressbar.*
 import org.jsoup.Jsoup
+import java.lang.Exception
 import javax.inject.Inject
 
 
@@ -75,7 +73,7 @@ class DashboardFragment : Fragment(),DashboardContract.View,IChapterClickListene
             showDailyMessages()
         }
         studentId = mySharedPreferences.getIntData(Constants.STUDENT_ID)
-        presenter.loadDashboardData(studentId)
+      //  presenter.loadDashboardData(studentId)
     }
 
     private fun showDailyMessages() {
@@ -119,6 +117,8 @@ class DashboardFragment : Fragment(),DashboardContract.View,IChapterClickListene
         showLoadingProgress(progressBar,show)
     }
     override fun onLoadDataSucess(subjectListModel: SubjectListModel) {
+
+
         this.subjectListData = subjectListModel
         assignSubjectDatas()
         if(!subjectListModel.recent_video.isNullOrEmpty())
@@ -184,11 +184,12 @@ class DashboardFragment : Fragment(),DashboardContract.View,IChapterClickListene
        rv_recent_videos.adapter = ChapterListAdapter(context!!,5,subConceptList,this)
 
     }
-    override fun onChapterClick(conceptId: Int, subconceptId: Int, videoUrl: String) {
+    override fun onChapterClick(conceptId: Int, subconceptId: Int, videoUrl: String,videoTitle : String) {
 
     }
 
     private fun assignSubjectDatas() {
+        gl_subject_container.removeAllViews()
         var total = subjectListData.course_details.size
 
         var column = 2
@@ -238,8 +239,15 @@ class DashboardFragment : Fragment(),DashboardContract.View,IChapterClickListene
 
     }
 
-    override fun onLoadDataFailed(msg: String) {
 
+    override fun onResume() {
+        if(::presenter.isInitialized)
+            presenter.loadDashboardData(studentId)
+        super.onResume()
+    }
+
+    override fun onLoadDataFailed(msg: String) {
+            showShortToast("$msg : Please Try again or restart the application",context!!)
     }
 
     private fun resumeQuizActivity()
@@ -260,6 +268,7 @@ class DashboardFragment : Fragment(),DashboardContract.View,IChapterClickListene
         intent.putExtra(Constants.VIDEO_URL,"https://wisdomleap-hls-playback.s3.amazonaws.com/grade1/math/grade1-math1.m3u8")
         startActivity(intent)
     }
+
 
 
 

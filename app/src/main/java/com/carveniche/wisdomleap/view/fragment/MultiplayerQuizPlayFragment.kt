@@ -33,9 +33,11 @@ import android.graphics.Color
 import android.view.animation.Animation
 
 import android.widget.TextView
+import androidx.constraintlayout.solver.widgets.ConstraintAnchor
 import androidx.core.content.ContextCompat
 import com.airbnb.lottie.LottieAnimationView
 import com.carveniche.wisdomleap.model.MySharedPreferences
+import com.carveniche.wisdomleap.util.Config
 import com.carveniche.wisdomleap.view.activity.MultiPlayerQuizActivity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -61,6 +63,7 @@ class MultiplayerQuizPlayFragment : Fragment(),MultiplayerPlayQuizContract.View,
     var mCurrentOptions = mutableListOf<String>()
     var currentQuestionNumber  = -1
     var mCorrectAnswer  = ""
+    var mStudentId = 0
     private lateinit var progressAnimator : ObjectAnimator
     private lateinit var multiPlayerQuizActivity: MultiPlayerQuizActivity
     private var userScore = 0
@@ -68,10 +71,11 @@ class MultiplayerQuizPlayFragment : Fragment(),MultiplayerPlayQuizContract.View,
     private var isUserClickEnabled = true
     private var mPlayerName =  ""
     private var mOpponentName = ""
+    private var totalQuestions = Config.MULTIPLAYER_QUESTION_COUNT
     private lateinit var rightAnswerAnimator : ObjectAnimator
     private var opponentAvatar = 0
     private var avatarList = Constants.getAvatarList()
-    private var questionDuration : Long = 5000
+    private var questionDuration : Long = Config.QUESTION_DURATION
     private var quizCategory = 0
     private var quizLevel = Constants.EASY
     private lateinit var opponentAnswerAnimator : ObjectAnimator
@@ -87,6 +91,7 @@ class MultiplayerQuizPlayFragment : Fragment(),MultiplayerPlayQuizContract.View,
         opponentAvatar = arguments!!.getInt(Constants.OPPONENT_AVATAR)
         quizCategory = arguments!!.getInt(Constants.QUIZ_CATEGORY)
         quizLevel = arguments!!.getString(Constants.QUIZ_LEVEL)
+        mStudentId= mySharedPreferences.getIntData(Constants.STUDENT_ID)
 
     }
 
@@ -122,7 +127,7 @@ class MultiplayerQuizPlayFragment : Fragment(),MultiplayerPlayQuizContract.View,
 
         presenter.attach(this)
         presenter.subscribe()
-        presenter.loadQuizQuestions(15,quizCategory,quizLevel,"multiple")
+        presenter.loadQuizQuestions(totalQuestions,quizCategory,quizLevel,"multiple")
 
 
         tv_option_1.setOnClickListener {
@@ -389,5 +394,27 @@ class MultiplayerQuizPlayFragment : Fragment(),MultiplayerPlayQuizContract.View,
         animationView.bringToFront()
         animationView.playAnimation()
     }
+
+
+    override fun onStop() {
+      calculateQuizResult()
+        super.onStop()
+
+    }
+    fun calculateQuizResult()
+    {
+        Log.d(Constants.LOG_TAG,"Submitting Quiz Result")
+        var winningStatus = ""
+        var oppScore = opponentScore+(totalQuestions-(currentQuestionNumber+1))
+        if(oppScore==userScore)
+            winningStatus = Constants.DRAW
+        else if(oppScore<userScore)
+            winningStatus = Constants.WINNER
+        else if(userScore<oppScore)
+            winningStatus = Constants.LOOSER
+
+        presenter.saveMultiPlayerQuiz(mStudentId,quizCategory,quizLevel,totalQuestions,userScore,mOpponentName,winningStatus)
+    }
+
 
 }
