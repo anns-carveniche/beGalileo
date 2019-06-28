@@ -265,7 +265,8 @@ class DashboardFragment : Fragment(),DashboardContract.View,IChapterClickListene
         intent.putExtra(Constants.COURSE_ID,inprogress_video.course_id)
         intent.putExtra(Constants.CONCEPT_ID,inprogress_video.chapter_id)
         intent.putExtra(Constants.SUB_CONCEPT_ID,inprogress_video.chapter_id)
-        intent.putExtra(Constants.VIDEO_URL,"https://wisdomleap-hls-playback.s3.amazonaws.com/grade1/math/grade1-math1.m3u8")
+        intent.putExtra(Constants.VIDEO_URL,inprogress_video.link)
+        intent.putExtra(Constants.VIDEO_TITLE,inprogress_video.name)
         startActivity(intent)
     }
 

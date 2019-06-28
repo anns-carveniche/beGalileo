@@ -126,4 +126,5 @@ dependencies {
 
     //Reactive Network
     implementation 'com.github.pwittchen:reactivenetwork-rx2:3.0.3'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
 }

@@ -53,7 +53,8 @@ interface ApiInterface {
                               @Field("first_name") firstName: String,
                               @Field("last_name") lastName: String,
                               @Field("grade_id") gradeId : Int,
-                              @Field("city") city: String) : Observable<RegisterModel>
+                              @Field("city") city: String,
+                              @Field("reference_code") referralCode : String) : Observable<RegisterModel>
 
     @GET("app_users/grade_details")
     fun gradeList() : Observable<GradeListModel>
@@ -81,7 +82,13 @@ interface ApiInterface {
     fun getChapterQuizQuestions(@Query("student_id") studentId : Int,
                                 @Query("course_id") courseId : Int,
                                 @Query("chapter_id") chapterId : Int
-                                ) : Observable<ChapterQuizModel>
+    ) : Observable<ChapterQuizModel>
+
+    @POST("app_students/chapter_videos")
+    fun getChapterVideos(@Query("student_id") studentId : Int,
+                                @Query("chapter_id") chapterId : Int
+    ) : Observable<ChapterVideosModel>
+
 
     @POST("app_users/test_questions")
     fun getTestQuestions(@Query("question_id") question_id : Int
@@ -133,12 +140,20 @@ interface ApiInterface {
                          @Query("last_name") lastName : String,
                          @Query("school_name") schoolName : String
     ) : Observable<BasicResponseModel>
+    @POST("app_users/validate_reference_code")
+    fun validateRefferalCode(@Query("user_id") userId : Int,
+                             @Query("reference_code") referralCode: String
+    ) : Observable<BasicResponseModel>
 
     @POST("app_users/store_device_info")
     fun updateDeviceInfo(@Query("user_id") studentId : Int,
                       @Query("device_id") device_id : String,
                       @Query("last_active_date") last_active_date : String
     ) : Observable<JsonElement>
+
+    @POST("app_users/show_reference_code")
+    fun showRefferalCode(@Query("user_id") studentId : Int
+    ) : Observable<RefferalCodeModel>
 
     companion object {
         fun create():ApiInterface {

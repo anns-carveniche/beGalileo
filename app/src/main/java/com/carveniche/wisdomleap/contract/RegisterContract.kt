@@ -17,10 +17,12 @@ class RegisterContract {
         fun name(): Observable<CharSequence>
         fun lastName() : Observable<CharSequence>
         fun updateSchoolSubmitButtonState(state: Boolean)
+        fun verifyReferralState(isValid: Boolean)
     }
     interface Presenter : BaseContract.Presenter<RegisterContract.View>
     {
+        fun validateReferralCode(userId : Int,referralCode: String)
         fun getGradeList()
-        fun submitRegisterDetails(mobileNumber : String,email: String,firstName : String,lastName : String,gradeId : Int,city : String)
+        fun submitRegisterDetails(mobileNumber : String,email: String,firstName : String,lastName : String,gradeId : Int,city : String,referralCode : String)
     }
 }

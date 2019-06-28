@@ -17,11 +17,14 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 
 import com.carveniche.wisdomleap.R
+import com.carveniche.wisdomleap.adapter.ChapterVideoGridAdapter
 import com.carveniche.wisdomleap.contract.VideoPlayContract
 import com.carveniche.wisdomleap.di.component.DaggerActivityComponent
 import com.carveniche.wisdomleap.di.module.ActivityModule
 import com.carveniche.wisdomleap.di.module.ContextModule
 import com.carveniche.wisdomleap.di.module.SharedPreferenceModule
+import com.carveniche.wisdomleap.interfaces.IChapterVideoClickListener
+import com.carveniche.wisdomleap.model.ChapterVideosModel
 import com.carveniche.wisdomleap.model.MySharedPreferences
 import com.carveniche.wisdomleap.util.Constants
 import com.carveniche.wisdomleap.util.showLoadingProgress
@@ -46,7 +49,9 @@ import kotlinx.android.synthetic.main.layout_progressbar.*
 import javax.inject.Inject
 
 
-class VideoPlayActivity : AppCompatActivity(),VideoPlayContract.View {
+class VideoPlayActivity : AppCompatActivity(),VideoPlayContract.View,IChapterVideoClickListener {
+
+
 
     @Inject lateinit var presenter : VideoPlayContract.Presenter
     @Inject lateinit var mySharedPreferences: MySharedPreferences
@@ -88,8 +93,11 @@ class VideoPlayActivity : AppCompatActivity(),VideoPlayContract.View {
             mExoPlayerFullscreen = savedInstanceState.getBoolean(STATE_PLAYER_FULLSCREEN)
         }
 
-    }
 
+    }
+    override fun onChapterClick(conceptId: Int, subconceptId: Int, videoUrl: String, videoTitle: String) {
+
+    }
     override fun onSaveInstanceState(outState: Bundle?) {
         Log.d(Constants.LOG_TAG,"Outside Save $mResumeWindow -- $mResumePosition")
         outState!!.putInt(STATE_RESUME_WINDOW, mResumeWindow)
@@ -118,12 +126,20 @@ class VideoPlayActivity : AppCompatActivity(),VideoPlayContract.View {
         mVideoUrl = intent.getStringExtra(Constants.VIDEO_URL)
         mStudentId = mySharedPreferences.getIntData(Constants.STUDENT_ID)
         mVideoTitle = intent.getStringExtra(Constants.VIDEO_TITLE)
+        presenter.loadChapterVideos(mStudentId,conceptId)
 
     }
 
 
 
+    override fun onChapterLoadSuccess(chapterVideosModel: ChapterVideosModel) {
+        gv_chapter_videos.adapter = ChapterVideoGridAdapter(this,chapterVideosModel.sub_concept_details,this)
+        Log.d(Constants.LOG_TAG,chapterVideosModel.toString())
+    }
 
+    override fun onChapterLoadFailed(error: String) {
+        Log.d(Constants.LOG_TAG,"Error $error")
+    }
 
     /*override fun onPause() {
         super.onPause()

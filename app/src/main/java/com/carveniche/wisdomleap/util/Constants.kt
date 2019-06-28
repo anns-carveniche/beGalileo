@@ -56,6 +56,9 @@ class Constants {
         const val FONT_NICONNE = "fonts/Niconne-Regular.ttf"
         const val FONT_ROBOTO_LIGHT = "fonts/Roboto/Roboto-Light.ttf"
 
+
+        const val ERROR_MESSAGE = "Unable to fetch data please try again"
+
         //Avatar Array
          val myAvatarList = intArrayOf(R.drawable.avatar_1,
                                                 R.drawable.avatar_2,

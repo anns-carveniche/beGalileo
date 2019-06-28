@@ -4,6 +4,7 @@ import android.view.View
 import com.carveniche.wisdomleap.api.ApiInterface
 import com.carveniche.wisdomleap.contract.RegisterContract
 import com.carveniche.wisdomleap.util.isValidEmail
+import com.carveniche.wisdomleap.util.showShortToast
 import com.google.android.libraries.places.internal.it
 import io.reactivex.Observable
 import io.reactivex.Observable.combineLatest
@@ -16,6 +17,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_register.view.*
 
 class RegisterPresenter : RegisterContract.Presenter {
+
 
     lateinit var view : RegisterContract.View
     private var disposable = CompositeDisposable()
@@ -86,10 +88,11 @@ class RegisterPresenter : RegisterContract.Presenter {
         firstName: String,
         lastName: String,
         gradeId: Int,
-        city: String
+        city: String,
+        referralCode : String
     ) {
         view.showProgress(true)
-        var submitObservable = api.submitRegsiterDetails(mobileNumber,email,firstName,lastName,gradeId,city)
+        var submitObservable = api.submitRegsiterDetails(mobileNumber,email,firstName,lastName,gradeId,city,referralCode)
         .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -103,6 +106,20 @@ class RegisterPresenter : RegisterContract.Presenter {
                 view.onSubmitDetailFailed(it.localizedMessage)
             })
         disposable.add(submitObservable)
+    }
+    override fun validateReferralCode(userId: Int, referralCode: String) {
+        view.showProgress(true)
+        var submitReferral = api.validateRefferalCode(userId,referralCode)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                view.showProgress(false)
+                view.verifyReferralState(it.status)
+            },{
+                view.showProgress(false)
+                view.onSubmitDetailFailed(it.localizedMessage)
+            })
+        disposable.add(submitReferral)
     }
 
 

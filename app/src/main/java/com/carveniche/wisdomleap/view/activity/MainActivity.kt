@@ -166,8 +166,16 @@ class MainActivity : AppCompatActivity(),MainContract.View,NavigationView.OnNavi
             R.id.nav_home -> showDashboardFragment()
             R.id.nav_recently_viewed -> showRecentlyViewed()
             R.id.nav_chat -> showChatSupportActivity()
+            R.id.nav_refer_earn -> showReferralActivity()
         }
         return true
+    }
+
+    private fun showReferralActivity() {
+        drawer_layout.closeDrawers()
+        var intent = Intent(this,ReferralActivity::class.java)
+        intent.putExtra(Constants.STUDENT_ID,mySharedPreferences.getIntData(Constants.STUDENT_ID))
+        startActivity(intent)
     }
 
     private fun showChatSupportActivity() {

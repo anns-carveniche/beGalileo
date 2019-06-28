@@ -23,6 +23,7 @@ import com.carveniche.wisdomleap.util.Constants
 import com.carveniche.wisdomleap.util.showLoadingProgress
 
 import com.carveniche.wisdomleap.util.showLongToast
+import com.carveniche.wisdomleap.util.showShortToast
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.Autocomplete
@@ -36,6 +37,7 @@ import java.util.*
 import javax.inject.Inject
 
 class RegisterActivity : AppCompatActivity(),RegisterContract.View,IGradeClickListener {
+
 
     @Inject
     lateinit var mySharedPreferences: MySharedPreferences
@@ -54,6 +56,7 @@ class RegisterActivity : AppCompatActivity(),RegisterContract.View,IGradeClickLi
     private var mEmail = ""
     private var mFirstName = ""
     private var mLastName = ""
+    private var mReferralCode = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -92,12 +95,25 @@ class RegisterActivity : AppCompatActivity(),RegisterContract.View,IGradeClickLi
         }
         btnSubmitDetails.setOnClickListener {
             mEmail = edEmail.text.toString()
-            presenter.submitRegisterDetails(mMobileNumber,mEmail,mFirstName,mLastName,mSelectedGradeId,mSelectedCity)
+            if(cb_referral_code.isChecked)
+                viewflipper.showNext()
+            else
+                presenter.submitRegisterDetails(mMobileNumber,mEmail,mFirstName,mLastName,mSelectedGradeId,mSelectedCity,mReferralCode)
         }
         btnNameSubmit.setOnClickListener {
             mFirstName = edFirstName.text.toString()
             mLastName = edLastName.text.toString()
             viewflipper.showNext()
+        }
+        btnSubmitReferral.setOnClickListener {
+            mReferralCode = edReferralCode.text.toString()
+            if(edReferralCode.text.isEmpty())
+                showShortToast("Referral code field should not blank",this)
+            else
+            {
+                presenter.validateReferralCode(mySharedPreferences.getIntData(Constants.STUDENT_ID),mReferralCode)
+            }
+
         }
 
     }
@@ -140,7 +156,17 @@ class RegisterActivity : AppCompatActivity(),RegisterContract.View,IGradeClickLi
     override fun updateNameSubmitButton(state: Boolean) {
         btnNameSubmit.isEnabled = state
     }
+    override fun verifyReferralState(isValid: Boolean) {
+        if(isValid)
+        {
+            presenter.submitRegisterDetails(mMobileNumber,mEmail,mFirstName,mLastName,mSelectedGradeId,mSelectedCity,mReferralCode)
+        }
+        else
+        {
+            showLongToast("Referral code is invalid please check and try again",this);
+        }
 
+    }
 
     private fun openAutoCompletePlaceActivity() {
         val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN,fieldList)

@@ -8,6 +8,7 @@ import io.reactivex.schedulers.Schedulers
 
 class VideoPlayPresenter : VideoPlayContract.Presenter {
 
+
     private lateinit var view: VideoPlayContract.View
     private var disposable = CompositeDisposable()
     private var api = ApiInterface.create()
@@ -40,6 +41,23 @@ class VideoPlayPresenter : VideoPlayContract.Presenter {
 
             })
         disposable.add(videoStateObservable)
+    }
+    override fun loadChapterVideos(studentId: Int, chapterId: Int) {
+        var chapterVideosObservable = api.getChapterVideos(studentId,chapterId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                if(it.status)
+                {
+                    view.onChapterLoadSuccess(it)
+                }
+                else{
+                    view.onChapterLoadFailed("Unable to fetch related data")
+                }
+            },{
+                view.onChapterLoadFailed(it.localizedMessage)
+            })
+        disposable.add(chapterVideosObservable)
     }
 
 }
