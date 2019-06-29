@@ -78,6 +78,8 @@ class VideoPlayActivity : AppCompatActivity(),VideoPlayContract.View,IChapterVid
     private var mVideoTitle = ""
     private var isVideoCompleted = false
 
+    lateinit var player : SimpleExoPlayer
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -226,7 +228,7 @@ class VideoPlayActivity : AppCompatActivity(),VideoPlayContract.View,IChapterVid
         val videoTrackSelectionFactory = AdaptiveTrackSelection.Factory(bandwidthMeter)
         val trackSelector = DefaultTrackSelector(videoTrackSelectionFactory)
         val loadControl = DefaultLoadControl()
-        val player = ExoPlayerFactory.newSimpleInstance(DefaultRenderersFactory(this), trackSelector, loadControl)
+         player = ExoPlayerFactory.newSimpleInstance(DefaultRenderersFactory(this), trackSelector, loadControl)
 
 
         val haveResumePosition = mResumeWindow != C.INDEX_UNSET
@@ -239,6 +241,7 @@ class VideoPlayActivity : AppCompatActivity(),VideoPlayContract.View,IChapterVid
             player.seekTo(mResumeWindow, mResumePosition)
 
         }
+
         player.addListener(object : Player.EventListener{
             override fun onPlaybackParametersChanged(playbackParameters: PlaybackParameters?) {
 
@@ -292,8 +295,7 @@ class VideoPlayActivity : AppCompatActivity(),VideoPlayContract.View,IChapterVid
 
         })
         mExoPlayerView.player = player
-
-
+        Log.d(Constants.LOG_TAG,"Player pos ${player.currentPosition}")
     }
     fun showVideoProgress(show: Boolean)
     {

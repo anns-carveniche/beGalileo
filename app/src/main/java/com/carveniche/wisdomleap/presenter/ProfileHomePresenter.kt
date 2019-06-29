@@ -10,6 +10,7 @@ import javax.inject.Inject
 class ProfileHomePresenter : ProfileHomeContract.Presenter {
 
 
+
     @Inject lateinit var presenter: ProfileHomeContract.Presenter
 
     private lateinit var view : ProfileHomeContract.View
@@ -46,7 +47,7 @@ class ProfileHomePresenter : ProfileHomeContract.Presenter {
         disposable.add(profileLoadSubcriber)
     }
   override fun submitProfileDatas(studentId: Int, firstName: String, lastName: String, schoolName: String) {
-        view.showProgress(false)
+        view.showProgress(true)
         var submitProfileSubscriber = api.updateProfile(studentId,firstName,lastName,schoolName)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -61,5 +62,23 @@ class ProfileHomePresenter : ProfileHomeContract.Presenter {
                view.submitProfileDataFailed(it.localizedMessage)
             })
         disposable.add(submitProfileSubscriber)
+    }
+    override fun loadUserCoins(studentId: Int) {
+
+        var userCoinsObs = api.getUserCoins(studentId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+
+                if(it.status)
+                    view.onLoadCoinSuccess(it)
+                else
+                    view.onLoadCoinFailed(it.message)
+            },{
+
+                view.onLoadCoinFailed(it.localizedMessage)
+            })
+        disposable.add(userCoinsObs)
+
     }
 }

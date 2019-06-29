@@ -77,6 +77,27 @@
         app:layout_constraintTop_toTopOf="@+id/guideline6">
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/ic_gold_coins" />
+
+            <TextView
+                android:id="@+id/tv_gold_coins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_size_medium"
+                android:textStyle="bold"
+                android:text="0 Coin" />
+        </LinearLayout>
+
         <TextView
             android:id="@+id/tv_email"
             android:layout_width="match_parent"

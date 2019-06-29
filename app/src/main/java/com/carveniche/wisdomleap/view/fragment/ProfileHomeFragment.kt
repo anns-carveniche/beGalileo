@@ -21,6 +21,7 @@ import com.carveniche.wisdomleap.di.module.FragmentModule
 import com.carveniche.wisdomleap.di.module.SharedPreferenceModule
 import com.carveniche.wisdomleap.model.MySharedPreferences
 import com.carveniche.wisdomleap.model.StudentProfileModel
+import com.carveniche.wisdomleap.model.UserCoinModel
 import com.carveniche.wisdomleap.util.Constants
 import com.carveniche.wisdomleap.util.showLoadingProgress
 import com.carveniche.wisdomleap.util.showLongToast
@@ -36,6 +37,7 @@ import javax.inject.Inject
 
 
 class ProfileHomeFragment : Fragment(), ProfileHomeContract.View {
+
 
 
     private lateinit var rootView: View
@@ -68,6 +70,8 @@ class ProfileHomeFragment : Fragment(), ProfileHomeContract.View {
         presenter.attach(this)
         presenter.subscribe()
         presenter.loadProfileDatas(studentId)
+        presenter.loadUserCoins(studentId)
+
     }
 
     private fun initUI() {
@@ -145,7 +149,13 @@ class ProfileHomeFragment : Fragment(), ProfileHomeContract.View {
             .build()
         fragmentComponent.inject(this)
     }
+    override fun onLoadCoinSuccess(userCoinModel: UserCoinModel) {
+        tv_gold_coins.text = "${userCoinModel.coins} Coins"
+    }
 
+    override fun onLoadCoinFailed(error: String) {
+
+    }
     override fun onProfileLoadSucess(studentProfileModel: StudentProfileModel) {
         Log.d(Constants.LOG_TAG, studentProfileModel.toString())
         this.studentProfileModel = studentProfileModel
