@@ -129,6 +129,7 @@ class VideoPlayActivity : AppCompatActivity(),VideoPlayContract.View,IChapterVid
         mStudentId = mySharedPreferences.getIntData(Constants.STUDENT_ID)
         mVideoTitle = intent.getStringExtra(Constants.VIDEO_TITLE)
         presenter.loadChapterVideos(mStudentId,conceptId)
+        tv_video_title.text = mVideoTitle
 
     }
 

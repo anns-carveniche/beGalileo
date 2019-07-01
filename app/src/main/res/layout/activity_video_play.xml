@@ -8,7 +8,7 @@
         android:id="@+id/main_media_frame"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"
+        android:layout_weight="0.4"
         android:background="#000000">
 
         <com.google.android.exoplayer2.ui.PlayerView
@@ -31,9 +31,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"
+        android:layout_weight="0.6"
+        android:orientation="vertical"
+        android:background="@color/white"
         >
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginBottom="10dp">
+            <TextView
+                android:id="@+id/tv_video_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="@dimen/font_size_medium"
+                android:textColor="@color/quantum_black_100"
+                />
+        </LinearLayout>
 
         <GridView
             android:id="@+id/gv_chapter_videos"
