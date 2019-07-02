@@ -21,17 +21,6 @@
             tools:layout_editor_absoluteX="10dp"
             tools:layout_editor_absoluteY="10dp">
 
-            <WebView
-                android:id="@+id/wv_opt_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:padding="10dp"
-                android:textColor="@color/quantum_black_100"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <ImageView
                 android:id="@+id/rdImage1"
                 android:layout_width="match_parent"
@@ -48,14 +37,27 @@
                 android:id="@+id/radioButton1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="10dp"
+                android:padding="20dp"
                 android:text=""
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_size_medium"
                 android:buttonTint="@color/colorPrimary"
                 android:visibility="visible"
+                android:background="@color/primaryColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <WebView
+                android:id="@+id/wv_opt_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:background="@color/quantum_yellow"
+                android:padding="10dp"
+                android:textColor="@color/quantum_black_100"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -64,17 +66,6 @@
             android:layout_height="match_parent"
             tools:layout_editor_absoluteX="10dp"
             tools:layout_editor_absoluteY="10dp">
-
-            <WebView
-                android:id="@+id/wv_opt_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:padding="10dp"
-                android:textColor="@color/quantum_black_100"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/rdImage2"
@@ -92,14 +83,27 @@
                 android:id="@+id/radioButton2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="10dp"
+                android:padding="20dp"
                 android:text=""
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_size_medium"
                 android:visibility="visible"
                 android:buttonTint="@color/colorPrimary"
+                android:background="@color/primaryColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <WebView
+                android:id="@+id/wv_opt_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:background="@color/quantum_yellow"
+                android:padding="10dp"
+                android:textColor="@color/quantum_black_100"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -108,17 +112,6 @@
             android:layout_height="match_parent"
             tools:layout_editor_absoluteX="10dp"
             tools:layout_editor_absoluteY="10dp">
-
-            <WebView
-                android:id="@+id/wv_opt_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:padding="10dp"
-                android:textColor="@color/quantum_black_100"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/rdImage3"
@@ -136,8 +129,9 @@
                 android:id="@+id/radioButton3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="10dp"
+                android:padding="20dp"
                 android:text=""
+                android:background="@color/primaryColor"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_size_medium"
                 android:visibility="visible"
@@ -146,23 +140,24 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <WebView
+                android:id="@+id/wv_opt_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:background="@color/quantum_yellow"
+                android:padding="10dp"
+                android:textColor="@color/quantum_black_100"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layout_editor_absoluteX="10dp"
             tools:layout_editor_absoluteY="10dp">
-
-            <WebView
-                android:id="@+id/wv_opt_4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:padding="10dp"
-                android:textColor="@color/quantum_black_100"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/rdImage4"
@@ -180,14 +175,27 @@
                 android:id="@+id/radioButton4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="10dp"
+                android:padding="20dp"
                 android:text=""
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_size_medium"
                 android:visibility="visible"
+                android:background="@color/primaryColor"
                 android:buttonTint="@color/colorPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <WebView
+                android:id="@+id/wv_opt_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:background="@color/quantum_yellow"
+                android:padding="10dp"
+                android:textColor="@color/quantum_black_100"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>

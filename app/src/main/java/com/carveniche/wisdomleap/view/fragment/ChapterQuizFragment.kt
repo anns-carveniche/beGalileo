@@ -273,7 +273,7 @@ class ChapterQuizFragment : Fragment(),ChapterQuizContract.View {
         this.quizDataList = chapterQuizModel.quiz_data
         this.resultData = chapterQuizModel.result_data
         this.currentQuestion = chapterQuizModel.current
-        if(!resultData.isEmpty())
+        if(resultData.isNotEmpty())
         {
            // questionCount += chapterQuizModel.current
             resultData.forEach {
@@ -339,7 +339,7 @@ class ChapterQuizFragment : Fragment(),ChapterQuizContract.View {
         tvQuestionNumber.text = context!!.getString(R.string.QuestionNumber,currentQuestion,totalQuestion)
         showtMathView(tvQuestion,quizData.question_text)
        // tvQuestion.text = Jsoup.parse(quizData.question_text).text()
-        if(!quizData.question_image.isEmpty())
+        if(quizData.question_image.isNotEmpty())
         {
             ivQuestionImage.visibility = View.VISIBLE
         }
@@ -347,7 +347,7 @@ class ChapterQuizFragment : Fragment(),ChapterQuizContract.View {
             rbList[index].visibility = View.VISIBLE
           //  rbList[index].text = Jsoup.parse(choicesData.options).text()
             showtMathView(wbOptionsList[index],choicesData.options)
-            if(!choicesData.image.isEmpty())
+            if(choicesData.image.isNotEmpty())
             {
                 imageOptionList[index].visibility = View.VISIBLE
             }
