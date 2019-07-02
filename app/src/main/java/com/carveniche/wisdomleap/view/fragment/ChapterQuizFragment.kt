@@ -11,7 +11,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
+import com.airbnb.lottie.LottieAnimationView
 
 import com.carveniche.wisdomleap.R
 import com.carveniche.wisdomleap.contract.ChapterQuizContract
@@ -86,6 +88,10 @@ class ChapterQuizFragment : Fragment(),ChapterQuizContract.View {
     private var questionStartTime : Long = 0
     private var timeTaken : Long = 0
     private var currentQuestion = 0
+
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -111,6 +117,9 @@ class ChapterQuizFragment : Fragment(),ChapterQuizContract.View {
         presenter.subscribe()
         presenter.loadQuestionDatas(studentId,courseId,chapterId)
     }
+
+
+
 
     private fun initUI() {
 
@@ -281,11 +290,11 @@ class ChapterQuizFragment : Fragment(),ChapterQuizContract.View {
                     userCorrectAnswer++
             }
         }
-        this.quizDataList.forEach {
-            updateQuestion(it)
-        }
+      //  this.quizDataList.forEach {
+        //    updateQuestion(it)
+      //  }
 
-      //  updateQuestion(questionCount)
+        updateQuestion(quizDataList[questionCount])
     }
 
     private fun startTimer()
@@ -382,6 +391,12 @@ class ChapterQuizFragment : Fragment(),ChapterQuizContract.View {
 
 }
 class QuizOptionResultDialogFragment(var chapterQuizView : ChapterQuizContract.View,var correctAnswer : String,var isCorrect : Boolean,var image_url : String) : DialogFragment(){
+    private lateinit var resultAnimtion : LottieAnimationView
+
+    fun showResultAnimation(isCorrect: Boolean)
+    {
+        resultAnimtion.setAnimation("anim_load_data.json")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -396,12 +411,12 @@ class QuizOptionResultDialogFragment(var chapterQuizView : ChapterQuizContract.V
         if(isCorrect)
         {
             view.tvAnswerHeader.text = "Correct Answer"
-            view.tvAnswerHeader.setBackgroundColor(Color.GREEN)
+            view.tvAnswerHeader.setBackgroundColor(ContextCompat.getColor(context!!,R.color.correct_green))
         }
         else
         {
             view.tvAnswerHeader.text = "InCorrect Answer"
-            view.tvAnswerHeader.setBackgroundColor(Color.RED)
+            view.tvAnswerHeader.setBackgroundColor(ContextCompat.getColor(context!!,R.color.incorrect_red))
         }
         if(!image_url.isEmpty())
         {
@@ -410,8 +425,32 @@ class QuizOptionResultDialogFragment(var chapterQuizView : ChapterQuizContract.V
         else
             view.ivCorrectImage.visibility = View.GONE
 
+
+        resultAnimtion = view.animation_view
+        startLoadAnimation(isCorrect)
+
+
         return view
 
+    }
+
+    private fun startLoadAnimation(isCorrect: Boolean)
+    {
+        if(isCorrect)
+        {
+            resultAnimtion.setBackgroundColor(ContextCompat.getColor(context!!,R.color.correct_green))
+            resultAnimtion.setAnimation(Constants.ANIM_CORRECT)
+        }
+        else
+        {
+            resultAnimtion.setBackgroundColor(ContextCompat.getColor(context!!,R.color.incorrect_red))
+            resultAnimtion.setAnimation(Constants.ANIM_INCORRECT)
+        }
+
+
+        resultAnimtion.loop(true)
+
+        resultAnimtion.playAnimation()
     }
 
     override fun onPause() {

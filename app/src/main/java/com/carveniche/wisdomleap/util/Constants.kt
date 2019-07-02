@@ -52,6 +52,12 @@ class Constants {
         const val DRAW = "draw"
         const val USER_COINS = "USER_COINS"
 
+
+        //LOTTIE ANIMATIOn
+        const val ANIM_CORRECT = "anim_correct.json"
+        const val ANIM_INCORRECT = "anim_incorrect.json"
+        const val ANIM_LOAD = "anim_load_data.json"
+
         //Custom Font Path
         const val FONT_NICONNE = "fonts/Niconne-Regular.ttf"
         const val FONT_ROBOTO_LIGHT = "fonts/Roboto/Roboto-Light.ttf"

@@ -318,7 +318,7 @@ class MultiplayerQuizPlayFragment : Fragment(),MultiplayerPlayQuizContract.View,
 
     fun initLoadQuestionAnimation()
     {
-        animationView.setAnimation("anim_load_data.json")
+        animationView.setAnimation(Constants.ANIM_LOAD)
         animationView.loop(true)
         animationView.addAnimatorListener(object : Animator.AnimatorListener{
             override fun onAnimationRepeat(animation: Animator?) {
