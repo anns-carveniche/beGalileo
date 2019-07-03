@@ -66,4 +66,20 @@ class ChapterQuizPresenter : ChapterQuizContract.Presenter {
             })
         disposable.add(saveQuizSubscriber)
     }
+    override fun skipQuiz(
+        studentId: Int,
+        quizId: Int,
+        questionId: Int,
+        questionIndex: Int
+    ) {
+        var saveQuizSubscriber = api.skipQuiz(studentId,quizId,questionId,questionIndex)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Log.d(Constants.LOG_TAG,it.toString())
+            },{
+                Log.d(Constants.LOG_TAG,it.localizedMessage)
+            })
+        disposable.add(saveQuizSubscriber)
+    }
 }

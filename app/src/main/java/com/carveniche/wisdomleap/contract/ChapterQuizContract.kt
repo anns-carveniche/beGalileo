@@ -15,5 +15,7 @@ class ChapterQuizContract {
     interface Presenter : BaseContract.Presenter<ChapterQuizContract.View>{
         fun loadQuestionDatas(studentId : Int,courseId : Int,chapterId : Int)
         fun saveQuiz(studentId: Int,quizId : Int,questionId : Int,questionIndex : Int,choiceId : Int,timeSpent : Int,isCorrect : Boolean,isCompleted : Boolean)
+        fun skipQuiz(studentId: Int,quizId : Int,questionId : Int,questionIndex : Int)
+
     }
 }

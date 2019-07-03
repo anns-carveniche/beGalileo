@@ -14,34 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".view.activity.ReferralActivity"
-            android:screenOrientation="portrait"
-            >
-
-        </activity>
-        <activity android:name=".view.activity.MultiPlayerQuizActivity"
-            android:screenOrientation="portrait"
-            ></activity>
-        <activity android:name=".view.activity.ChatSupportActivity"
-            android:screenOrientation="portrait"
-            ></activity>
-        <activity android:name=".view.activity.RecentlyViewedActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".view.activity.WelcomeActivity"
-            android:screenOrientation="portrait"
-            >
-
-
-        </activity>
-        <activity android:name=".view.activity.ConceptQuizActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity
-            android:name=".view.activity.SplashActivity"
-            android:theme="@style/SplashScreenTheme"
-            android:screenOrientation="portrait"
-            >
+        <activity android:name=".view.activity.RoughActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -50,27 +23,46 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.activity.VideoPlayActivity"
-             >
+            android:name=".view.activity.ReferralActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".view.activity.MultiPlayerQuizActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.ChatSupportActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.RecentlyViewedActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.WelcomeActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".view.activity.ConceptQuizActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashScreenTheme">
 
         </activity>
-        <activity android:name=".view.activity.QuizActivity"
-            android:screenOrientation="portrait"
-            ></activity>
-        <activity android:name=".view.activity.SubjectActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".view.activity.RegisterActivity"
-            android:screenOrientation="portrait"
-            />
+        <activity android:name=".view.activity.VideoPlayActivity"></activity>
+        <activity
+            android:name=".view.activity.QuizActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.SubjectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.RegisterActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.activity.LoginActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize"
             android:screenOrientation="portrait"
-            />
-        <activity android:name=".view.activity.MainActivity"
-            android:screenOrientation="portrait"
-            />
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".view.activity.MainActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

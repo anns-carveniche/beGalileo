@@ -105,6 +105,14 @@ interface ApiInterface {
                  @Query("is_completed") isCompleted : Boolean
     ) : Observable<JsonElement>
 
+    @POST("app_students/skip")
+    fun skipQuiz(@Query("student_id") studentId : Int,
+                 @Query("quiz_id") quizId : Int,
+                 @Query("question_id") questionId : Int,
+                 @Query("question_index") questionIndex : Int
+    ) : Observable<JsonElement>
+
+
 
     @POST("app_students/video_logs")
     fun videoStatus(@Query("student_id") studentId : Int,

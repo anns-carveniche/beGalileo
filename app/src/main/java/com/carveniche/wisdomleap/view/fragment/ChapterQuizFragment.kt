@@ -178,8 +178,9 @@ class ChapterQuizFragment : Fragment(),ChapterQuizContract.View {
             {
                 showLongToast("Please select any option to continue",context!!)
             }
-
-
+        }
+        btn_skip.setOnClickListener {
+                skipAnswer()
         }
     }
 
@@ -188,6 +189,24 @@ class ChapterQuizFragment : Fragment(),ChapterQuizContract.View {
 
         resetUI()
         isOptionCorrect()
+        questionCount++
+        currentQuestion++
+        if(!isCompleted)
+            updateQuestion(quizDataList[questionCount])
+        else
+        {
+            conceptQuizActivity.showChapterQuizResultFragment(userCorrectAnswer,totalQuestion)
+        }
+        if(currentQuestion == totalQuestion)
+            isCompleted = true
+    }
+     fun skipAnswer()
+    {
+
+        resetUI()
+        var currentQuizData = quizDataList[questionCount]
+        presenter.skipQuiz(studentId,quizId,currentQuizData.question_id,currentQuestion)
+
         questionCount++
         currentQuestion++
         if(!isCompleted)
@@ -355,6 +374,8 @@ class ChapterQuizFragment : Fragment(),ChapterQuizContract.View {
         quizData.choices_data.forEachIndexed { index, choicesData ->
             rbList[index].visibility = View.VISIBLE
           //  rbList[index].text = Jsoup.parse(choicesData.options).text()
+            if(choicesData.correct_answer)
+                Log.d(Constants.LOG_TAG,choicesData.options)
             showtMathView(wbOptionsList[index],choicesData.options)
             if(choicesData.image.isNotEmpty())
             {
