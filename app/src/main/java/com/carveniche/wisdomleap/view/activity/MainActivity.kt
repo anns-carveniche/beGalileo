@@ -22,6 +22,7 @@ import com.carveniche.wisdomleap.util.Constants
 import com.carveniche.wisdomleap.util.DailyQuotes
 import com.carveniche.wisdomleap.util.showLoadingProgress
 import com.carveniche.wisdomleap.view.fragment.DashboardFragment
+import com.carveniche.wisdomleap.view.fragment.NotificationHomeFragment
 import com.carveniche.wisdomleap.view.fragment.ProfileHomeFragment
 import com.carveniche.wisdomleap.view.fragment.QuizHomeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -35,6 +36,7 @@ import kotlinx.android.synthetic.main.nav_header.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(),MainContract.View,NavigationView.OnNavigationItemSelectedListener{
+
 
     @Inject lateinit var presenter : MainContract.Presenter
     @Inject lateinit var mySharedPreferences: MySharedPreferences
@@ -109,6 +111,10 @@ class MainActivity : AppCompatActivity(),MainContract.View,NavigationView.OnNavi
                 showProfileFragment()
                 return@OnNavigationItemSelectedListener true
             }
+            R.id.main_nav_notification->{
+                showNotificationFragment()
+                return@OnNavigationItemSelectedListener true
+            }
         }
         false
     }
@@ -118,7 +124,12 @@ class MainActivity : AppCompatActivity(),MainContract.View,NavigationView.OnNavi
             .replace(R.id.container,DashboardFragment(),DashboardFragment.TAG)
            .commit()
     }
-
+    override fun showNotificationFragment() {
+        supportFragmentManager.beginTransaction()
+            .addToBackStack(null)
+            .replace(R.id.container,NotificationHomeFragment(),NotificationHomeFragment.TAG)
+            .commit()
+    }
     override fun showQuizFragment() {
         supportFragmentManager.beginTransaction()
             .addToBackStack(null)

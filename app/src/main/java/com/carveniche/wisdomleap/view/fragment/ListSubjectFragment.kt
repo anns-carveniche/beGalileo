@@ -67,7 +67,7 @@ class ListSubjectFragment : Fragment(),ListSubjctContract.View {
     }
     override fun onSubjectLoadSucess(subjectListModel: SubjectListModel) {
         this.courseDetail = subjectListModel.course_details
-        gvSubject.adapter = SubjectListAdapter(context!!,courseDetail,subjectActivity)
+       // gvSubject.adapter = SubjectListAdapter(context!!,courseDetail,subjectActivity)
     }
 
     override fun onSubjectLoadFailed(msg: String) {

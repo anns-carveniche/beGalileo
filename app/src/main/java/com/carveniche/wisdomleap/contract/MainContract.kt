@@ -8,6 +8,7 @@ class MainContract {
         fun showDashboardFragment()
         fun showQuizFragment()
         fun showProfileFragment()
+        fun showNotificationFragment()
     }
     interface Presenter : BaseContract.Presenter<View>
     {

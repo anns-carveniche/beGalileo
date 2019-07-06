@@ -45,6 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+
                 android:background="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -54,8 +55,10 @@
                     android:id="@+id/bottomNavigationView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    app:itemBackground="@color/colorPrimary"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:background="@color/wf_text_color"
+                    app:itemBackground="@color/wf_text_color"
                     app:itemIconTint="@android:color/white"
                     app:itemTextColor="@android:color/white"
                     app:menu="@menu/main_bottom_navigation" />

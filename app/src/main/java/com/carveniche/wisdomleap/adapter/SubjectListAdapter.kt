@@ -18,20 +18,20 @@ import com.squareup.picasso.Picasso
 
 import kotlinx.android.synthetic.main.list_item_subject.view.*
 
-class SubjectListAdapter(private val context: Context,private val courseDetail: List<CourseDetail> ,activity: SubjectActivity) : BaseAdapter() {
+class SubjectListAdapter(private val context: Context,private val courseDetail: List<CourseDetail>) : BaseAdapter() {
 
     private val inflater: LayoutInflater
             = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
-      var activity : SubjectActivity = activity
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val rowView = inflater.inflate(R.layout.list_item_subject,parent,false)
-        Picasso.with(context).load(URL.WISDOM_LEAP_URL+courseDetail[position].image_url)
-            .into(rowView.ivImageItem)
-        rowView.setOnClickListener {
-            activity.showListChapterFragment(courseDetail[position].course_id)
-        }
+        /*Picasso.with(context).load(URL.WISDOM_LEAP_URL+courseDetail[position].image_url)
+            .into(rowView.ivImageItem)*/
+        rowView.tv_chapter_count.text = context.getString(R.string.chapter_count,courseDetail[position].chapters_count)
+        rowView.tv_lesson_count.text = context.getString(R.string.lesson_count,courseDetail[position].lessons_count)
+        rowView.tv_subject_name.text = courseDetail[position].name
+
         return rowView
     }
 

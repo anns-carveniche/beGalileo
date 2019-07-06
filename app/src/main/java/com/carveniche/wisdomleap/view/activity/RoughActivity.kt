@@ -24,42 +24,9 @@ class RoughActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rough)
-      initUI()
-    }
-
-    private fun initUI() {
-        mPieChart = piechart
-        mPieChart.setUsePercentValues(true)
-        val yvalues = mutableListOf<PieEntry>()
-        yvalues.add(PieEntry(5f, "Incorrect"))
-        yvalues.add(PieEntry(5f, "Correct"))
-        yvalues.add(PieEntry(5f, "Skipped"))
-
-
-        val pieDataSet = PieDataSet(yvalues, "Quiz Results")
-        pieDataSet.sliceSpace = 2f;
-        pieDataSet.valueTextSize = 15f;
-        pieDataSet.selectionShift = 10f;
-        pieDataSet.valueLinePart1OffsetPercentage = 80f;
-        pieDataSet.valueLinePart1Length = 1f;
-        pieDataSet.valueLinePart2Length = 0.9f;
-
-        val colors = ArrayList<Int>()
-        colors.add(Color.RED)
-        colors.add(Color.GREEN)
-        colors.add(Color.YELLOW)
-        pieDataSet.colors = colors
-        var pieData = PieData(pieDataSet)
-
-       // pieData.dataSet = dataSet
-        pieData.setValueFormatter(DefaultValueFormatter(0))
-
-        mPieChart.data = pieData
-        mPieChart.holeRadius = 0.0f
-        mPieChart.isDrawHoleEnabled = false
-
-
 
     }
+
+
 }
 

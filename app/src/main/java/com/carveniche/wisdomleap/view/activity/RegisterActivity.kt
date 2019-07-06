@@ -7,7 +7,11 @@ import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.TextView
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.carveniche.wisdomleap.R
 import com.carveniche.wisdomleap.adapter.GradeListAdapter
 import com.carveniche.wisdomleap.contract.RegisterContract
@@ -29,14 +33,19 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.jakewharton.rxbinding2.widget.AdapterViewItemClickEvent
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.Observable
+import io.reactivex.internal.operators.observable.ObservableInternalHelper
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.layout_progressbar.*
+import kotlinx.android.synthetic.main.register_bottom_sheet.*
 import java.util.*
 import javax.inject.Inject
 
-class RegisterActivity : AppCompatActivity(),RegisterContract.View,IGradeClickListener {
+class RegisterActivity : AppCompatActivity(),RegisterContract.View{
+
 
 
     @Inject
@@ -50,13 +59,17 @@ class RegisterActivity : AppCompatActivity(),RegisterContract.View,IGradeClickLi
     lateinit var selectedPlace  : Place
     private var isAutoLocatedFlag = false
     private lateinit var gradeList : List<GradeDetail>
-    private var mSelectedGradeId = 0
+    private var mSelectedGradeId = -1
     private var mSelectedCity = ""
     private var mMobileNumber = ""
     private var mEmail = ""
     private var mFirstName = ""
     private var mLastName = ""
     private var mReferralCode = ""
+    private lateinit var gradeAdpter : GradeListAdapter
+    private var previousSelectedGrade = -1
+    private lateinit var bottomSheetBehavior :   BottomSheetBehavior<View>
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,7 +85,12 @@ class RegisterActivity : AppCompatActivity(),RegisterContract.View,IGradeClickLi
         presenter.attach(this)
         presenter.subscribe()
         presenter.getGradeList()
+        initViews()
 
+    }
+
+    private fun initViews() {
+        bottomSheetBehavior  = BottomSheetBehavior.from(bottomSheetLayout)
     }
 
     override fun lastName(): Observable<CharSequence> {
@@ -85,27 +103,16 @@ class RegisterActivity : AppCompatActivity(),RegisterContract.View,IGradeClickLi
         tvCity.setOnClickListener {
             openAutoCompletePlaceActivity()
         }
-        btnCheckAnswer.setOnClickListener {
-           if(tvCity.text.isNotEmpty())
-                viewflipper.showNext()
-            else
-           {
-               showLongToast("Please select your city",this)
-           }
-        }
+
         btnSubmitDetails.setOnClickListener {
             mEmail = edEmail.text.toString()
-            if(cb_referral_code.isChecked)
-                viewflipper.showNext()
-            else
-                presenter.submitRegisterDetails(mMobileNumber,mEmail,mFirstName,mLastName,mSelectedGradeId,mSelectedCity,mReferralCode)
-        }
-        btnNameSubmit.setOnClickListener {
             mFirstName = edFirstName.text.toString()
             mLastName = edLastName.text.toString()
-            viewflipper.showNext()
+                presenter.submitRegisterDetails(mMobileNumber,mEmail,mFirstName,mLastName,mSelectedGradeId,mSelectedCity,mReferralCode)
         }
-        btnSubmitReferral.setOnClickListener {
+
+
+       /* btnSubmitReferral.setOnClickListener {
             mReferralCode = edReferralCode.text.toString()
             if(edReferralCode.text.isEmpty())
                 showShortToast("Referral code field should not blank",this)
@@ -114,22 +121,15 @@ class RegisterActivity : AppCompatActivity(),RegisterContract.View,IGradeClickLi
                 presenter.validateReferralCode(mySharedPreferences.getIntData(Constants.STUDENT_ID),mReferralCode)
             }
 
-        }
+        }*/
 
-    }
-    override fun updateSchoolSubmitButtonState(state: Boolean) {
-        btnNameSubmit.isEnabled = state
     }
 
 
     override fun name(): Observable<CharSequence> {
         return RxTextView.textChanges(edFirstName).skipInitialValue()
     }
-    override fun onGradeClick(id: Int) {
-        mSelectedGradeId  = gradeList[id].id
-        Log.d(Constants.LOG_TAG,id.toString())
-        viewflipper.showNext()
-    }
+
     private fun injectDependency() {
         val activityComponent = DaggerActivityComponent.builder()
             .activityModule(ActivityModule(this))
@@ -142,20 +142,21 @@ class RegisterActivity : AppCompatActivity(),RegisterContract.View,IGradeClickLi
         Manifest.permission.ACCESS_COARSE_LOCATION
     ) == PackageManager.PERMISSION_GRANTED
     override fun showProgress(status: Boolean) {
-        showLoadingProgress(progressBar,status)
+//        showLoadingProgress(progressBar,status)
     }
 
     override fun emailObservable(): Observable<CharSequence> {
         return RxTextView.textChanges(edEmail).skipInitialValue()
+    }
+    override fun cityNameObserver(): Observable<CharSequence> {
+            return RxTextView.textChanges(tvCity).skipInitialValue()
     }
 
     override fun updateSubmitButton(state: Boolean) {
         btnSubmitDetails.isEnabled = state
     }
 
-    override fun updateNameSubmitButton(state: Boolean) {
-        btnNameSubmit.isEnabled = state
-    }
+
     override fun verifyReferralState(isValid: Boolean) {
         if(isValid)
         {
@@ -199,10 +200,33 @@ class RegisterActivity : AppCompatActivity(),RegisterContract.View,IGradeClickLi
         mSelectedCity = selectedPlace.address!!
         tvCity.text = selectedPlace.address
     }
+
+
     override fun gradeListLoadSucess(gradeListModel: GradeListModel) {
         this.gradeList = gradeListModel.grade_details
-        gvBoards.adapter = GradeListAdapter(this,gradeList,this)
+        gradeAdpter = GradeListAdapter(this,gradeList)
+        gvBoards.adapter = gradeAdpter
+        gvBoards.setOnItemClickListener { parent, view, position, id ->
+            mSelectedGradeId  = gradeList[position].id
+            var textView = view.findViewById<TextView>(R.id.tvGradeNumber)
+            textView.isSelected = true
+            if(previousSelectedGrade!=-1)
+            {
+                var textViewPre = gvBoards.getChildAt(previousSelectedGrade).findViewById<TextView>(R.id.tvGradeNumber)
+                textViewPre.isSelected = false
+            }
+            Log.d(Constants.LOG_TAG,"DFSSDFSDf $position")
+            previousSelectedGrade = position
+            expandBottomSheet()
+        }
+
     }
+
+    private fun expandBottomSheet() {
+        if(bottomSheetBehavior.state != BottomSheetBehavior.STATE_EXPANDED)
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+    }
+
 
     override fun gradeListLoadFailed(msg: String) {
         showLongToast(msg,this)

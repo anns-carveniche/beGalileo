@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">WisdomLeap</string>
     <string name="verify_me">Verify me</string>
+    <string name="send_otp">Send OTP</string>
     <string name="num1">1</string>
     <string name="num2">2</string>
     <string name="num3">3</string>
@@ -79,6 +80,10 @@
     <string name="nav_drawer_close">Close</string>
 
     <string name="month_prompt">Select Month</string>
+    <string name="register_with_us">Register with us</string>
+    <string name="to_find_out_more">to find out more</string>
+    <string name="chapter_count">%1$d Chapters</string>
+    <string name="lesson_count">%1$d Lessons</string>
     <string-array name="month_arrays">
         <item>All</item>
         <item>January</item>

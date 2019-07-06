@@ -28,8 +28,8 @@ class DashboardSubjectListAdapter(private val context: Context, private val cour
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val rowView = inflater.inflate(R.layout.list_item_subject,parent,false)
-        Picasso.with(context).load(URL.WISDOM_LEAP_URL+courseDetail[position].image_url)
-            .into(rowView.ivImageItem);
+       /* Picasso.with(context).load(URL.WISDOM_LEAP_URL+courseDetail[position].image_url)
+            .into(rowView.ivImageItem);*/
         rowView.setOnClickListener {
 
         }

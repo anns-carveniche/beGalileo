@@ -187,9 +187,14 @@ class EnterOtpFragment : Fragment(),EnterOtpContract.View,View.OnClickListener {
         btnEditProfile.setOnClickListener(this)
         tvResendOTP.setOnClickListener(this)
         tvEditMobileNumber.setOnClickListener(this)
-        tvMobileNumber.text = mMobileNumber
+        tvMobileNumber.text = starredMobileNumber(mMobileNumber)
     }
     companion object {
         const val TAG = "EnterOtpFragment"
+    }
+    fun starredMobileNumber(number: String) : String{
+
+        var starredNumber = number.substring(number.length-4,number.length)
+        return "******$starredNumber"
     }
 }

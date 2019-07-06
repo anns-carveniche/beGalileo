@@ -105,6 +105,7 @@ class MobileNumberFragment : Fragment(),MobileNumberContract.View,View.OnClickLi
            tvVerifyMe.isEnabled = it
         }
         countryCodeSelector.setNumberAutoFormattingEnabled(true)
+        countryCodeSelector.showNameCode(true)
     }
     private fun displayMobileNumber(value: String?)
     {

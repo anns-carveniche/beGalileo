@@ -6,18 +6,24 @@
         android:enabled="true"
         android:icon="@drawable/ic_home"
         android:title="Home"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/main_nav_quiz"
         android:enabled="true"
         android:icon="@drawable/ic_quiz"
         android:title="Quiz"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/main_nav_profile"
         android:enabled="true"
         android:icon="@drawable/ic_profile"
         android:title="Profile"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/main_nav_notification"
+        android:enabled="true"
+        android:icon="@drawable/ic_notifications_none"
+        android:title="Notificaitons"
+        app:showAsAction="ifRoom"/>
 
 </menu>

@@ -21,6 +21,7 @@ import com.carveniche.wisdomleap.R
 import com.carveniche.wisdomleap.adapter.ChapterListAdapter
 import com.carveniche.wisdomleap.adapter.DashboardRecentQuizListAdapter
 import com.carveniche.wisdomleap.adapter.DashboardSubjectListAdapter
+import com.carveniche.wisdomleap.adapter.SubjectListAdapter
 import com.carveniche.wisdomleap.contract.DashboardContract
 import com.carveniche.wisdomleap.di.component.DaggerFragmentComponent
 import com.carveniche.wisdomleap.di.module.ContextModule
@@ -88,10 +89,10 @@ class DashboardFragment : Fragment(),DashboardContract.View,IChapterClickListene
     }
 
     private fun initUI() {
-        btn_resume_quiz.setOnClickListener {
+        card_quiz_resume.setOnClickListener {
             resumeQuizActivity()
         }
-        btn_resume_video.setOnClickListener {
+        card_video_resume.setOnClickListener {
             resumeVideoActivity()
         }
     }
@@ -120,7 +121,12 @@ class DashboardFragment : Fragment(),DashboardContract.View,IChapterClickListene
 
 
         this.subjectListData = subjectListModel
-        assignSubjectDatas()
+        gvSubject.adapter = SubjectListAdapter(context!!,subjectListData.course_details)
+        gvSubject.isExpanded = true
+        gvSubject.setOnItemClickListener { parent, view, position, id ->
+            showChapters(subjectListModel.course_details[position].course_id)
+        }
+
         if(!subjectListModel.recent_video.isNullOrEmpty())
         {
             displayRecentVideos(subjectListModel.recent_video)
@@ -188,7 +194,7 @@ class DashboardFragment : Fragment(),DashboardContract.View,IChapterClickListene
 
     }
 
-    private fun assignSubjectDatas() {
+   /* private fun assignSubjectDatas() {
         gl_subject_container.removeAllViews()
         var total = subjectListData.course_details.size
 
@@ -229,7 +235,7 @@ class DashboardFragment : Fragment(),DashboardContract.View,IChapterClickListene
             i++
             c++
         }
-    }
+    }*/
 
     private fun showChapters(selCourserId : Int) {
 

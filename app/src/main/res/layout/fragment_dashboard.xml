@@ -27,6 +27,7 @@
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/wf_color_primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,6 +44,7 @@
 
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -82,92 +84,111 @@
 
                     android:layout_gravity="center"
                     android:background="@color/white"
-                    app:layout_constraintBottom_toTopOf="@+id/gl_subject_container"
-                    app:layout_constraintTop_toTopOf="@+id/gl_subject_container">
+                    app:layout_constraintBottom_toTopOf="@+id/gvSubject"
+                    app:layout_constraintTop_toTopOf="@+id/gvSubject">
 
-                    <GridLayout
-                        android:id="@+id/gl_subject_container"
-                        android:layout_width="0dp"
+
+                    <com.carveniche.wisdomleap.util.ExpandableHeightGridView
+                        android:id="@+id/gvSubject"
+                        android:background="@color/wf_color_primary"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:gravity="center"
+                        android:numColumns="2"
+                        android:verticalSpacing="20dp"
+
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:layout_conversion_absoluteHeight="0dp"
-                        tools:layout_conversion_absoluteWidth="411dp"
-                        tools:layout_conversion_wrapHeight="0"
-                        tools:layout_conversion_wrapWidth="0">
+                        app:layout_constraintTop_toTopOf="parent" />
 
-
-                    </GridLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 <LinearLayout
                     android:id="@+id/ll_in_progress_video_container"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:orientation="vertical"
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal"
                     android:visibility="gone"
-                    tools:visibility="gone">
+                    tools:visibility="visible">
 
                     <TextView
                         android:id="@+id/textView17"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="10dp"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:paddingStart="30dp"
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
-                        android:text="Video InProgress"
-                        android:textSize="@dimen/font_size_medium" />
+                        android:text=" You were \n Watching"
+                        android:textColor="@color/wf_text_color"
+                        android:textSize="@dimen/font_size_medium"
+                        android:textStyle="bold" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_video_resume"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="3dp">
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:orientation="vertical">
 
-                            <ImageView
-                                android:id="@+id/iv_video_inprogress"
-                                android:layout_width="200dp"
-                                android:layout_height="120dp"
-                                android:src="@drawable/ic_quiz_nature" />
-
-                            <Button
-                                android:id="@+id/btn_resume_video"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Resume Video" />
-                        </LinearLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/linearLayout14"
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
+                            <ImageView
+                                android:id="@+id/iv_video_inprogress"
+                                android:layout_width="match_parent"
+                                android:layout_height="150dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/ic_quiz_nature" />
+
                             <TextView
                                 android:id="@+id/tv_video_inprogress"
-                                android:layout_width="0dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="8dp"
-                                android:layout_marginBottom="8dp"
+                                android:layout_alignParentBottom="true"
+                                android:background="@color/white"
                                 android:gravity="center"
                                 android:padding="5dp"
                                 android:text="Quiz Name"
-                                android:textSize="@dimen/font_size_medium"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                android:textColor="@color/wf_text_color"
+                                android:textSize="@dimen/font_size_small" />
 
-                        </androidx.constraintlayout.widget.ConstraintLayout>
+                            <TextView
+                                android:id="@+id/textView24"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@drawable/rounded_alpha_black"
+                                android:paddingStart="10dp"
+                                android:paddingTop="1dp"
+                                android:paddingEnd="10dp"
+                                android:paddingBottom="1dp"
+                                android:text="Resume"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/font_size_small" />
 
-                    </LinearLayout>
+                            <ImageView
+                                android:id="@+id/imageView5"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/ic_play_circle_outline_black_24dp" />
+
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+
 
                 </LinearLayout>
 
@@ -175,68 +196,77 @@
                     android:id="@+id/ll_in_progress_quiz_container"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="30dp"
                     android:gravity="center"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:visibility="gone"
-                    tools:visibility="gone">
+                    tools:visibility="visible">
 
                     <TextView
-                        android:id="@+id/textView16"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="10dp"
+                        android:id="@+id/textView18"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:paddingStart="30dp"
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
-                        android:text="Quiz InProgress"
-                        android:textSize="@dimen/font_size_medium" />
+                        android:text=" You were \n Practicing"
+                        android:textColor="@color/wf_text_color"
+                        android:textSize="@dimen/font_size_medium"
+                        android:textStyle="bold" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_quiz_resume"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="3dp">
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:orientation="vertical">
 
-                            <ImageView
-                                android:id="@+id/iv_quiz_inprogress"
-                                android:layout_width="200dp"
-                                android:layout_height="120dp"
-                                android:src="@drawable/ic_quiz_nature" />
-
-                            <Button
-                                android:id="@+id/btn_resume_quiz"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Resume Quiz" />
-                        </LinearLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/linearLayout15"
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
+                            <ImageView
+                                android:id="@+id/iv_quiz_inprogress"
+                                android:layout_width="match_parent"
+                                android:layout_height="150dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/ic_quiz_nature" />
+
                             <TextView
                                 android:id="@+id/tv_quiz_inprogress"
-                                android:layout_width="0dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="8dp"
-                                android:layout_marginBottom="8dp"
+                                android:layout_alignParentBottom="true"
+                                android:background="@color/white"
                                 android:gravity="center"
                                 android:padding="5dp"
                                 android:text="Quiz Name"
-                                android:textSize="@dimen/font_size_medium"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                android:textColor="@color/wf_text_color"
+                                android:textSize="@dimen/font_size_small" />
 
-                        </androidx.constraintlayout.widget.ConstraintLayout>
+                            <TextView
+                                android:id="@+id/textView24"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@drawable/rounded_alpha_black"
+                                android:paddingStart="10dp"
+                                android:paddingTop="1dp"
+                                android:paddingEnd="10dp"
+                                android:paddingBottom="1dp"
+                                android:text="Resume"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/font_size_small" />
 
-                    </LinearLayout>
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
 
 
                 </LinearLayout>
@@ -289,6 +319,62 @@
                         android:id="@+id/rv_recent_quiz"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="15dp"
+                    android:background="@color/white"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="20dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_quiz_answer" />
+
+                    <TextView
+                        android:id="@+id/textView23"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Play A Quiz"
+                        android:gravity="center_vertical"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="15dp"
+                        android:textColor="@color/wf_text_color"
+                        android:textSize="@dimen/font_size_medium" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="15dp"
+                    android:background="@color/white"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="20dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_quiz_answer" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Share this App"
+                        android:gravity="center_vertical"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="15dp"
+                        android:textColor="@color/wf_text_color"
+                        android:textSize="@dimen/font_size_medium" />
                 </LinearLayout>
 
             </LinearLayout>

@@ -1,8 +1,10 @@
 package com.carveniche.wisdomleap.presenter
 
+import android.util.Log
 import android.view.View
 import com.carveniche.wisdomleap.api.ApiInterface
 import com.carveniche.wisdomleap.contract.RegisterContract
+import com.carveniche.wisdomleap.util.Constants
 import com.carveniche.wisdomleap.util.isValidEmail
 import com.carveniche.wisdomleap.util.showShortToast
 import com.google.android.libraries.places.internal.it
@@ -15,6 +17,7 @@ import io.reactivex.functions.Function
 import io.reactivex.rxkotlin.Observables
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_register.view.*
+import io.reactivex.rxkotlin.Observables.combineLatest as combineLatest1
 
 class RegisterPresenter : RegisterContract.Presenter {
 
@@ -25,18 +28,49 @@ class RegisterPresenter : RegisterContract.Presenter {
 
     override fun subscribe() {
         val emailObservable = view.emailObservable().map(validateEmail())
-        val emailSubscribe = emailObservable.subscribe {
-            view.updateSubmitButton(it)
-        }
+        val cityObservable   = view.cityNameObserver().map(validateCity())
         val nameObservable =view.name().map(isValidName())
         val lastNameObservable  = view.lastName().map(isValidLastName())
+
+
+       /* val nameCombinedCheck  = Observables.combineLatest(
+            nameObservable,
+            emailObservable,
+            lastNameObservable).subscribe {
+            view.updateSubmitButton(it.first && it.second && it.third)
+        }*/
+
         val nameCombinedCheck  = Observables.combineLatest(
             nameObservable,
-            lastNameObservable).subscribe {
-            view.updateNameSubmitButton(it.first && it.second)
+            lastNameObservable)
+        val emailCityCombinedCheck  = Observables.combineLatest(
+            emailObservable,
+            cityObservable)
+
+        val totCombinedCheck  = Observables.combineLatest(
+            nameCombinedCheck,
+            emailCityCombinedCheck).subscribe{
+            var nameCheck = it.first.first && it.second.second
+            var ecCheck = it.second.first && it.second.second
+            view.updateSubmitButton(nameCheck && ecCheck)
         }
-        disposable.add(nameCombinedCheck)
-        disposable.add(emailSubscribe)
+
+
+        disposable.add(totCombinedCheck)
+
+    }
+
+    private fun validGrade(): Function<in Int, out Boolean>? {
+        return Function {
+            it!=-1
+        }
+    }
+
+
+    private fun validateCity(): Function<in CharSequence, out Boolean>? {
+        return Function {
+            it.length > 2
+        }
     }
 
 

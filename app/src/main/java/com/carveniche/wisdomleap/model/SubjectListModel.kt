@@ -41,7 +41,10 @@ data class InprogressVideo(
 
 data class CourseDetail(
     val course_id: Int,
-    val image_url: String
+    val image_url: String,
+    val chapters_count : Int,
+    val lessons_count : Int,
+    val name: String
 )
 
 data class InprogressPractice(
