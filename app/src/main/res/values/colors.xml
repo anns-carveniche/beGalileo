@@ -55,6 +55,7 @@
     //Wireframe Colors
     <color name="wf_color_primary">#F5F5F5</color>
     <color name="wf_text_color">#3B3837</color>
+    <color name="wf_color_secondary">#EEEEEE</color>
 
 
 

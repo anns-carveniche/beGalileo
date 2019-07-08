@@ -97,13 +97,15 @@ class ListChaptersFragment : Fragment(),ListChapterContract.View,IChapterClickLi
     }
     override fun onLoadDataSucess(chapterList: ChapterListModel) {
         this.chapterConceptList = chapterList.chapter_concepts
-        chapterConceptList.forEach {
-            displayData(it)
+
+        chapterConceptList.forEachIndexed { index, chapterConcept ->
+            displayData(index+1,chapterConcept)
+
         }
 
     }
 
-    private fun displayData(chapterConcept : ChapterConcept) {
+    private fun displayData(index : Int,chapterConcept : ChapterConcept) {
         val inflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         var customView = inflater.inflate(R.layout.list_item_chapter_video,null)
 
@@ -111,7 +113,7 @@ class ListChaptersFragment : Fragment(),ListChapterContract.View,IChapterClickLi
         var tvHeader = customView.findViewById<TextView>(R.id.tvHeader)
         var btnTakeTest = customView.findViewById<Button>(R.id.btnTakeTest)
 
-        tvHeader.text = chapterConcept.chapter_name
+        tvHeader.text = "$index. "+chapterConcept.chapter_name
 
         val firstManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         rvChapter.layoutManager = firstManager

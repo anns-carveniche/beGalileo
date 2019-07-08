@@ -250,7 +250,7 @@
                                 android:textSize="@dimen/font_size_small" />
 
                             <TextView
-                                android:id="@+id/textView24"
+                                android:id="@+id/textView25"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="5dp"
@@ -276,10 +276,10 @@
                     android:id="@+id/ll_recently_videos_container"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
                     android:gravity="center"
+                    android:orientation="vertical"
                     android:visibility="gone"
-                    tools:visibility="gone">
+                    tools:visibility="visible">
 
                     <TextView
                         android:id="@+id/textView6"
@@ -288,11 +288,14 @@
                         android:paddingStart="10dp"
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
-                        android:text="Recent Videos"
+                        android:textStyle="bold"
+                        android:textColor="@color/wf_text_color"
+                        android:text="Recent Watched Videos"
                         android:textSize="@dimen/font_size_medium" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_recent_videos"
+                        android:background="@color/wf_color_primary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -312,7 +315,9 @@
                         android:paddingStart="10dp"
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
-                        android:text="Recent Quiz"
+                        android:textStyle="bold"
+                        android:textColor="@color/wf_text_color"
+                        android:text="Recently Practised"
                         android:textSize="@dimen/font_size_medium" />
 
                     <androidx.recyclerview.widget.RecyclerView

@@ -6,6 +6,7 @@ import android.animation.AnimatorSet
 import android.animation.ValueAnimator
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
+import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +28,7 @@ import com.carveniche.wisdomleap.view.activity.MultiPlayerQuizActivity
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.fragment_multiplayer_search.*
 import kotlinx.android.synthetic.main.fragment_profile_home.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import kotlin.random.Random
 
@@ -77,8 +79,9 @@ class MultiplayerSearchFragment : Fragment(),MultiplayerSearchContract.View {
             multiPlayerQuizActivity.showMultiplayerQuizPlay(mOpponentName,randomAvatarIndex)
         }
 
-        tv_player_search_header.text = "Matching Player"
+        tv_player_search_header.text = "Searching for Opponent"
         tv_player_name.text = mUserName
+        ll_game_counting_container.visibility = View.GONE
     }
 
     override fun randomPlayerAnimation(state: Boolean) {
@@ -110,7 +113,7 @@ class MultiplayerSearchFragment : Fragment(),MultiplayerSearchContract.View {
         tv_random_player_coins.text = "$coins Coins"
         opponentCoins = coins
         mOpponentName = name
-        tv_player_search_header.text = "Matching Found"
+        tv_player_search_header.text = "Opponent Found"
 
         tv_random_player_coins.text = "$userCoins Coins"
         coinStackFromUser()
@@ -143,6 +146,7 @@ class MultiplayerSearchFragment : Fragment(),MultiplayerSearchContract.View {
 
             override fun onAnimationEnd(animation: Animator?) {
                btn_play.isEnabled = true
+                startCountDownTimer()
 
             }
 
@@ -158,6 +162,22 @@ class MultiplayerSearchFragment : Fragment(),MultiplayerSearchContract.View {
         animatorSet.start()
     }
 
+    fun startCountDownTimer()
+    {
+        ll_game_counting_container.visibility = View.VISIBLE
+        val timer = object : CountDownTimer(11000,1000) {
+            override fun onFinish() {
+                tv_game_counter.text = "0"
+                multiPlayerQuizActivity.showMultiplayerQuizPlay(mOpponentName,randomAvatarIndex)
+            }
+
+            override fun onTick(millisUntilFinished: Long) {
+                tv_game_counter.text = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished).toString()
+            }
+
+        }
+        timer.start()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

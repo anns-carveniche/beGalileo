@@ -5,7 +5,7 @@
     android:id="@+id/clContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryDarkColor"
+    android:background="@color/wf_color_primary"
     tools:context=".view.fragment.MultiplayerSearchFragment">
 
     <LinearLayout
@@ -23,12 +23,15 @@
             android:id="@+id/tv_player_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:ellipsize="none"
             android:gravity="center"
             android:padding="5dp"
-            android:text=""
-            android:ellipsize="none"
             android:scrollHorizontally="false"
-            android:textSize="@dimen/font_size_medium" />
+            android:text="User Name"
+            android:textColor="@color/wf_text_color"
+            android:textSize="@dimen/font_size_medium"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/iv_Player"
@@ -40,9 +43,11 @@
             android:id="@+id/tv_player_coins"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:padding="5dp"
-            android:text=""
+            android:text="User Coins"
+            android:textColor="@color/wf_text_color"
 
             android:textSize="@dimen/font_size_medium" />
     </LinearLayout>
@@ -54,36 +59,41 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="32dp"
         android:orientation="vertical"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout17">
+        app:layout_constraintStart_toEndOf="@+id/linearLayout17"
+        tools:visibility="visible">
 
         <TextView
             android:id="@+id/tv_random_player_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:ellipsize="none"
             android:gravity="center"
             android:padding="5dp"
-            android:text=""
-            android:ellipsize="none"
             android:scrollHorizontally="false"
-            android:textSize="@dimen/font_size_medium" />
+            android:text=""
+            android:textColor="@color/wf_text_color"
+            android:textSize="@dimen/font_size_medium"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/iv_random_Player"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tv_random_player_coins"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:padding="5dp"
             android:text=""
+            android:textColor="@color/wf_text_color"
             android:textSize="@dimen/font_size_medium" />
     </LinearLayout>
 
@@ -102,8 +112,10 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:text="0 Coins"
+        android:textColor="@color/wf_text_color"
         android:textSize="@dimen/font_size_large"
         android:textStyle="bold"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline7" />
@@ -115,10 +127,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Play"
         android:background="@color/quantum_orange"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Play"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_total_coins" />
@@ -131,11 +142,61 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:text=""
+        android:textColor="@color/wf_text_color"
         android:textSize="@dimen/font_size_medium"
         android:textStyle="bold"
-        android:text=""
         app:layout_constraintBottom_toTopOf="@+id/linearLayout17"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_game_counting_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_play">
+
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Game Starts In..."
+            android:textColor="@color/wf_text_color"
+            android:textSize="@dimen/font_size_small"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_game_counter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="10"
+            android:textColor="@color/wf_text_color"
+            android:textSize="32dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Seconds"
+            android:textColor="@color/wf_text_color"
+            android:textSize="@dimen/font_size_small"
+            android:textStyle="bold" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
