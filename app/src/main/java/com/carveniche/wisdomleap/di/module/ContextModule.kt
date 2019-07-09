@@ -7,10 +7,10 @@ import javax.inject.Singleton
 
 @Module
 class ContextModule(private var context: Context) {
-    @Provides
-    @Singleton
-    fun provideContext() :Context
-    {
-        return context
-    }
+  @Provides
+  @Singleton
+  fun provideContext() :Context
+  {
+    return context
+  }
 }

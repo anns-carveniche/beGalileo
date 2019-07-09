@@ -13,10 +13,10 @@ import javax.inject.Singleton
 @Module
 class SharedPreferenceModule {
 
-    @Provides
-    @Singleton
-    @Inject
-    fun provideSharedPreferences(context: Context): SharedPreferences {
-        return context.getSharedPreferences(Constants.MY_PREFS, Context.MODE_PRIVATE)
-    }
+  @Provides
+  @Singleton
+  @Inject
+  fun provideSharedPreferences(context: Context): SharedPreferences {
+    return context.getSharedPreferences(Constants.MY_PREFS, Context.MODE_PRIVATE)
+  }
 }
