@@ -10,6 +10,10 @@ import android.widget.Toast
 
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
+import android.net.NetworkInfo
+import android.net.ConnectivityManager
+
+
 
 fun showLongToast(msg:String,context:Context)
 {
@@ -49,6 +53,18 @@ fun Random.getInt(range: IntRange):Int{
 fun getPercentage(totValue:Float,percentValue:Float) : Float
 {
     return (totValue/100)*percentValue
+}
+
+fun isNetworkAvailable(context: Context): Boolean {
+    // Get Connectivity Manager class object from Systems Service
+    val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+    // Get Network Info from connectivity Manager
+    val networkInfo = cm.activeNetworkInfo
+
+    // if no network is available networkInfo will be null
+    // otherwise check if we are connected
+    return networkInfo != null && networkInfo.isConnected
 }
 
 

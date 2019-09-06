@@ -5,10 +5,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:minHeight="?android:attr/listPreferredItemHeightSmall"
     android:orientation="vertical"
-    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+
     >
 
     <ImageView
@@ -22,11 +20,12 @@
         android:id="@+id/tvHomeItemName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:gravity="center"
         android:padding="5dp"
         android:text="TextView"
-        android:textSize="@dimen/font_size_medium"
         android:textColor="@color/secondaryLightColor"
+        android:textSize="@dimen/font_size_medium"
         android:textStyle="bold" />
 
 </LinearLayout>

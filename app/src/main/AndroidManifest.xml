@@ -21,7 +21,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:targetApi="n">
-        <activity android:name=".ui.activities.PracticeMathActivity"></activity>
+        <activity android:name=".ui.activities.LiveClassActivity"
+            android:screenOrientation="landscape"
+            />
+        <activity
+            android:name=".ui.activities.PracticeMathActivity"
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".ui.activities.GameResultActivity"
             android:screenOrientation="landscape"></activity>

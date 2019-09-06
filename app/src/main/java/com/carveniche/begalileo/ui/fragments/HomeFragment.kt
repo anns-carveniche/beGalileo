@@ -15,11 +15,9 @@ import com.carveniche.begalileo.adapters.HomeItemListAdapter
 import com.carveniche.begalileo.di.component.DaggerFragmentComponent
 import com.carveniche.begalileo.di.module.ContextModule
 import com.carveniche.begalileo.di.module.Fragmentmodule
-import com.carveniche.begalileo.ui.activities.AddChildActivity
-import com.carveniche.begalileo.ui.activities.ConceptActivity
 import com.carveniche.begalileo.contract.HomeContract
 import com.carveniche.begalileo.contract.MainContract
-import com.carveniche.begalileo.ui.activities.UserLocationActivity
+import com.carveniche.begalileo.ui.activities.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 import javax.inject.Inject
@@ -61,12 +59,14 @@ class HomeFragment : Fragment(), HomeContract.View {
             Constants.ADD_CHILD->openAddChild()
             Constants.FIND_CENTER->openFindCenter()
             Constants.CURRICULAM->openCurriculum()
-            Constants.MY_PROFILE->openMyProfile()
+            Constants.LIVE_VIDEO->openMyProfile()
+            Constants.PRACTICE_MATH->openPracticeMathActivity()
         }
     }
 
     private fun openMyProfile() {
-        Log.d(Constants.LOG_TAG, Constants.MY_PROFILE)
+       var intentLiveVideo = Intent(context,LiveClassActivity::class.java)
+        startActivity(intentLiveVideo)
     }
 
     private fun openCurriculum() {
@@ -82,6 +82,12 @@ class HomeFragment : Fragment(), HomeContract.View {
     private fun openAddChild() {
        var intentAddChild = Intent(context, AddChildActivity::class.java)
         startActivity(intentAddChild)
+    }
+
+    private fun openPracticeMathActivity()
+    {
+        var intentPracticeMath = Intent(context,PracticeMathActivity::class.java)
+        startActivity(intentPracticeMath)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

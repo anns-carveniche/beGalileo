@@ -20,6 +20,7 @@ class Constants {
         const val FIND_CENTER = "Find Center"
         const val CURRICULAM = "Curriculum"
         const val MY_PROFILE = "My Profile"
+        const val LIVE_VIDEO = "Live Class"
         const val NEARBY_CENTERS = "NEARBY_CENTERS"
         const val PLAYERS = "PLAYERS"
         const val LEVEL_ID = "LEVEL_ID"
@@ -27,13 +28,18 @@ class Constants {
         const val QuestionAnswerLog = "QuestionAnswerLog"
         const val COMPUTER_SCORE = "COMPUTER_SCORE"
         const val PRACTICE_MATH = "Practice Math"
+        const val ADD = "ADD"
+        const val SUBTRACT = "SUBTRACT"
+        const val MULTIPLY = "MULTIPLY"
+        const val DIVIDE = "DIVIDE"
+
 
         var HOME_ITEM_NAME_LIST =  listOf<String>(
             ADD_CHILD,
             FIND_CENTER,
             CURRICULAM,
             PRACTICE_MATH,
-            MY_PROFILE
+            LIVE_VIDEO
         )
         var HOME_ITEM_IMAGE_LIST = listOf<Int>(
             R.drawable.ic_add_child,
