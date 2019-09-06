@@ -7,13 +7,72 @@
     android:background="@color/white"
     tools:context=".ui.activities.LiveClassActivity">
 
-    <WebView
-        android:id="@+id/webView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+    <FrameLayout
+        android:id="@+id/subscriber_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/iv_video_cam"
+        android:layout_width="@dimen/video_icon"
+        android:layout_height="@dimen/video_icon"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/iv_call_end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/publisher_container"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_videocam_on" />
+
+    <ImageView
+        android:id="@+id/iv_mic"
+        android:layout_width="@dimen/video_icon"
+        android:layout_height="@dimen/video_icon"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/publisher_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/publisher_container"
+        app:layout_constraintTop_toBottomOf="@+id/iv_call_end"
+        app:srcCompat="@drawable/ic_mic_on" />
+
+    <ImageView
+        android:id="@+id/iv_call_end"
+        android:layout_width="@dimen/video_icon"
+        android:layout_height="@dimen/video_icon"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/publisher_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/publisher_container"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_call_end_red_24dp" />
+
+    <FrameLayout
+        android:id="@+id/publisher_container"
+        android:layout_width="@dimen/video_view_mini"
+        android:layout_height="@dimen/video_view_mini"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="#FFFFFF"
+        android:padding="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -40,4 +40,5 @@
     <string name="ComputerScore">Computer : %1$d</string>
     <string name="YourScore">You : %1$d</string>
     <string name="unable_to_fetch_data">Unable to fetch data please try again</string>
+    <string name="video_audio_permission">This app needs access to your camera and mic to make video calls</string>
 </resources>

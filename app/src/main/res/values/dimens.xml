@@ -4,4 +4,6 @@
     <dimen name="font_size_medium">20sp</dimen>
     <dimen name="font_size_large">30sp</dimen>
     <dimen name="practice_math_button_margin">4dp</dimen>
+    <dimen name="video_icon">75dp</dimen>
+    <dimen name="video_view_mini">100dp</dimen>
 </resources>
