@@ -18,27 +18,55 @@
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="next">Next</string>
-    <string name="unknown_error">Something Went Wrong Please try again</string>
     <string name="school_city">School City</string>
     <string name="school_name">School name</string>
-    <string name="latitude_label">Latitude: %f</string>
-    <string name="longitude_label">Longitude: %f</string>
-    <string name="NO_LOCATION_DETECTED">No Location Detected</string>
-    <string name="permission_denied_explanation">
-        Permission was denied, but is needed for core functionality.
-    </string>
     <string name="permission_rationale">
         Location permission is needed for core functionality
     </string>
-    <string name="settings">Settings</string>
     <string name="place_api_key">AIzaSyCLJ8eLdOh0HezxlyyKDRLCkQSCrmQSsE4</string>
     <string name="search_area_or_place_or_street_name">Search Area or Place or Street Name</string>
 
+
+    <string name="action_settings">Settings</string>
+
+    <string name="title_settings_dialog">Permissions Required</string>
+    <string name="rationale_video_app">This app needs access to your camera and mic to make video calls</string>
+    <string name="rationale_ask_again">This app may not work correctly without the requested permissions. Open the app settings screen to modify app permissions.</string>
+
+    <string name="setting">Settings</string>
+    <string name="cancel">Cancel</string>
+
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="level_string_num1">Level 1</string>
     <string name="ComputerScore">Computer : %1$d</string>
     <string name="YourScore">You : %1$d</string>
     <string name="unable_to_fetch_data">Unable to fetch data please try again</string>
     <string name="video_audio_permission">This app needs access to your camera and mic to make video calls</string>
+
+
+    <item name="subscriber_1" type="id"/>
+    <item name="subscriber_2" type="id"/>
+    <item name="subscriber_3" type="id"/>
+    <item name="subscriber_4" type="id"/>
+    <item name="subscriber_5" type="id"/>
+    <item name="subscriber_6" type="id"/>
+    <item name="subscriber_7" type="id"/>
+    <item name="subscriber_8" type="id"/>
+    <item name="subscriber_9" type="id"/>
+    <item name="subscriber_10" type="id"/>
+
+
+    <array name="subscriber_view_ids">
+        <item>@id/subscriber_1</item>
+        <item>@id/subscriber_2</item>
+        <item>@id/subscriber_3</item>
+        <item>@id/subscriber_4</item>
+        <item>@id/subscriber_5</item>
+        <item>@id/subscriber_6</item>
+        <item>@id/subscriber_7</item>
+        <item>@id/subscriber_8</item>
+        <item>@id/subscriber_9</item>
+        <item>@id/subscriber_10</item>
+    </array>
+
 </resources>

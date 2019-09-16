@@ -30,6 +30,9 @@ android {
     repositories {
         mavenCentral()
     }
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
+    }
 }
 
 dependencies {
@@ -108,5 +111,11 @@ dependencies {
 
     //CircleImageView
     implementation 'de.hdodenhof:circleimageview:3.0.1'
+
+    //Signature Pad
+    implementation 'com.github.gcacace:signature-pad:1.2.1'
+
+    //Annotation Opentok
+    implementation 'com.opentok.android:opentok-accelerator-annotation:1.0.1'
 
 }

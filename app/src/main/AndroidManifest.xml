@@ -20,6 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
+        tools:replace="android:theme"
         tools:targetApi="n">
         <activity android:name=".ui.activities.LiveClassActivity"
             android:screenOrientation="landscape"

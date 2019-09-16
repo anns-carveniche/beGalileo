@@ -4,6 +4,11 @@
     <dimen name="font_size_medium">20sp</dimen>
     <dimen name="font_size_large">30sp</dimen>
     <dimen name="practice_math_button_margin">4dp</dimen>
-    <dimen name="video_icon">75dp</dimen>
+    <dimen name="video_icon">50dp</dimen>
     <dimen name="video_view_mini">100dp</dimen>
+
+    <dimen name="message_history_height">120dp</dimen>
+    <dimen name="message_history_vertical_margin">8dp</dimen>
+    <dimen name="message_vertical_margin">1dp</dimen>
+    <dimen name="message_horizontal_margin">2dp</dimen>
 </resources>
