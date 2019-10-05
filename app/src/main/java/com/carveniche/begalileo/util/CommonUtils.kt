@@ -10,9 +10,17 @@ import android.widget.Toast
 
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
-import android.net.NetworkInfo
 import android.net.ConnectivityManager
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.os.Environment
 
+import java.io.File
+import java.io.FileOutputStream
+import android.view.ViewGroup
+import android.webkit.WebSettings
+import android.widget.ProgressBar
+import com.carveniche.begalileo.R
 
 
 fun showLongToast(msg:String,context:Context)
@@ -66,6 +74,134 @@ fun isNetworkAvailable(context: Context): Boolean {
     // otherwise check if we are connected
     return networkInfo != null && networkInfo.isConnected
 }
+
+fun loadBitmapFromView(v: View): Bitmap {
+    if (v.measuredHeight <= 0) {
+        v.measure(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        val b = Bitmap.createBitmap(v.measuredWidth, v.measuredHeight, Bitmap.Config.ARGB_8888)
+        val c = Canvas(b)
+        v.layout(0, 0, v.measuredWidth, v.measuredHeight)
+        v.draw(c)
+        return b
+    }
+    else
+    {
+        val b =
+            Bitmap.createBitmap(v.measuredWidth, v.measuredHeight, Bitmap.Config.ARGB_8888)
+        val c = Canvas(b)
+        v.layout(v.left, v.top, v.right, v.bottom)
+        v.draw(c)
+        return b
+    }
+
+}
+
+
+ fun SaveImage(finalBitmap: Bitmap) {
+
+    val root = Environment.getExternalStorageDirectory().absolutePath
+    val myDir = File("$root/saved_images")
+    myDir.mkdirs()
+    var currentTime = Calendar.getInstance().time
+    val fname = "Image ${currentTime.time}.png"
+    val file = File(myDir, fname)
+    if (file.exists()) file.delete()
+    try {
+        val out = FileOutputStream(file)
+        finalBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out)
+        out.flush()
+        out.close()
+
+
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+
+}
+
+fun showLoadingProgress(progressBar : ProgressBar, status : Boolean)
+{
+    progressBar.bringToFront()
+    if(status)
+        progressBar.visibility = View.VISIBLE
+    else
+        progressBar.visibility = View.GONE
+}
+
+fun getHtmlFormaatedQuestionData(data : String) : String
+{
+    return ("<html><head>"
+            + "<style type=\"text/css\">"
+            + "body{color: #ffffff;  text-align:center; font-size:30px; vertical-align:middle; }"
+            + "img{ width : 50px }"
+            + "</style></head>"
+            + "<body>"
+            + data
+            + "</body></html>")
+}
+
+fun setWebSettingsQuiz(wvSettings: WebSettings,context: Context)
+{
+    wvSettings.defaultFontSize =  context.resources.getDimension(R.dimen.font_size_medium).toInt()
+    wvSettings.loadWithOverviewMode = true
+    wvSettings.useWideViewPort  = true
+}
+
+/*
+private fun storeImage(context: Context,image: Bitmap) {
+    val pictureFile = getOutputMediaFile()
+    if (pictureFile == null) {
+        Log.d(
+            Constants.LOG_TAG,
+            "Error creating media file, check storage permissions: "
+        )// e.getMessage());
+        return
+    }
+    try {
+        val fos = FileOutputStream(pictureFile)
+        image.compress(Bitmap.CompressFormat.PNG, 90, fos)
+        fos.close()
+    } catch (e: FileNotFoundException) {
+        Log.d(Constants.LOG_TAG, "File not found: " + e.message)
+    } catch (e: IOException) {
+        Log.d(Constants.LOG_TAG, "Error accessing file: " + e.message)
+    }
+
+}
+private fun getOutputMediaFile(context: Context): File? {
+ // To be safe, you should check that the SDCard is mounted
+    // using Environment.getExternalStorageState() before doing this.
+    var externalPath = getExternalStorageDirectory().absolutePath
+    */
+/*val mediaStorageDir = File(
+        Environment.getExternalStorageDirectory()
+    + "/Android/data/"
+    + context.packageName
+    + "/Files"
+    )*//*
+
+
+
+
+ // This location works best if you want the created images to be shared
+    // between applications and persist after your app has been uninstalled.
+
+    // Create the storage directory if it does not exist
+    if (!mediaStorageDir.exists())
+{
+if (!mediaStorageDir.mkdirs())
+{
+return null
+}
+}
+ // Create a media file name
+    val timeStamp = SimpleDateFormat("ddMMyyyy_HHmm").format(Date())
+val mediaFile:File
+val mImageName = "MI_$timeStamp.png"
+mediaFile = File(mediaStorageDir.getPath() + File.separator + mImageName)
+return mediaFile
+}
+*/
 
 
 

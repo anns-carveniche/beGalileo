@@ -118,4 +118,13 @@ dependencies {
     //Annotation Opentok
     implementation 'com.opentok.android:opentok-accelerator-annotation:1.0.1'
 
+    //AWS
+    implementation 'com.amazonaws:aws-android-sdk-s3:2.2.+'
+    implementation 'com.amazonaws:aws-android-sdk-cognito:2.2.+'
+    implementation 'com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.2.+'
+
+    //Picaso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    implementation 'com.github.nikartm:image-support:1.0.5'
 }

@@ -14,5 +14,6 @@
     <color name="textview_disabled">#9e9e9e</color>
     <color name="bg_video_icon">#DCE2DB</color>
     <color name="color_blue_light">#0093D1</color>
+    <color name="question_frame">#C0000000</color>
 
 </resources>

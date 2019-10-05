@@ -23,4 +23,7 @@ interface FragmentComponent {
     fun inject(computerPlayer: ComputerPlayer)
     fun inject(gameLevelFragment: GameLevelFragment)
     fun inject(practiceMathHomeFragment: PracticeMathHomeFragment)
+    fun inject(quizHomeFragment: QuizHomeFragment)
+    fun inject(quizPlayFragment: QuizPlayFragment)
+    fun inject(quizResultFragment: QuizResultFragment)
 }

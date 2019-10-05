@@ -27,11 +27,17 @@ class Constants {
         const val COMPUTER = "computer"
         const val QuestionAnswerLog = "QuestionAnswerLog"
         const val COMPUTER_SCORE = "COMPUTER_SCORE"
-        const val PRACTICE_MATH = "Practice Math"
+        const val PRACTICE_MATH = "Speed Math"
         const val ADD = "ADD"
+        const val ANDROID_SCHEMA = "http://schemas.android.com/apk/res/android"
         const val SUBTRACT = "SUBTRACT"
         const val MULTIPLY = "MULTIPLY"
         const val DIVIDE = "DIVIDE"
+        const val FONT_ROBOTO = "fonts/Roboto/Roboto-Black.ttf"
+
+        const val  QUESTION_TYPE_SELECT_CHOICE = "selectchoice"
+        const val  QUESTION_TYPE_DRAG_DROP = "dragdrop"
+        const val  QUESTION_TYPE_KEYING = "keying"
 
 
         var HOME_ITEM_NAME_LIST =  listOf<String>(

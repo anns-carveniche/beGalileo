@@ -18,12 +18,9 @@ import javax.inject.Inject
 
 class PracticeMathHomeFragment : Fragment(),PracticeMathHomeContract.View,View.OnClickListener {
 
-
-
     @Inject lateinit var presenter : PracticeMathHomeContract.Presenter
     private lateinit var rootView : View
-    private var selectedNumberList = mutableListOf<Int>()
-    private var selectedOperation = mutableListOf<String>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,23 +41,6 @@ class PracticeMathHomeFragment : Fragment(),PracticeMathHomeContract.View,View.O
 
     private fun initUI() {
 
-        btnNumber1.setOnClickListener(this)
-        btnNumber2.setOnClickListener(this)
-        btnNumber3.setOnClickListener(this)
-        btnNumber4.setOnClickListener(this)
-        btnNumber5.setOnClickListener(this)
-        btnNumber6.setOnClickListener(this)
-        btnNumber7.setOnClickListener(this)
-        btnNumber8.setOnClickListener(this)
-        btnNumber9.setOnClickListener(this)
-        btnNumber10.setOnClickListener(this)
-        btnNumber11.setOnClickListener(this)
-        btnNumber12.setOnClickListener(this)
-        btnPlus.setOnClickListener(this)
-        btnMinus.setOnClickListener(this)
-        btnMultiplication.setOnClickListener(this)
-        btnDivision.setOnClickListener(this)
-
     }
 
     private fun injectDependency() {
@@ -78,49 +58,11 @@ class PracticeMathHomeFragment : Fragment(),PracticeMathHomeContract.View,View.O
     }
     override fun onClick(v: View?) {
 
-        when(v!!.id)
-        {
-            R.id.btnNumber1-> onNumberClick(1,v.isActivated,v)
-            R.id.btnNumber2-> onNumberClick(2,v.isActivated,v)
-            R.id.btnNumber3-> onNumberClick(3,v.isActivated,v)
-            R.id.btnNumber4-> onNumberClick(4,v.isActivated,v)
-            R.id.btnNumber5-> onNumberClick(5,v.isActivated,v)
-            R.id.btnNumber6-> onNumberClick(6,v.isActivated,v)
-            R.id.btnNumber7-> onNumberClick(7,v.isActivated,v)
-            R.id.btnNumber8-> onNumberClick(8,v.isActivated,v)
-            R.id.btnNumber9-> onNumberClick(9,v.isActivated,v)
-            R.id.btnNumber10-> onNumberClick(10,v.isActivated,v)
-            R.id.btnNumber11-> onNumberClick(11,v.isActivated,v)
-            R.id.btnNumber12-> onNumberClick(12,v.isActivated,v)
-            R.id.btnPlus->onOperatorClick(Constants.ADD,v.isActivated,v)
-            R.id.btnMinus->onOperatorClick(Constants.SUBTRACT,v.isActivated,v)
-            R.id.btnMultiplication->onOperatorClick(Constants.MULTIPLY,v.isActivated,v)
-            R.id.btnDivision->onOperatorClick(Constants.DIVIDE,v.isActivated,v)
-        }
+
 
     }
 
-    private fun onOperatorClick(operation: String, activated: Boolean, v: View) {
-        v.isActivated = !activated
-        if(!activated)
-            selectedOperation.add(operation)
-        else
-            selectedOperation.remove(operation)
-        Log.d(Constants.LOG_TAG,selectedOperation.toString())
-    }
 
-    private fun onNumberClick(number : Int,activated : Boolean,view : View) {
-        view.isActivated = !activated
-        if(!activated)
-        {
-            //add number to array
-            selectedNumberList.add(number)
-        }
-        else
-        {
-            //remove number from array
-            selectedNumberList.remove(number)
-        }
-        Log.d(Constants.LOG_TAG,"Number $selectedNumberList")
-    }
+
+
 }

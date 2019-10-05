@@ -108,6 +108,20 @@ class Fragmentmodule  {
         return PracticeMathHomePresenter()
     }
 
+    @Provides
+    fun provideQuizHomePresenter() : QuizHomeContract.Presenter{
+        return QuizHomePresenter()
+    }
+
+    @Provides
+    fun provideQuizPlayPresenter() : QuizPlayContract.Presenter{
+        return QuizPlayPresenter()
+    }
+
+    @Provides
+    fun provideQuizResultPresenter() : QuizResultContract.Presenter{
+        return QuizResultPresenter()
+    }
 
 
 

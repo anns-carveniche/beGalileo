@@ -10,6 +10,6 @@ class BaseContract {
 
     interface View
     {
-        fun showProgress(boolean: Boolean)
+        fun showProgress(show: Boolean)
     }
 }

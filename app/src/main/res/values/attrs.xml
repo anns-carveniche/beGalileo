@@ -3,4 +3,7 @@
     <declare-styleable name="DonutChart">
         <attr name="radius" format="dimension"/>
     </declare-styleable>
+    <declare-styleable name="DoodleCanvas">
+        <attr name="pen_color" format="color"/>
+    </declare-styleable>
 </resources>

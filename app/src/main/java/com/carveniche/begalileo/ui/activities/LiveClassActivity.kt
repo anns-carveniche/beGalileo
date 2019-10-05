@@ -13,6 +13,7 @@ import pub.devrel.easypermissions.EasyPermissions
 import pub.devrel.easypermissions.AfterPermissionGranted
 
 import android.opengl.GLSurfaceView
+import android.view.MotionEvent
 import android.view.View
 import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
@@ -35,6 +36,7 @@ import android.view.animation.AnimationUtils
 
 import com.carveniche.begalileo.adapters.SignalMessageAdapter
 import com.carveniche.begalileo.models.SignalMessage
+
 import com.carveniche.begalileo.util.OpenTokConfig
 
 import com.tokbox.android.annotations.utils.AnnotationsVideoRenderer
@@ -115,6 +117,7 @@ class LiveClassActivity : AppCompatActivity(),
         ws.javaScriptEnabled = true
         ws.allowFileAccess = true
 
+        wb_whiteboard.setOnTouchListener { v, event -> (event!!.action == MotionEvent.ACTION_MOVE); }
         wb_whiteboard.loadData(boardHtml,"text/html","UTF-8")
     }
 

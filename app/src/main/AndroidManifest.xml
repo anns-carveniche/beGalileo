@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <dist:module dist:instant="true" />
 
@@ -22,25 +24,39 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:replace="android:theme"
         tools:targetApi="n">
-        <activity android:name=".ui.activities.LiveClassActivity"
-            android:screenOrientation="landscape"
-            />
+        <activity android:name=".ui.activities.QuizActivity"
+            android:screenOrientation="landscape">
+
+
+        </activity>
+        <activity
+            android:name=".ui.activities.LiveClassActivity"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".ui.activities.PracticeMathActivity"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.activities.GameResultActivity"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".ui.activities.SpeedMathActivity"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape">
+
+        </activity>
         <activity
             android:name=".ui.activities.NearbyCenterActivity"
             android:exported="true"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".ui.activities.ConceptActivity"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -64,14 +80,7 @@
         <activity android:name=".activities.payment.PaymentActivity" />
         <activity
             android:name=".ui.activities.MainActivity"
-            android:screenOrientation="landscape" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:screenOrientation="landscape"></activity>
 
         <meta-data
             android:name="com.razorpay.ApiKey"

@@ -42,18 +42,19 @@
     <string name="YourScore">You : %1$d</string>
     <string name="unable_to_fetch_data">Unable to fetch data please try again</string>
     <string name="video_audio_permission">This app needs access to your camera and mic to make video calls</string>
+    <string name="write_permission">This app needs write to storage permission</string>
 
 
-    <item name="subscriber_1" type="id"/>
-    <item name="subscriber_2" type="id"/>
-    <item name="subscriber_3" type="id"/>
-    <item name="subscriber_4" type="id"/>
-    <item name="subscriber_5" type="id"/>
-    <item name="subscriber_6" type="id"/>
-    <item name="subscriber_7" type="id"/>
-    <item name="subscriber_8" type="id"/>
-    <item name="subscriber_9" type="id"/>
-    <item name="subscriber_10" type="id"/>
+    <item name="subscriber_1" type="id" />
+    <item name="subscriber_2" type="id" />
+    <item name="subscriber_3" type="id" />
+    <item name="subscriber_4" type="id" />
+    <item name="subscriber_5" type="id" />
+    <item name="subscriber_6" type="id" />
+    <item name="subscriber_7" type="id" />
+    <item name="subscriber_8" type="id" />
+    <item name="subscriber_9" type="id" />
+    <item name="subscriber_10" type="id" />
 
 
     <array name="subscriber_view_ids">
@@ -68,5 +69,8 @@
         <item>@id/subscriber_9</item>
         <item>@id/subscriber_10</item>
     </array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

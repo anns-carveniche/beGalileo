@@ -86,7 +86,7 @@ class HomeFragment : Fragment(), HomeContract.View {
 
     private fun openPracticeMathActivity()
     {
-        var intentPracticeMath = Intent(context,PracticeMathActivity::class.java)
+        var intentPracticeMath = Intent(context,SpeedMathActivity::class.java)
         startActivity(intentPracticeMath)
     }
 

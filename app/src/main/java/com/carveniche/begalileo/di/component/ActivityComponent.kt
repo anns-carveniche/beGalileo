@@ -22,4 +22,5 @@ interface ActivityComponent{
     fun inject(nearbyCenterActivity: NearbyCenterActivity)
     fun inject(speedMathActivity: SpeedMathActivity)
     fun inject(gameResultActivity: GameResultActivity)
+    fun inject(practiceMathActivity: PracticeMathActivity)
 }
