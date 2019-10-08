@@ -9,6 +9,7 @@ import com.carveniche.begalileo.di.component.DaggerActivityComponent
 import com.carveniche.begalileo.di.module.ActivityModule
 import com.carveniche.begalileo.di.module.ContextModule
 import com.carveniche.begalileo.models.PracticeQuizQuestionModel
+import com.carveniche.begalileo.ui.fragments.ShowSolutionDialogFragment
 import com.carveniche.begalileo.ui.fragments.question_template.ChoiceTypeQuestionFragment
 import com.carveniche.begalileo.ui.fragments.question_template.DragDropTypeQuestionFragment
 import com.carveniche.begalileo.ui.fragments.question_template.KeyingTypeQuestionFragment
@@ -18,7 +19,8 @@ import kotlinx.android.synthetic.main.activity_practice_math.*
 import kotlinx.android.synthetic.main.layout_progressbar.*
 import javax.inject.Inject
 
-class PracticeMathActivity : AppCompatActivity(),PracticeMathContract.View {
+class PracticeMathActivity : AppCompatActivity(),PracticeMathContract.View,ISolutionListener {
+
 
 
     @Inject
@@ -30,17 +32,18 @@ class PracticeMathActivity : AppCompatActivity(),PracticeMathContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_practice_math)
         injectDependency()
-        initUI()
-         presenter.attach(this)
+        presenter.attach(this)
         presenter.subscribe()
-        getPracticeQuizQuestion()
+        initUI()
+
+
     }
 
     private fun initUI() {
-
+            getPracticeQuizQuestion()
     }
 
-    public fun getPracticeQuizQuestion() {
+     fun getPracticeQuizQuestion() {
         questionNumber++
         presenter.getPracticeQuizQuestions(questionNumber)
     }
@@ -74,12 +77,9 @@ class PracticeMathActivity : AppCompatActivity(),PracticeMathContract.View {
             .commit()
     }
 
-    /*private fun showPracticeMathHomeFragment() {
-        supportFragmentManager.beginTransaction()
-            .addToBackStack(null)
-            .replace(R.id.frame,PracticeMathHomeFragment(),PracticeMathHomeFragment.TAG)
-            .commit()
-    }*/
+    override fun onSolutionModelClosed() {
+        getPracticeQuizQuestion()
+    }
 
     private fun injectDependency() {
         val activityComponent = DaggerActivityComponent.builder()
@@ -90,7 +90,7 @@ class PracticeMathActivity : AppCompatActivity(),PracticeMathContract.View {
     }
 
     override fun showProgress(show: Boolean) {
-        showLoadingProgress(progressBar,show)
+      showLoadingProgress(progressBar,show)
     }
 
 
@@ -106,6 +106,20 @@ class PracticeMathActivity : AppCompatActivity(),PracticeMathContract.View {
         }
     }
 
+     fun openShowDialogFragment(value : String)
+    {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        val prev = supportFragmentManager.findFragmentByTag("dialog")
+        if(prev!=null)
+        {
+            fragmentTransaction.remove(prev)
+        }
+        fragmentTransaction.addToBackStack(null)
+        val dialogFragment = ShowSolutionDialogFragment(value,this)
+        dialogFragment.show(fragmentTransaction,"dialog")
+
+    }
+
     override fun onPracticeQuizQuestionLoadFailed(errorMsg: String) {
         Log.e(Constants.LOG_TAG,"Error : $errorMsg")
     }
@@ -113,5 +127,8 @@ class PracticeMathActivity : AppCompatActivity(),PracticeMathContract.View {
     override fun onBackPressed() {
 
     }
+}
+ interface ISolutionListener{
+    public fun onSolutionModelClosed()
 }
 

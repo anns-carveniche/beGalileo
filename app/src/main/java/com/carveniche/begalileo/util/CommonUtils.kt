@@ -140,6 +140,18 @@ fun getHtmlFormaatedQuestionData(data : String) : String
             + "</body></html>")
 }
 
+fun getHtmlFormattedSolution(data : String) : String
+{
+    return ("<html><head>"
+            + "<style type=\"text/css\">"
+            + "body{color: red;  text-align:center; font-size:50px; vertical-align:middle; }"
+            + "img{ width : 100px }"
+            + "</style></head>"
+            + "<body><center>"
+            + data
+            + "</center></body></html>")
+}
+
 fun setWebSettingsQuiz(wvSettings: WebSettings,context: Context)
 {
     wvSettings.defaultFontSize =  context.resources.getDimension(R.dimen.font_size_medium).toInt()

@@ -8,6 +8,7 @@ import android.text.Html
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebSettings
@@ -22,6 +23,8 @@ import com.carveniche.begalileo.util.getHtmlFormaatedQuestionData
 import com.carveniche.begalileo.util.setWebSettingsQuiz
 import kotlinx.android.synthetic.main.fragment_choice_type_question.*
 import com.carveniche.begalileo.R
+import com.carveniche.begalileo.ui.activities.ISolutionListener
+import com.carveniche.begalileo.ui.fragments.ShowSolutionDialogFragment
 import com.carveniche.begalileo.util.showShortToast
 import com.squareup.picasso.Picasso
 import org.jsoup.Jsoup
@@ -32,7 +35,9 @@ import ru.nikartm.support.ImageBadgeView
 /**
  * A simple [Fragment] subclass.
  */
-class ChoiceTypeQuestionFragment : Fragment() {
+class ChoiceTypeQuestionFragment : Fragment(),View.OnTouchListener {
+
+
 
     private lateinit var rootView : View
     private lateinit var practiceMathActivity: PracticeMathActivity
@@ -78,33 +83,34 @@ class ChoiceTypeQuestionFragment : Fragment() {
     }
 
     private fun displayChoiceOptions() {
-        practiceData.question_data.choices.forEach {
-            var container = LinearLayout(context)
-            container.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT,1.0f)
+        practiceData.question_data.choices.forEachIndexed { index, s ->
             var webView = WebView(context)
             // setWebSettingsQuiz(webView.settings,context!!)
+            webView.tag = "wv_choice_$index"
             webView.setBackgroundColor(0)
             webView.isVerticalScrollBarEnabled = false
             webView.isHorizontalScrollBarEnabled = false
 
-            var strHtml = getHtmlFormaatedQuestionData(it)
+            var strHtml = getHtmlFormaatedQuestionData(s)
             webView.loadData(strHtml,"text/html","UTF-8")
-            var valueClick = it
+
+            webView.setOnTouchListener(this)
 
             val webViewParams =  LinearLayout.LayoutParams(100,100,1.0f)
-            container.addView(webView,webViewParams)
-            container.setOnClickListener {
-                onOptionClicked(valueClick)
-            }
 
-            ll_question_choice_container.addView(container)
+            ll_question_choice_container.addView(webView,webViewParams)
+
         }
+
     }
 
-    private fun onOptionClicked(value : String)
+    private fun onOptionClicked(value : Int)
     {
        Log.d(Constants.LOG_TAG,"Option Clicked $value")
+        practiceMathActivity.openShowDialogFragment(practiceData.question_data.solution.model[0].`val`)
     }
+
+
 
     private fun displayQuestionContent() {
         var rows = practiceData.question_data.rows.toInt()
@@ -161,18 +167,50 @@ class ChoiceTypeQuestionFragment : Fragment() {
         }
     }
 
+   /* fun openShowDialogFragment(value : String)
+    {
+        val fragmentTransaction = childFragmentManager.beginTransaction()
+        val prev = childFragmentManager.findFragmentByTag("dialog")
+        if(prev!=null)
+        {
+            fragmentTransaction.remove(prev)
+        }
+        fragmentTransaction.addToBackStack(null)
+        val dialogFragment = ShowSolutionDialogFragment(value)
+        dialogFragment.show(fragmentTransaction,"dialog")
+    }*/
+
+    override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+        if(event!!.action == MotionEvent.ACTION_DOWN)
+        {
+            Log.d(Constants.LOG_TAG,"WEB VIEW EVENT ; ${v!!.tag.toString().takeLast(1)}")
+            onOptionClicked(v.tag.toString().takeLast(1).toInt())
+
+        }
+
+
+       return false
+    }
+
+
+
 
     private fun addBadge(imageBadge : ImageBadgeView)
     {
-        badgeCount++
-        imageBadge.setBadgeValue(badgeCount)
-            .setBadgeOvalAfterFirst(true)
-            .setBadgeTextSize(16f)
-            .setMaxBadgeValue(999)
-            .setBadgePosition(BadgePosition.BOTTOM_RIGHT)
-            .setBadgeTextStyle(Typeface.NORMAL)
-            .setShowCounter(true)
-            .setBadgePadding(6);
+        if(!imageBadge.isBadgeOvalAfterFirst)
+        {
+            Log.d(Constants.LOG_TAG,"Batch : ${imageBadge.isBadgeOvalAfterFirst}")
+            badgeCount++
+            imageBadge.setBadgeValue(badgeCount)
+                .setBadgeOvalAfterFirst(true)
+                .setBadgeTextSize(16f)
+                .setMaxBadgeValue(999)
+                .setBadgePosition(BadgePosition.BOTTOM_RIGHT)
+                .setBadgeTextStyle(Typeface.NORMAL)
+                .setShowCounter(true)
+                .setBadgePadding(6)
+        }
+
     }
 
 
