@@ -14,4 +14,5 @@
     <dimen name="message_horizontal_margin">2dp</dimen>
 
     <dimen name="question_wv_txt_size">20sp</dimen>
+    <dimen name="drop_box">75dp</dimen>
 </resources>

@@ -34,8 +34,8 @@ class PracticeMathActivity : AppCompatActivity(),PracticeMathContract.View,ISolu
         injectDependency()
         presenter.attach(this)
         presenter.subscribe()
-        initUI()
-
+       // initUI()
+        showDragDropTypeQuestionFragment()
 
     }
 
@@ -99,7 +99,7 @@ class PracticeMathActivity : AppCompatActivity(),PracticeMathContract.View,ISolu
         Log.d(Constants.LOG_TAG,practiceModel.toString())*/
         this.practiceQuizQuestionModel = practiceModel
         when(practiceQuizQuestionModel.question_data.choiceType){
-            Constants.QUESTION_TYPE_DRAG_DROP -> showChoicTypeQuestionFragment()
+            Constants.QUESTION_TYPE_DRAG_DROP -> showDragDropTypeQuestionFragment()
             Constants.QUESTION_TYPE_KEYING -> showKeyTypeQuestionFragment()
             Constants.QUESTION_TYPE_SELECT_CHOICE -> showChoicTypeQuestionFragment()
 
