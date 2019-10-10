@@ -40,6 +40,7 @@ class ShowSolutionDialogFragment(var value : String,var listener : ISolutionList
         Log.d(Constants.LOG_TAG,strHtml)
         webViewsolution.loadData(strHtml,"text/html","UTF-8")
        // webViewsolution.setInitialScale(1);
+        webViewsolution.setBackgroundColor(0)
         webViewsolution.settings.loadWithOverviewMode = true
         webViewsolution.settings.useWideViewPort = true
         webViewsolution.settings.builtInZoomControls = true

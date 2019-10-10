@@ -38,6 +38,7 @@ class Constants {
         const val  QUESTION_TYPE_SELECT_CHOICE = "selectchoice"
         const val  QUESTION_TYPE_DRAG_DROP = "dragdrop"
         const val  QUESTION_TYPE_KEYING = "keying"
+        const val  QUESTION_SUB_TYPE_RANDOM_DRAG_DROP = "randomarrangementdragdrop"
 
 
         var HOME_ITEM_NAME_LIST =  listOf<String>(

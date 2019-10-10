@@ -26,6 +26,7 @@ class PracticeMathActivity : AppCompatActivity(),PracticeMathContract.View,ISolu
     @Inject
     lateinit var presenter : PracticeMathContract.Presenter
     var questionNumber  = 34
+
      lateinit var practiceQuizQuestionModel: PracticeQuizQuestionModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,8 +35,8 @@ class PracticeMathActivity : AppCompatActivity(),PracticeMathContract.View,ISolu
         injectDependency()
         presenter.attach(this)
         presenter.subscribe()
-       // initUI()
-        showDragDropTypeQuestionFragment()
+        initUI()
+
 
     }
 
@@ -101,7 +102,7 @@ class PracticeMathActivity : AppCompatActivity(),PracticeMathContract.View,ISolu
         when(practiceQuizQuestionModel.question_data.choiceType){
             Constants.QUESTION_TYPE_DRAG_DROP -> showDragDropTypeQuestionFragment()
             Constants.QUESTION_TYPE_KEYING -> showKeyTypeQuestionFragment()
-            Constants.QUESTION_TYPE_SELECT_CHOICE -> showChoicTypeQuestionFragment()
+            Constants.QUESTION_TYPE_SELECT_CHOICE -> showDragDropTypeQuestionFragment()
 
         }
     }
