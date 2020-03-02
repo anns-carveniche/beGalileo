@@ -4,41 +4,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryColor">
+    android:background="@drawable/bg_background_main">
 
-    <include layout="@layout/layout_progressbar"/>
+    <include
+        layout="@layout/layout_progressbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_main_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.carveniche.begalileo.util.CustomTextView
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
         android:gravity="center"
         android:text="Enter Mobile Number to receive OTP"
-        android:textColor="@color/secondaryLightColor"
-        android:textSize="@dimen/font_size_medium"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        android:textColor="@color/text_black"
+        android:textSize="@dimen/font_size_small"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
-    <Button
+    <com.carveniche.begalileo.util.CustomTextView
         android:id="@+id/tvVerifyMe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/button_corner_shape"
         android:gravity="center"
-        android:paddingStart="50dp"
-        android:paddingEnd="50dp"
+        android:paddingStart="30dp"
+        android:paddingTop="7dp"
+        android:paddingEnd="30dp"
+        android:paddingBottom="7dp"
         android:text="@string/verify_me"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_size_medium"
+        android:textSize="@dimen/font_size_small"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,9 +67,10 @@
         android:id="@+id/linearLayout2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/tvVerifyMe"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView">
@@ -61,12 +81,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="4"
-            android:background="@color/primaryDarkColor"
             android:gravity="center"
             android:padding="5dp"
             android:text="+91"
-            android:textColor="@color/secondaryDarkColor"
+            android:textColor="@color/text_black"
             android:textSize="@dimen/font_size_medium"
+            android:textStyle="bold"
 
             />
 
@@ -75,7 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/bg_mobile_numer"
+            android:background="@android:color/transparent"
             android:cursorVisible="false"
             android:ems="10"
             android:focusableInTouchMode="true"
@@ -83,18 +103,19 @@
             android:inputType="number"
             android:padding="5dp"
             android:text=""
-            android:textColor="@color/primaryDarkColor"
+            android:textColor="@color/text_black"
             android:textSize="@dimen/font_size_medium" />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

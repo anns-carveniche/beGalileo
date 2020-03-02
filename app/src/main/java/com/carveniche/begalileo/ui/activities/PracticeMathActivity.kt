@@ -21,8 +21,6 @@ import javax.inject.Inject
 
 class PracticeMathActivity : AppCompatActivity(),PracticeMathContract.View,ISolutionListener {
 
-
-
     @Inject
     lateinit var presenter : PracticeMathContract.Presenter
     var questionNumber  = 34
@@ -36,8 +34,6 @@ class PracticeMathActivity : AppCompatActivity(),PracticeMathContract.View,ISolu
         presenter.attach(this)
         presenter.subscribe()
         initUI()
-
-
     }
 
     private fun initUI() {
@@ -102,7 +98,7 @@ class PracticeMathActivity : AppCompatActivity(),PracticeMathContract.View,ISolu
         when(practiceQuizQuestionModel.question_data.choiceType){
             Constants.QUESTION_TYPE_DRAG_DROP -> showDragDropTypeQuestionFragment()
             Constants.QUESTION_TYPE_KEYING -> showKeyTypeQuestionFragment()
-            Constants.QUESTION_TYPE_SELECT_CHOICE -> showDragDropTypeQuestionFragment()
+            Constants.QUESTION_TYPE_SELECT_CHOICE -> showChoicTypeQuestionFragment()
 
         }
     }

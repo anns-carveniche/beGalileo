@@ -5,44 +5,68 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryDarkColor"
+    android:background="@drawable/bg_background_main"
     android:orientation="vertical">
 
     <include
         layout="@layout/layout_progressbar"
-        />
-    <EditText
-        android:id="@+id/edEmail"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:text=""
-       android:padding="15dp"
-        android:textSize="@dimen/font_size_medium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnSubmit"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_main_logo"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout8"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Update Email"
-        android:enabled="false"
-        android:paddingStart="25dp"
-        android:paddingEnd="25dp"
-        android:background="@color/primaryColor"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edEmail" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.carveniche.wisdomleap.util.CustomEditText
+            android:id="@+id/edEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:padding="15dp"
+            android:text=""
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/font_size_medium" />
+
+        <com.carveniche.wisdomleap.util.CustomButton
+            android:id="@+id/btnSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/button_corner_shape"
+            android:enabled="false"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp"
+            android:text="Update Email" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

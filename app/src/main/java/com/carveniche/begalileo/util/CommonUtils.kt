@@ -14,6 +14,7 @@ import android.net.ConnectivityManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Environment
+import android.util.Log
 
 import java.io.File
 import java.io.FileOutputStream
@@ -21,6 +22,8 @@ import android.view.ViewGroup
 import android.webkit.WebSettings
 import android.widget.ProgressBar
 import com.carveniche.begalileo.R
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.iid.FirebaseInstanceId
 
 
 fun showLongToast(msg:String,context:Context)
@@ -157,6 +160,28 @@ fun setWebSettingsQuiz(wvSettings: WebSettings,context: Context)
     wvSettings.defaultFontSize =  context.resources.getDimension(R.dimen.font_size_medium).toInt()
     wvSettings.loadWithOverviewMode = true
     wvSettings.useWideViewPort  = true
+}
+
+fun getFirebaseToken() : String
+{
+    var token = ""
+    FirebaseInstanceId.getInstance().instanceId
+        .addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(Constants.LOG_TAG, "getInstanceId failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new Instance ID token
+             token = task.result?.token!!
+
+            // Log and toast
+
+            Log.d(Constants.LOG_TAG, token)
+
+        })
+        return token
+
 }
 
 /*

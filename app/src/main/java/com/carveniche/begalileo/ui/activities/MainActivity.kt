@@ -11,6 +11,7 @@ import com.carveniche.begalileo.di.module.SharedPreferenceModule
 import com.carveniche.begalileo.ui.fragments.HomeFragment
 import com.carveniche.begalileo.contract.MainContract
 import com.carveniche.begalileo.ui.fragments.PracticeFragment
+import com.carveniche.begalileo.util.getFirebaseToken
 
 import javax.inject.Inject
 
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         setContentView(R.layout.activity_main)
         injectDependency()
         presenter.attach(this)
+        getFirebaseToken()
     }
 
     private fun injectDependency() {

@@ -24,7 +24,7 @@
         android:gravity="center"
         android:padding="5dp"
         android:text="TextView"
-        android:textColor="@color/secondaryLightColor"
+        android:textColor="@color/text_black"
         android:textSize="@dimen/font_size_medium"
         android:textStyle="bold" />
 

@@ -1,5 +1,6 @@
 package com.carveniche.begalileo.contract
 
+import com.carveniche.begalileo.models.RegisterModel
 import io.reactivex.Observable
 
 class EnterOtpContract  {
@@ -8,7 +9,7 @@ class EnterOtpContract  {
         fun updateSubmitButtonState(state: Boolean)
         fun showOtpError()
         fun otpValidationSuccess()
-        fun resendOtpResponse(status: Boolean)
+        fun resendOtpResponse(registerModel: RegisterModel)
     }
     interface Presenter : BaseContract.Presenter<View>
     {

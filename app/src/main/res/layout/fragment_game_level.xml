@@ -6,7 +6,7 @@
     android:id="@+id/clContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryDarkColor"
+    android:background="@drawable/bg_background_main"
     tools:context=".ui.fragments.GameLevelFragment">
 
     <include
@@ -21,7 +21,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@color/primaryDarkColor"
         android:gravity="center"
         android:horizontalSpacing="10dp"
         android:numColumns="3"

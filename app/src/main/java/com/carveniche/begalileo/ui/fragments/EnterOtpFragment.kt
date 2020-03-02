@@ -15,6 +15,7 @@ import com.carveniche.begalileo.di.module.SharedPreferenceModule
 import com.carveniche.begalileo.models.MySharedPreferences
 import com.carveniche.begalileo.contract.LoginContract
 import com.carveniche.begalileo.contract.EnterOtpContract
+import com.carveniche.begalileo.models.RegisterModel
 import com.carveniche.begalileo.ui.activities.MainActivity
 import com.carveniche.begalileo.util.snackBar
 import com.jakewharton.rxbinding2.widget.RxTextView
@@ -86,17 +87,17 @@ class EnterOtpFragment : Fragment(), EnterOtpContract.View,View.OnClickListener 
         btnSubmit.isEnabled = state
     }
     private fun initUI() {
-       tvNumOne.setOnClickListener(this)
-       tvNumTwo.setOnClickListener(this)
-       tvNumThree.setOnClickListener(this)
-       tvNumFour.setOnClickListener(this)
-       tvNumFive.setOnClickListener(this)
-       tvNumSix.setOnClickListener(this)
-       tvNumSeven.setOnClickListener(this)
-       tvNumEight.setOnClickListener(this)
-       tvNumNine.setOnClickListener(this)
-       tvNumZero.setOnClickListener(this)
-       ivClear.setOnClickListener(this)
+        tvNumOne.setOnClickListener(this)
+        tvNumTwo.setOnClickListener(this)
+        tvNumThree.setOnClickListener(this)
+        tvNumFour.setOnClickListener(this)
+        tvNumFive.setOnClickListener(this)
+        tvNumSix.setOnClickListener(this)
+        tvNumSeven.setOnClickListener(this)
+        tvNumEight.setOnClickListener(this)
+        tvNumNine.setOnClickListener(this)
+        tvNumZero.setOnClickListener(this)
+        ivClear.setOnClickListener(this)
         btnSubmit.setOnClickListener(this)
         tvResendOTP.setOnClickListener(this)
     }
@@ -115,11 +116,22 @@ class EnterOtpFragment : Fragment(), EnterOtpContract.View,View.OnClickListener 
             tvNumZero.id->displayOtpNumber(getString(R.string.num0))
             ivClear.id->deleteOtpNumber()
             btnSubmit.id->presenter.verifyOtp(getUserOtp(),mGeneratedOtp)
-            tvResendOTP.id->presenter.resendOtp(mMobileNumber)
+            tvResendOTP.id->resendOTP()
         }
 
     }
 
+    private fun resendOTP(){
+        clearOTPField()
+        presenter.resendOtp(mMobileNumber)
+    }
+
+    private fun clearOTPField(){
+        tvOtpField1.text = ""
+        tvOtpField2.text = ""
+        tvOtpField3.text = ""
+        tvOtpField4.text = ""
+    }
     private fun getUserOtp(): String {
         return tvOtpField1.text.toString()+tvOtpField2.text.toString()+tvOtpField3.text.toString()+tvOtpField4.text.toString()
     }
@@ -148,9 +160,14 @@ class EnterOtpFragment : Fragment(), EnterOtpContract.View,View.OnClickListener 
     override fun showOtpError() {
         context!!.snackBar("Invalid OTP please try again",rootView)
     }
-    override fun resendOtpResponse(status: Boolean) {
-        if(status)
+    override fun resendOtpResponse(registerModel: RegisterModel) {
+
+        if(registerModel.status)
+        {
             context!!.snackBar("Otp sent successfully",rootView)
+            mGeneratedOtp = registerModel.otp.toString()
+        }
+
         else
             context!!.snackBar("Resending OTP Failed",rootView)
 

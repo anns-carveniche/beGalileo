@@ -82,7 +82,7 @@ class GameLevelFragment : Fragment(), GameLevelContractor.View {
         var tvPlayUser = dialog.findViewById<TextView>(R.id.tvPlayUser)
         tvPlayUser.setOnClickListener {
             dialog.dismiss()
-            showLongToast("User",context!!)
+            showLongToast("We are updating this feature will be right back soon",context!!)
         }
         var tvPlayRobot = dialog.findViewById<TextView>(R.id.tvPlayRobot)
         tvPlayRobot.setOnClickListener {

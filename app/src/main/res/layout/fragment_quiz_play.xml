@@ -270,7 +270,7 @@
             android:id="@+id/rough_board_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:pen_color="@color/picker_color_red"
+            app:pen_color="@color/primaryColor"
             />
         <ImageView
             android:id="@+id/iv_close_rough_board"

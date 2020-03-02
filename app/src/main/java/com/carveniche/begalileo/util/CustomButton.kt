@@ -36,7 +36,7 @@ class CustomButton : Button {
     private fun init() {
         val tf = Typeface.createFromAsset(
             context.assets,
-            Constants.FONT_ROBOTO
+            Constants.FONT_MONTSERRAT
         )
         typeface = tf
 
@@ -44,7 +44,7 @@ class CustomButton : Button {
     private fun initBold() {
         val tf = Typeface.createFromAsset(
             context.assets,
-            Constants.FONT_ROBOTO
+            Constants.FONT_MONTSERRAT
         )
         typeface = tf
     }

@@ -4,6 +4,7 @@ package com.carveniche.begalileo.ui.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import com.carveniche.begalileo.util.Constants
 import com.carveniche.begalileo.R
 import com.carveniche.begalileo.di.component.DaggerActivityComponent
@@ -21,7 +22,12 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         injectDependency()
-        checkIsLoggedIn()
+        Handler().postDelayed({
+
+            checkIsLoggedIn()
+
+        }, 3000)
+
     }
 
     private fun checkIsLoggedIn() {

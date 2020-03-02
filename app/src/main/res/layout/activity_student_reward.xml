@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_background_main"
+    tools:context=".ui.activities.StudentRewardActivity">
+
+    <include
+        layout="@layout/layout_progressbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_reward_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone">
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="20dp"
+            android:text="Rewards"
+            android:textColor="@color/text_black"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_rewards"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView5"
+            app:layout_constraintTop_toBottomOf="@+id/textView11">
+
+            <com.carveniche.begalileo.util.CustomTextView
+                android:id="@+id/tv_available_coins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:text="@string/available_coins"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/font_size_large" />
+
+            <com.carveniche.begalileo.util.CustomTextView
+                android:id="@+id/tv_coins_redeemed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:text="@string/coins_redeemed"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/font_size_large" />
+
+            <com.carveniche.begalileo.util.CustomTextView
+                android:id="@+id/tv_coins_today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:text="@string/coins_earned_today"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/font_size_large" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_leaderboard_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Leaderboard of the month"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/font_size_large"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TableLayout
+            android:id="@+id/tl_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView12">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="RANK"
+                    android:textColor="@color/text_black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_column="2"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="STUDENT"
+                    android:textColor="@color/text_black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_column="3"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="GRADE"
+                    android:textColor="@color/text_black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_column="4"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="SCORE"
+                    android:textColor="@color/text_black"
+                    android:textStyle="bold" />
+
+            </TableRow>
+
+
+        </TableLayout>
+
+        <RelativeLayout
+            android:id="@+id/ll_footer_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tl_container">
+
+            <TextView
+                android:id="@+id/tv_your_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:padding="10dp"
+                android:text="@string/yours_score"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/font_size_small"
+                android:textStyle="italic|bold" />
+
+            <TextView
+                android:id="@+id/tv_points_away"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/points_away"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/font_size_small"
+                android:textStyle="italic|bold" />
+
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_badges_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Badges"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/font_size_large"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.carveniche.begalileo.util.CustomTextView
+            android:id="@+id/textView14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="start"
+            android:padding="5dp"
+            android:text="As of now you have 36 badges"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/font_size_medium"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView14">
+
+            <LinearLayout
+                android:id="@+id/ll_badges_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+
+            </LinearLayout>
+
+
+        </HorizontalScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_kid_progress_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.carveniche.begalileo.util.CustomTextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="Kids Progress"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/font_size_large"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageView9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_kp_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last Attempted : "
+                android:layout_margin="5dp"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/font_size_large"
+                android:textStyle="bold" />
+
+                <com.carveniche.begalileo.util.CustomTextView
+                    android:id="@+id/tv_kp_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Introduction to Integers"
+
+                    android:layout_margin="7dp"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/font_size_large"
+                    android:textStyle="bold" />
+
+                <com.carveniche.begalileo.util.CustomTextView
+                    android:id="@+id/tv_kp_accuracy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Accuracy : 62 %"
+
+                    android:layout_margin="7dp"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/font_size_large"
+                    android:textStyle="bold" />
+
+
+                <com.carveniche.begalileo.util.CustomTextView
+                    android:id="@+id/tv_kp_questions_attempted"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Questions Attempted : 37"
+                    android:layout_margin="7dp"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/font_size_large"
+                    android:textStyle="bold" />
+
+                <com.carveniche.begalileo.util.CustomTextView
+                    android:id="@+id/tv_kp_correct_answers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Correct Answers : 23"
+                    android:layout_margin="7dp"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/font_size_large"
+                    android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_kids_progress" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.carveniche.begalileo.util.Constants
 import com.carveniche.begalileo.R
 import com.carveniche.begalileo.di.component.DaggerActivityComponent
@@ -14,6 +15,7 @@ import com.carveniche.begalileo.ui.fragments.GameLevelFragment
 import com.carveniche.begalileo.ui.fragments.MathWithComputerFragment
 import com.carveniche.begalileo.contract.SpeedMathContract
 import com.carveniche.begalileo.util.showLongToast
+import kotlinx.android.synthetic.main.layout_progressbar.*
 import javax.inject.Inject
 
 class SpeedMathActivity : AppCompatActivity(), SpeedMathContract.View {
@@ -30,8 +32,12 @@ class SpeedMathActivity : AppCompatActivity(), SpeedMathContract.View {
         showGameLevelFragment()
     }
 
-    override fun showProgress(boolean: Boolean) {
-
+    override fun showProgress(show: Boolean) {
+        progressBar.bringToFront()
+        if(show)
+            progressBar.visibility = View.VISIBLE
+        else
+            progressBar.visibility = View.GONE
     }
     override fun showGameLevelFragment() {
         supportFragmentManager.beginTransaction()
@@ -65,7 +71,7 @@ class SpeedMathActivity : AppCompatActivity(), SpeedMathContract.View {
     }
 
     override fun showMathWithPlayerFragement() {
-
+        showLongToast("We are updating this feature will be right back soon ",this)
     }
     override fun showGameResultActivity(data: AnswerSheetModel, robotCorrectAnswer: Int) {
 
@@ -82,9 +88,15 @@ class SpeedMathActivity : AppCompatActivity(), SpeedMathContract.View {
         }
         else
         {
-          showLongToast("Do u want to exit ",this)
+            goToMainActivity()
+         // showLongToast("Do u want to exit ",this)
         }
 
+    }
+
+    fun goToMainActivity(){
+        var intent = Intent(this,MainActivity::class.java)
+        startActivity(intent)
     }
 
 }

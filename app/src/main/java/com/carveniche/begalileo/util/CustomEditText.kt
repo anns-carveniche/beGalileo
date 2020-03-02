@@ -23,7 +23,7 @@ class CustomEditText : EditText {
 
     private fun init() {
         if (!isInEditMode) {
-            val tf = Typeface.createFromAsset(context.assets, Constants.FONT_ROBOTO)
+            val tf = Typeface.createFromAsset(context.assets, Constants.FONT_MONTSERRAT)
             typeface = tf
         }
     }

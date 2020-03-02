@@ -73,4 +73,12 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="points_away">YOU ARE %1$d POINTS \n AWAY FROM MAKING AN ENTRY TO THE LEADERBOARD</string>
+    <string name="yours_score">Your Score : %1$d</string>
+    <string name="available_coins">Available Coins : %1$d</string>
+    <string name="coins_redeemed">COINS REDEEMED : %1$d</string>
+    <string name="coins_earned_today">COINS EARNED TODAY : %1$d</string>
+
+    <string name="scrolling_message"> Please Standby For The Latest New beGalileo app with full range of New-Age Fun , Learn and Knowledge-Share. First Release Of New App by March 15th 2020! </string>
+
 </resources>

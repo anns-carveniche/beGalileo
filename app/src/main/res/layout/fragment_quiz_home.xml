@@ -5,7 +5,7 @@
     android:id="@+id/cl_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/picker_color_orange">
+    android:background="@color/color_blue_light">
 
     <include
         android:id="@+id/include2"
@@ -278,7 +278,7 @@
                 android:id="@+id/rough_board_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:pen_color="@color/picker_color_green" />
+                app:pen_color="@color/color_blue_light" />
         </RelativeLayout>
 
         <ImageView

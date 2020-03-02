@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_green_dark"
+    android:background="@drawable/bg_school_baord"
     tools:context=".ui.activities.GameResultActivity">
 
 
@@ -24,11 +24,11 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            app:srcCompat="@drawable/avatar_girl" />
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/ic_custom_person" />
 
-        <TextView
+        <com.carveniche.begalileo.util.CustomTextView
             android:id="@+id/tvUserCorrect"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
             android:textSize="@dimen/font_size_small"
             android:textStyle="bold" />
 
-        <TextView
+        <com.carveniche.begalileo.util.CustomTextView
             android:id="@+id/tvUserWrong"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -50,11 +50,6 @@
             android:textSize="@dimen/font_size_small"
             android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btnViewAnswer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="View Answer" />
     </LinearLayout>
 
     <LinearLayout
@@ -71,11 +66,11 @@
 
         <ImageView
             android:id="@+id/ivComputer"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            app:srcCompat="@drawable/avatar_boy" />
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/ic_robot" />
 
-        <TextView
+        <com.carveniche.begalileo.util.CustomTextView
             android:id="@+id/tvComputerMarks"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -88,12 +83,12 @@
 
     </LinearLayout>
 
-    <TextView
+    <com.carveniche.begalileo.util.CustomTextView
         android:id="@+id/tvGameResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="You Won"
@@ -103,5 +98,35 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+
+        <com.carveniche.begalileo.util.CustomTextView
+            android:id="@+id/btnViewAnswer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_corner_shape"
+            android:padding="10dp"
+            android:text="View Answer" />
+
+        <com.carveniche.begalileo.util.CustomTextView
+            android:id="@+id/btnTryAgain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="20dp"
+           android:padding="10dp"
+            android:background="@drawable/button_corner_shape"
+            android:text="Try Again" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

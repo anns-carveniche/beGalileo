@@ -62,7 +62,7 @@ class EnterOtpPresenter : EnterOtpContract.Presenter
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 view.showProgress(false)
-                view.resendOtpResponse(it.status)
+                view.resendOtpResponse(it)
 
             }
         subscriptions.add(resendOtpSubscribe)

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryLightColor"
+    android:background="@drawable/bg_background_main"
     tools:context=".ui.activities.SpeedMathActivity">
 
     <include layout="@layout/layout_progressbar"/>

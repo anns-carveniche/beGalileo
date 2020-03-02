@@ -49,6 +49,9 @@ class GameResultActivity : AppCompatActivity(),
         btnViewAnswer.setOnClickListener {
             showAnswerSummary()
         }
+        btnTryAgain.setOnClickListener {
+            onBackPressed()
+        }
         listData.forEach {
             if (it.isAnswerWright)
                 userCorrectAnswer++

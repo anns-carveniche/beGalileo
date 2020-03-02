@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Solution"
-            android:textColor="@color/picker_color_red"
+            android:textColor="@color/primaryColor"
             android:textSize="@dimen/font_size_large"
             android:gravity="center"
             android:layout_margin="5dp"

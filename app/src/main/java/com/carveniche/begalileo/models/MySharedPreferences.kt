@@ -31,4 +31,7 @@ class MySharedPreferences @Inject constructor(private val mSharedPreferences: Sh
     {
         return mSharedPreferences.getString(key,"")!!
     }
+    fun clearAllDatas(){
+        mSharedPreferences.edit().clear().apply()
+    }
 }

@@ -38,7 +38,7 @@ class SignInFragment : Fragment(), SignInContract.View,View.OnClickListener {
 
     override fun showEnterOtpFragment(registerModel: RegisterModel) {
         Log.d(Constants.LOG_TAG,registerModel.otp.toString())
-        showLongToast(registerModel.otp.toString(),context!!)
+      //  showLongToast(registerModel.otp.toString(),context!!)
         loginView.showEnterOtpScreen(registerModel)
     }
 

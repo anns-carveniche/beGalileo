@@ -2,6 +2,7 @@ package com.carveniche.begalileo.api
 
 import com.carveniche.begalileo.util.Constants
 import com.carveniche.begalileo.models.*
+import com.carveniche.begalileo.util.URL
 import io.reactivex.Observable
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -73,6 +74,22 @@ interface ApiServiceInterface {
     @GET("new_device_students/new_type_questions")
     fun getPracticeQuizQuestion(@Query("q_number") qNumber : Int) : Observable<PracticeQuizQuestionModel>
 
+
+    @GET("app_students/leader_board")
+    fun getLeaderboardDataModel(@Query("student_id") student_id : Int) : Observable<LeaderboardDataModel>
+
+    @GET("app_students/rewards")
+    fun getRewardsDataModel(@Query("student_id") student_id : Int) : Observable<RewardsDataModel>
+
+    @GET("app_students/badges")
+    fun getBadgesDataModel(@Query("student_id") student_id : Int) : Observable<BadgesDataModel>
+
+    @GET("app_parents/dashboard")
+    fun getDashboardDataModel(@Query("parent_id") parent_id : Int) : Observable<DashboardDataModel>
+
+    @GET("app_students/student_progress")
+    fun getKidsProgress(@Query("student_id") student_id : Int) : Observable<KidsProgressModel>
+
     @FormUrlEncoded
     @POST("app_students/start_game")
     fun getGameQuestions(@Field("level_id") level_id : Int,
@@ -81,11 +98,13 @@ interface ApiServiceInterface {
                          ) : Observable<GameRobotQuestionModel>
 
 
+
+
     companion object {
 
         fun create():ApiServiceInterface {
             var logging = HttpLoggingInterceptor()
-            logging.level = HttpLoggingInterceptor.Level.BASIC
+            logging.level = HttpLoggingInterceptor.Level.BODY
 
 
             var client = OkHttpClient.Builder()
@@ -100,7 +119,7 @@ interface ApiServiceInterface {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
-                .baseUrl(Constants.BASE_URL)
+                .baseUrl(URL.BASE_URL)
                 .build()
             return retrofit.create(ApiServiceInterface::class.java)
         }

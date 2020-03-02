@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryDarkColor"
+    android:background="@drawable/bg_school_baord"
     tools:context=".ui.activities.SpeedMathActivity">
 
 
@@ -14,13 +14,16 @@
         android:id="@+id/clItemContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/clKeyboardLayout"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <com.carveniche.begalileo.util.CustomTextView
             android:id="@+id/tvGameLevel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,7 +35,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
+        <com.carveniche.wisdomleap.util.CustomEditText
             android:id="@+id/edAnswer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -47,7 +50,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvQuestion" />
 
-        <TextView
+        <com.carveniche.begalileo.util.CustomTextView
             android:id="@+id/tvQuestion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,7 +63,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvGameLevel" />
 
-        <TextView
+        <com.carveniche.begalileo.util.CustomTextView
             android:id="@+id/tvTimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -76,13 +79,16 @@
         android:id="@+id/clKeyboardLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/clItemContainer"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <com.carveniche.begalileo.util.CustomTextView
             android:id="@+id/tvComputerStatus"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -92,7 +98,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <com.carveniche.begalileo.util.CustomTextView
             android:id="@+id/tvUserStatus"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
